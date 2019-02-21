@@ -1,5 +1,5 @@
-data class NameAndEmail(val container: _Div_,
-                        val firstNameInput: _Input_,
-                        val lastNameInput: _Input_,
-                        val emailInput: _Input_,
-                        val sumbit: _Button_)
+data class NameAndEmail(val container: _Div_ = div(),
+                        val firstNameInput: _Input_ = input(),
+                        val lastNameInput: _Input_ = input(),
+                        val emailInput: _Input_ = input(),
+                        val sumbit: _Button_ = button())

@@ -9,7 +9,7 @@ class View {
         container.append(newForm())
     }
 
-    private fun newForm() = NameAndEmail(div(), input(), input(), input(), button()).let { form ->
+    private fun newForm() = NameAndEmail().let { form ->
         form.apply {
             firstNameInput.configureInput(INPUT, placeholder = "First Name")
             lastNameInput.configureInput(INPUT, placeholder = "Last Name")
