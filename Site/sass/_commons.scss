@@ -1,0 +1,29 @@
+* {
+  color:#333;
+  text-align: center;
+  border: none;
+  padding: 0;
+  margin: 0;
+  z-index: 10000;
+}
+
+body {
+  background: #343444;
+}
+
+.clearfix {
+  clear: both;
+}
+
+.margin-bottom {
+  margin-bottom: 4rem;
+}
+
+.padded-bottom {
+  padding-bottom: 4rem;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+

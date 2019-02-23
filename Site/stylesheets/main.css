@@ -1,3 +1,85 @@
+/* line 1, ../sass/button.scss */
+button {
+  height: 1.5rem;
+  border-radius: 5px;
+  box-shadow: -1px -1px -1px #efefef;
+}
+
+/* line 7, ../sass/button.scss */
+.button {
+  margin: 0 auto;
+  width: 5rem;
+  height: 2rem;
+  box-shadow: 1px 1px 1px #333;
+  background: #fff;
+}
+
+/* line 1, ../sass/_commons.scss */
+* {
+  color: #333;
+  text-align: center;
+  border: none;
+  padding: 0;
+  margin: 0;
+  z-index: 10000;
+}
+
+/* line 10, ../sass/_commons.scss */
+body {
+  background: #343444;
+}
+
+/* line 14, ../sass/_commons.scss */
+.clearfix {
+  clear: both;
+}
+
+/* line 18, ../sass/_commons.scss */
+.margin-bottom {
+  margin-bottom: 4rem;
+}
+
+/* line 22, ../sass/_commons.scss */
+.padded-bottom {
+  padding-bottom: 4rem;
+}
+
+/* line 26, ../sass/_commons.scss */
+.uppercase {
+  text-transform: uppercase;
+}
+
+/* line 1, ../sass/_form.scss */
+.FormContainer {
+  background: #4488ee;
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px #000;
+  width: 200px;
+  padding: 1em;
+  margin: 0 auto;
+  display: flex;
+  align-content: space-around;
+}
+
+/* line 12, ../sass/_form.scss */
+input {
+  flex-basis: 100%;
+  margin: 1rem;
+  height: 1.5rem;
+  border-top: 2px solid #999;
+  border-left: 1px solid #999;
+  border-radius: 5px;
+}
+
+/* line 21, ../sass/_form.scss */
+.container {
+  display: flex;
+  align-items: space-between;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 1em;
+}
+
 /*!
  * Hamburgers
  * @description Tasty CSS-animated hamburgers
@@ -1026,22 +1108,41 @@
   transform: rotate(-90deg);
 }
 
-/* line 3, ../sass/main.scss */
-* {
-  text-align: center;
-  border: none;
-  padding: 0;
-  margin: 0;
+/* line 1, ../sass/_hero.scss */
+.Hero {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 54.16vw;
 }
-
-/* line 10, ../sass/main.scss */
-body {
-  background: #343444;
+/* line 9, ../sass/_hero.scss */
+.Hero-image {
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
 }
-
-/* line 14, ../sass/main.scss */
-.Navigation {
+/* line 19, ../sass/_hero.scss */
+.Hero-title {
+  font-family: Arial;
   color: #fff;
+  padding-left: 33.33%;
+  padding-top: 10%;
+  text-align: left;
+  max-width: 33.33%;
+  font-size: 8rem;
+}
+/* line 29, ../sass/_hero.scss */
+.Hero-subtitle {
+  color: #fff;
+}
+
+/* line 2, ../sass/_navigation.scss */
+.Navigation--visible {
   margin-bottom: 80px;
   background: #4488ee;
   height: 7rem;
@@ -1053,62 +1154,24 @@ body {
   align-items: center;
   box-shadow: 2px 2px 2px #000;
 }
-/* line 27, ../sass/main.scss */
+/* line 15, ../sass/_navigation.scss */
 .Navigation-Header {
+  color: #fff;
   background: none;
   margin: 0 auto;
   float: left;
 }
-/* line 33, ../sass/main.scss */
+/* line 22, ../sass/_navigation.scss */
+.Navigation-logo {
+  z-index: 99999999;
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+}
+/* line 29, ../sass/_navigation.scss */
 .Navigation .hamburger {
+  z-index: 99999999;
   position: fixed;
   top: 1.5rem;
   right: 1.5rem;
-}
-
-/* line 40, ../sass/main.scss */
-.FormContainer {
-  background: #4488ee;
-  border-radius: 3px;
-  box-shadow: 2px 2px 2px #000;
-  width: 200px;
-  padding: 1em;
-  margin: 0 auto;
-  display: flex;
-  align-content: space-around;
-}
-
-/* line 51, ../sass/main.scss */
-.container {
-  display: flex;
-  align-items: space-between;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  padding: 1em;
-}
-
-/* line 59, ../sass/main.scss */
-button {
-  height: 1.5rem;
-  border-radius: 5px;
-  box-shadow: -1px -1px -1px #efefef;
-}
-
-/* line 65, ../sass/main.scss */
-input {
-  flex-basis: 100%;
-  margin: 1rem;
-  height: 1.5rem;
-  border-top: 2px solid #999;
-  border-left: 1px solid #999;
-  border-radius: 5px;
-}
-
-/* line 74, ../sass/main.scss */
-.button {
-  margin: 0 auto;
-  width: 5rem;
-  height: 2rem;
-  box-shadow: 1px 1px 1px #333;
-  background: #fff;
 }

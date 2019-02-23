@@ -1,0 +1,37 @@
+.Navigation {
+  &--visible {
+    margin-bottom: 80px;
+    background: #4488ee;
+    height: 7rem;
+    position: static;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    box-shadow: 2px 2px 2px #000;
+  }
+
+  &-Header {
+    color: #fff;
+    background: none;
+    margin: 0 auto;
+    float: left;
+  }
+
+  &-logo {
+    z-index: 99999999;
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+  }
+
+  .hamburger {
+    z-index: 99999999;
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+
+
+}
