@@ -7,6 +7,9 @@
 </head>
 <body>
 
+
+<!--   Navigation   -->
+
 <nav>
     <div class="Navigation">
         <button id="hamburger" class="hamburger hamburger--collapse">
@@ -17,15 +20,76 @@
     </div>
 </nav>
 
-<div class="Hero margin-bottom" >
-    <img class="Hero Hero-image" src="images/ja.jpg">
+
+<!--  Hero  -->
+
+<div class="Hero">
+    <img class="Hero-image Hero-image--withText" src="images/ja.jpg">
+    <h1 class="Hero-title">Welcome!</h1>
 </div>
 
-<div class="FormContainer" id="formContainer">
-    <!--Things will be dynamically placed here-->
+<!--  Portfolio  -->
+
+<div class="Portfolio">
+    <h1 class="Portfolio-title">Hey! I'm Jacob.</h1>
+    <br>
+    <p class="Portfolio-text">I'm a Developer with many interests. My focus is Native Mobile development but I've recently found a fondness for web as well,
+        thanks to Kotlin, Ruby on Rails, and Sass.
+        Some of my technical skills include mobile development with experience in legacy code bases, front end development, testing, and design.
+    </p>
+    <br>
+    <h2 class="Portfolio-title">Checkout some of my work.</h2>
+</div>
+<!--  Work  -->
+<div class="Portfolio Portfolio-work">
+    <div class="Portfolio-work-item Portfolio-work-item--art shaded">
+        <p class="Portfolio-text">ART</p>
+    </div>
+    <div class="Portfolio-work-item Portfolio-work-item--mobile shaded">
+        <p class="Portfolio-text">MOBILE</p>
+    </div>
+
 </div>
 
-<div style="height: 10000px; background: #343444;"></div>
+<!-- Spacer for scrolling
+    Will get deleted
+ -->
+<!--<div style="height: 1000px; background: #343444;"></div>-->
+
+<!-- Footer -->
+<footer class="shaded-r">
+    <div class="Footer">
+        <h2>
+            This site was built with
+            <a target="_blank" href="https://kotlinlang.org/">
+                <img class="Image Image--kotlin" src="images/kotlin.png" alt="Kotlin Logo">
+            </a>
+
+            and
+
+            <a target="_blank" href="https://sass-lang.com/">
+                <img class="Image Image--sass" src="images/saas.png" alt="Sass Logo">
+            </a>
+        </h2>
+
+        <div class="Footer-nav">
+
+            <div class="Footer-social">
+                <a class="Percent-30" href="https://www.linkedin.com/in/jacob-rakidzich-b8722436" target="_blank"><img class="Image--social" src="images/linkedin.png"></a>
+                <a class="Percent-30" href="https://www.github.com/JZDesign" target="_blank"><img class="Image--social" src="images/git.png"></a>
+            </div>
+
+            <div class="Footer-siteMap">
+                <a class="Percent-30" href="#"><p>Art</p></a>
+                <a class="Percent-30" href="#"><p>Mobile</p></a>
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
 
 <script type="text/javascript" src="out/production/JacobZivanDesign/lib/kotlin.js"></script>
 <script type="text/javascript" src="out/production/JacobZivanDesign/JacobZivanDesign.js"></script>

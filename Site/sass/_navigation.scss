@@ -1,7 +1,7 @@
 .Navigation {
   &--visible {
     margin-bottom: 80px;
-    background: #4488ee;
+    background: $primary;
     height: 7rem;
     position: static;
     top: 0;
@@ -13,7 +13,6 @@
   }
 
   &-Header {
-    color: #fff;
     background: none;
     margin: 0 auto;
     float: left;

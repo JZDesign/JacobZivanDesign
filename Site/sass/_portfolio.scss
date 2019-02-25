@@ -1,0 +1,50 @@
+.Portfolio {
+  margin: 5rem auto;
+  width: 100%;
+  max-width: $desk_and_up;
+
+  @include respond-to($small) {
+    margin: 10rem auto;
+    width: $lap_and_up;
+  }
+
+  @include respond-to($large) {
+    margin: 15rem auto;
+    width: $lap_and_up * 1.5;
+  }
+
+  &-work {
+
+    @include respond-to($small) {
+      align-content: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+
+
+    &-item {
+      background: $primary;
+      border-radius: 1rem;
+      margin: 2rem auto;
+      width: 66%;
+
+      @include respond-to($small) {
+        width: 45%;
+      }
+    }
+  }
+
+  &-text {
+    padding: 3rem;
+    font-size: 1.2rem;
+
+    @include respond-to($small) {
+      font-size: 1.3rem;
+    }
+
+    @include respond-to($large) {
+      font-size: 1.4rem;
+    }
+  }
+}

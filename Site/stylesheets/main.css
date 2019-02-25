@@ -1,11 +1,11 @@
-/* line 1, ../sass/button.scss */
+/* line 1, ../sass/_button.scss */
 button {
   height: 1.5rem;
   border-radius: 5px;
   box-shadow: -1px -1px -1px #efefef;
 }
 
-/* line 7, ../sass/button.scss */
+/* line 7, ../sass/_button.scss */
 .button {
   margin: 0 auto;
   width: 5rem;
@@ -16,7 +16,7 @@ button {
 
 /* line 1, ../sass/_commons.scss */
 * {
-  color: #333;
+  color: #fff;
   text-align: center;
   border: none;
   padding: 0;
@@ -25,28 +25,155 @@ button {
 }
 
 /* line 10, ../sass/_commons.scss */
+a {
+  text-decoration: none;
+}
+
+/* line 14, ../sass/_commons.scss */
 body {
   background: #343444;
 }
 
-/* line 14, ../sass/_commons.scss */
+/* line 18, ../sass/_commons.scss */
 .clearfix {
   clear: both;
 }
 
-/* line 18, ../sass/_commons.scss */
+/* line 22, ../sass/_commons.scss */
 .margin-bottom {
   margin-bottom: 4rem;
 }
 
-/* line 22, ../sass/_commons.scss */
+/* line 26, ../sass/_commons.scss */
 .padded-bottom {
   padding-bottom: 4rem;
 }
 
-/* line 26, ../sass/_commons.scss */
+/* line 30, ../sass/_commons.scss */
 .uppercase {
   text-transform: uppercase;
+}
+
+/* line 34, ../sass/_commons.scss */
+.shaded {
+  filter: drop-shadow(2px 5px 6px rgba(0, 0, 0, 0.5));
+}
+
+/* line 38, ../sass/_commons.scss */
+.shaded-r {
+  filter: drop-shadow(-2px -5px 6px rgba(0, 0, 0, 0.5));
+}
+
+/* line 1, ../sass/_footer.scss */
+footer {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: #4488ee;
+}
+
+/* line 10, ../sass/_footer.scss */
+.Footer {
+  padding: 2rem;
+  margin: 0 auto;
+  width: 100%;
+}
+@media (min-width: 600px) {
+  /* line 10, ../sass/_footer.scss */
+  .Footer {
+    width: 600px;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 10, ../sass/_footer.scss */
+  .Footer {
+    width: 900px;
+  }
+}
+/* line 23, ../sass/_footer.scss */
+.Footer-social {
+  width: 33%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: space-evenly;
+}
+@media (min-width: 600px) {
+  /* line 23, ../sass/_footer.scss */
+  .Footer-social {
+    margin: 0 auto;
+  }
+}
+/* line 36, ../sass/_footer.scss */
+.Footer-siteMap {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+@media (min-width: 600px) {
+  /* line 36, ../sass/_footer.scss */
+  .Footer-siteMap {
+    margin: 0 auto;
+  }
+}
+/* line 46, ../sass/_footer.scss */
+.Footer-siteMap p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000;
+}
+/* line 53, ../sass/_footer.scss */
+.Footer-nav {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-content: space-evenly;
+}
+/* line 60, ../sass/_footer.scss */
+.Footer h2 {
+  font-size: 1rem;
+  padding-bottom: 2rem;
+}
+@media (min-width: 600px) {
+  /* line 60, ../sass/_footer.scss */
+  .Footer h2 {
+    font-size: 2rem;
+  }
+}
+
+/* line 70, ../sass/_footer.scss */
+.Image {
+  position: relative;
+  bottom: -.2rem;
+  margin: 0 .2rem;
+}
+/* line 75, ../sass/_footer.scss */
+.Image--kotlin {
+  width: 6.5rem;
+}
+/* line 79, ../sass/_footer.scss */
+.Image--sass {
+  width: 2.5rem;
+}
+/* line 84, ../sass/_footer.scss */
+.Image--social {
+  width: 2.5rem;
+}
+
+/* line 90, ../sass/_footer.scss */
+.Percent-30 {
+  filter: opacity(40%);
+}
+/* line 93, ../sass/_footer.scss */
+.Percent-30 :hover {
+  filter: opacity(75%);
+}
+/* line 97, ../sass/_footer.scss */
+.Percent-30 p:hover {
+  filter: opacity(75%);
 }
 
 /* line 1, ../sass/_form.scss */
@@ -1111,13 +1238,20 @@ input {
 /* line 1, ../sass/_hero.scss */
 .Hero {
   position: relative;
-  top: 0;
+  top: -4rem;
   left: 0;
   right: 0;
   width: 100%;
   height: 54.16vw;
+  max-width: 1800px;
 }
-/* line 9, ../sass/_hero.scss */
+@media (min-width: 1800px) {
+  /* line 1, ../sass/_hero.scss */
+  .Hero {
+    margin: 0 auto;
+  }
+}
+/* line 14, ../sass/_hero.scss */
 .Hero-image {
   z-index: 0;
   position: absolute;
@@ -1126,19 +1260,38 @@ input {
   right: 0;
   width: 100%;
 }
-/* line 19, ../sass/_hero.scss */
+/* line 22, ../sass/_hero.scss */
+.Hero-image--withText {
+  filter: brightness(66%);
+}
+/* line 27, ../sass/_hero.scss */
 .Hero-title {
+  position: absolute;
+  bottom: 15%;
+  left: 10%;
   font-family: Arial;
   color: #fff;
-  padding-left: 33.33%;
-  padding-top: 10%;
   text-align: left;
   max-width: 33.33%;
-  font-size: 8rem;
+  font-size: 2rem;
 }
-/* line 29, ../sass/_hero.scss */
-.Hero-subtitle {
-  color: #fff;
+@media (min-width: 600px) {
+  /* line 27, ../sass/_hero.scss */
+  .Hero-title {
+    font-size: 3rem;
+  }
+}
+@media (min-width: 900px) {
+  /* line 27, ../sass/_hero.scss */
+  .Hero-title {
+    font-size: 4rem;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 27, ../sass/_hero.scss */
+  .Hero-title {
+    font-size: 5rem;
+  }
 }
 
 /* line 2, ../sass/_navigation.scss */
@@ -1156,22 +1309,81 @@ input {
 }
 /* line 15, ../sass/_navigation.scss */
 .Navigation-Header {
-  color: #fff;
   background: none;
   margin: 0 auto;
   float: left;
 }
-/* line 22, ../sass/_navigation.scss */
+/* line 21, ../sass/_navigation.scss */
 .Navigation-logo {
   z-index: 99999999;
   position: fixed;
   top: 1.5rem;
   left: 1.5rem;
 }
-/* line 29, ../sass/_navigation.scss */
+/* line 28, ../sass/_navigation.scss */
 .Navigation .hamburger {
   z-index: 99999999;
   position: fixed;
   top: 1.5rem;
   right: 1.5rem;
+}
+
+/* line 1, ../sass/_portfolio.scss */
+.Portfolio {
+  margin: 5rem auto;
+  width: 100%;
+  max-width: 1200px;
+}
+@media (min-width: 600px) {
+  /* line 1, ../sass/_portfolio.scss */
+  .Portfolio {
+    margin: 10rem auto;
+    width: 600px;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 1, ../sass/_portfolio.scss */
+  .Portfolio {
+    margin: 15rem auto;
+    width: 900px;
+  }
+}
+@media (min-width: 600px) {
+  /* line 16, ../sass/_portfolio.scss */
+  .Portfolio-work {
+    align-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+}
+/* line 26, ../sass/_portfolio.scss */
+.Portfolio-work-item {
+  background: #4488ee;
+  border-radius: 1rem;
+  margin: 2rem auto;
+  width: 66%;
+}
+@media (min-width: 600px) {
+  /* line 26, ../sass/_portfolio.scss */
+  .Portfolio-work-item {
+    width: 45%;
+  }
+}
+/* line 38, ../sass/_portfolio.scss */
+.Portfolio-text {
+  padding: 3rem;
+  font-size: 1.2rem;
+}
+@media (min-width: 600px) {
+  /* line 38, ../sass/_portfolio.scss */
+  .Portfolio-text {
+    font-size: 1.3rem;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 38, ../sass/_portfolio.scss */
+  .Portfolio-text {
+    font-size: 1.4rem;
+  }
 }

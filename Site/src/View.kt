@@ -6,7 +6,7 @@ class View {
     private val container = document.getElementById("formContainer") as _Div_
 
     fun create() {
-        container.append(newForm())
+//        container.append(newForm())
     }
 
     private fun newForm() = NameAndEmail(div(), input(), input(), input(), button()).let { form ->

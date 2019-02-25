@@ -1,5 +1,5 @@
 * {
-  color:#333;
+  color: $white;
   text-align: center;
   border: none;
   padding: 0;
@@ -7,8 +7,12 @@
   z-index: 10000;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
-  background: #343444;
+  background: $secondary;
 }
 
 .clearfix {
@@ -25,5 +29,13 @@ body {
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.shaded {
+  filter: drop-shadow(2px 5px 6px rgba(0,0,0, .5));
+}
+
+.shaded-r {
+  filter: drop-shadow(-2px -5px 6px rgba(0,0,0, .5));
 }
 

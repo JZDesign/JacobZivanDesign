@@ -1,6 +1,13 @@
+// theme and mixins
+@import "constants";
+@import "respond-to";
+
+// Styles
 @import "button";
 @import "commons";
+@import "footer";
 @import "form";
 @import "hamburgers";
 @import "hero";
 @import "navigation";
+@import "portfolio";

@@ -1,0 +1,100 @@
+footer {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: $primary;
+}
+
+.Footer {
+  padding: 2rem;
+  margin: 0 auto;
+  width: 100%;
+
+  @include respond-to($small) {
+    width: $lap_and_up;
+  }
+
+  @include respond-to($large) {
+    width: $lap_and_up * 1.5;
+  }
+
+  &-social {
+    width: 33%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-evenly;
+
+    @include respond-to($small) {
+      margin: 0 auto;
+    }
+
+  }
+
+  &-siteMap {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    @include respond-to($small) {
+      margin: 0 auto;
+    }
+
+    p {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #000;
+    }
+  }
+
+  &-nav {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: space-evenly;
+  }
+
+  h2 {
+    font-size: 1rem;
+    padding-bottom: 2rem;
+    @include respond-to($small) {
+      font-size: 2rem;
+    }
+  }
+}
+
+
+.Image {
+  position: relative;
+  bottom: -.2rem;
+  margin: 0 .2rem;
+
+  &--kotlin {
+    width: 6.5rem;
+  }
+
+  &--sass {
+
+    width: 2.5rem;
+  }
+
+  &--social {
+    width: 2.5rem;
+  }
+}
+
+
+.Percent-30 {
+  filter: opacity(40%);
+
+  :hover {
+    filter: opacity(75%);
+  }
+
+  p:hover {
+    filter: opacity(75%);
+  }
+}
