@@ -7,8 +7,20 @@
   z-index: 10000;
 }
 
+.Kotlin-injection-target {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
 a {
   text-decoration: none;
+}
+
+p {
+  line-height: 1.75rem;
 }
 
 body {
@@ -32,10 +44,24 @@ body {
 }
 
 .shaded {
-  filter: drop-shadow(2px 5px 6px rgba(0,0,0, .5));
+  filter: drop-shadow(2px 5px 6px rgba(0, 0, 0, .5));
 }
 
 .shaded-r {
-  filter: drop-shadow(-2px -5px 6px rgba(0,0,0, .5));
+  filter: drop-shadow(-2px -5px 6px rgba(0, 0, 0, .5));
 }
 
+.Percent-40 {
+  animation: Percent40Out .5s forwards;
+  animation-timing-function: ease-in-out;
+
+  :hover {
+    animation: Percent40In .5s forwards;
+  animation-timing-function: ease-in-out;
+  }
+
+  p:hover {
+    animation: Percent40In .5s forwards;
+  animation-timing-function: ease-in-out;
+  }
+}
