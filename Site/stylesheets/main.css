@@ -30,6 +30,42 @@ button {
   background: #fff;
 }
 
+/* line 1, ../sass/_card.scss */
+.Card {
+  display: inline-block;
+  margin: 0 auto;
+  padding: 1rem;
+  height: 280px;
+  width: 280px;
+}
+@media (min-width: 600px) {
+  /* line 1, ../sass/_card.scss */
+  .Card {
+    width: 400px;
+    height: 400px;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 1, ../sass/_card.scss */
+  .Card {
+    height: 500px;
+    width: 500px;
+  }
+}
+/* line 18, ../sass/_card.scss */
+.Card-body {
+  border-radius: .5rem;
+  height: 100%;
+  width: 100%;
+  padding: .5rem;
+  background: #4488ee;
+}
+/* line 25, ../sass/_card.scss */
+.Card-body img {
+  width: 98%;
+  height: 98%;
+}
+
 /* line 1, ../sass/_commons.scss */
 * {
   color: #fff;
@@ -47,64 +83,98 @@ button {
   right: 0;
   top: 0;
   bottom: 0;
+  margin: auto;
 }
 
-/* line 18, ../sass/_commons.scss */
+/* line 19, ../sass/_commons.scss */
+.Space {
+  margin: 5rem auto !important;
+}
+@media (min-width: 600px) {
+  /* line 19, ../sass/_commons.scss */
+  .Space {
+    margin: 10rem auto !important;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 19, ../sass/_commons.scss */
+  .Space {
+    margin: 15rem auto !important;
+  }
+}
+/* line 30, ../sass/_commons.scss */
+.Space-small {
+  margin: 2rem auto !important;
+}
+@media (min-width: 600px) {
+  /* line 30, ../sass/_commons.scss */
+  .Space-small {
+    margin: 4rem auto !important;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 30, ../sass/_commons.scss */
+  .Space-small {
+    margin: 6rem auto !important;
+  }
+}
+
+/* line 44, ../sass/_commons.scss */
 a {
   text-decoration: none;
 }
 
-/* line 22, ../sass/_commons.scss */
+/* line 48, ../sass/_commons.scss */
 p {
   line-height: 1.75rem;
 }
 
-/* line 26, ../sass/_commons.scss */
+/* line 52, ../sass/_commons.scss */
 body {
   background: #343444;
 }
 
-/* line 30, ../sass/_commons.scss */
+/* line 56, ../sass/_commons.scss */
 .clearfix {
   clear: both;
 }
 
-/* line 34, ../sass/_commons.scss */
+/* line 60, ../sass/_commons.scss */
 .margin-bottom {
   margin-bottom: 4rem;
 }
 
-/* line 38, ../sass/_commons.scss */
+/* line 64, ../sass/_commons.scss */
 .padded-bottom {
   padding-bottom: 4rem;
 }
 
-/* line 42, ../sass/_commons.scss */
+/* line 68, ../sass/_commons.scss */
 .uppercase {
   text-transform: uppercase;
 }
 
-/* line 46, ../sass/_commons.scss */
+/* line 72, ../sass/_commons.scss */
 .shaded {
   filter: drop-shadow(2px 5px 6px rgba(0, 0, 0, 0.5));
 }
 
-/* line 50, ../sass/_commons.scss */
+/* line 76, ../sass/_commons.scss */
 .shaded-r {
   filter: drop-shadow(-2px -5px 6px rgba(0, 0, 0, 0.5));
 }
 
-/* line 54, ../sass/_commons.scss */
+/* line 80, ../sass/_commons.scss */
 .Percent-40 {
   animation: Percent40Out .5s forwards;
   animation-timing-function: ease-in-out;
 }
-/* line 58, ../sass/_commons.scss */
+/* line 84, ../sass/_commons.scss */
 .Percent-40 :hover {
   animation: Percent40In .5s forwards;
   animation-timing-function: ease-in-out;
 }
-/* line 63, ../sass/_commons.scss */
+/* line 89, ../sass/_commons.scss */
 .Percent-40 p:hover {
   animation: Percent40In .5s forwards;
   animation-timing-function: ease-in-out;
@@ -1371,26 +1441,30 @@ input {
 
 /* line 1, ../sass/_portfolio.scss */
 .Portfolio {
-  margin: 5rem auto;
+  margin: 0 auto;
   width: 100%;
   max-width: 1200px;
 }
 @media (min-width: 600px) {
   /* line 1, ../sass/_portfolio.scss */
   .Portfolio {
-    margin: 10rem auto;
     width: 600px;
   }
 }
 @media (min-width: 1200px) {
   /* line 1, ../sass/_portfolio.scss */
   .Portfolio {
-    margin: 15rem auto;
     width: 900px;
   }
 }
+/* line 14, ../sass/_portfolio.scss */
+.Portfolio-gallery {
+  margin: 0 auto;
+  width: 90%;
+  clear: both;
+}
 @media (min-width: 600px) {
-  /* line 16, ../sass/_portfolio.scss */
+  /* line 20, ../sass/_portfolio.scss */
   .Portfolio-work {
     align-content: center;
     display: flex;
@@ -1398,7 +1472,7 @@ input {
     justify-content: space-evenly;
   }
 }
-/* line 26, ../sass/_portfolio.scss */
+/* line 30, ../sass/_portfolio.scss */
 .Portfolio-work-item {
   background: #4488ee;
   border-radius: 1rem;
@@ -1406,24 +1480,24 @@ input {
   width: 66%;
 }
 @media (min-width: 600px) {
-  /* line 26, ../sass/_portfolio.scss */
+  /* line 30, ../sass/_portfolio.scss */
   .Portfolio-work-item {
     width: 45%;
   }
 }
-/* line 38, ../sass/_portfolio.scss */
+/* line 42, ../sass/_portfolio.scss */
 .Portfolio-text {
   padding: 3rem;
   font-size: 1.2rem;
 }
 @media (min-width: 600px) {
-  /* line 38, ../sass/_portfolio.scss */
+  /* line 42, ../sass/_portfolio.scss */
   .Portfolio-text {
     font-size: 1.3rem;
   }
 }
 @media (min-width: 1200px) {
-  /* line 38, ../sass/_portfolio.scss */
+  /* line 42, ../sass/_portfolio.scss */
   .Portfolio-text {
     font-size: 1.4rem;
   }

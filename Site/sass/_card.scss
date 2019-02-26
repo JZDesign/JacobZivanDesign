@@ -1,0 +1,30 @@
+.Card {
+  display: inline-block;
+  margin: 0 auto;
+  padding: 1rem;
+  height: 280px;
+  width: 280px;
+
+  @include respond-to($small) {
+    width: 400px;
+    height: 400px;
+  }
+
+  @include respond-to($large) {
+    height: 500px;
+    width: 500px;
+  }
+
+  &-body {
+    border-radius: .5rem;
+    height: 100%;
+    width: 100%;
+    padding: .5rem;
+    background: $primary;
+
+    img {
+      width: 98%;
+      height: 98%;
+    }
+  }
+}

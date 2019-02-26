@@ -13,6 +13,32 @@
   right: 0;
   top: 0;
   bottom: 0;
+  margin: auto;
+}
+
+.Space {
+  margin: 5rem auto !important;
+
+  @include respond-to($small) {
+    margin: 10rem auto !important;
+  }
+
+  @include respond-to($large) {
+    margin: 15rem auto !important;
+  }
+
+  &-small {
+    margin: 2rem auto !important;
+
+    @include respond-to($small) {
+      margin: 4rem auto !important;
+    }
+
+    @include respond-to($large) {
+      margin: 6rem auto !important;
+    }
+  }
+
 }
 
 a {

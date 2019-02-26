@@ -1,16 +1,20 @@
 .Portfolio {
-  margin: 5rem auto;
+  margin: 0 auto;
   width: 100%;
   max-width: $desk_and_up;
 
   @include respond-to($small) {
-    margin: 10rem auto;
     width: $lap_and_up;
   }
 
   @include respond-to($large) {
-    margin: 15rem auto;
     width: $lap_and_up * 1.5;
+  }
+
+  &-gallery {
+    margin: 0 auto;
+    width: 90%;
+    clear: both;
   }
 
   &-work {
