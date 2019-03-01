@@ -53,6 +53,39 @@ body {
   background: $secondary;
 }
 
+.blue {
+  background: $primary;
+
+  &-light {
+    background: $primary-light;
+  }
+
+  &-lighter {
+    background: $primary-lighter;
+
+  }
+}
+
+.red {
+  background: $red;
+  &-light {
+    background: $red-light;
+  }
+
+  &-lighter {
+    background: $red-lighter;
+
+  }
+}
+
+.yellow {
+  background: $yellow;
+  &-light {
+    background: $yellow-light;
+  }
+
+}
+
 .clearfix {
   clear: both;
 }
