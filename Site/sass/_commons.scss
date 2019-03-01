@@ -73,6 +73,10 @@ body {
   filter: drop-shadow(2px 5px 6px rgba(0, 0, 0, .5));
 }
 
+.shaded-p {
+  filter: drop-shadow(0 0 6px rgba(68,136,238,.5));
+}
+
 .shaded-r {
   filter: drop-shadow(-2px -5px 6px rgba(0, 0, 0, .5));
 }

@@ -35,33 +35,55 @@ button {
   display: inline-block;
   margin: 0 auto;
   padding: 1rem;
+}
+/* line 8, ../sass/_card.scss */
+.Card-albumArt {
   height: 280px;
   width: 280px;
 }
 @media (min-width: 600px) {
-  /* line 1, ../sass/_card.scss */
-  .Card {
+  /* line 8, ../sass/_card.scss */
+  .Card-albumArt {
     width: 400px;
     height: 400px;
   }
 }
 @media (min-width: 1200px) {
-  /* line 1, ../sass/_card.scss */
-  .Card {
+  /* line 8, ../sass/_card.scss */
+  .Card-albumArt {
     height: 500px;
     width: 500px;
   }
 }
-/* line 18, ../sass/_card.scss */
+/* line 30, ../sass/_card.scss */
+.Card-businessCards--landscape {
+  min-width: 400px;
+  min-height: 225.2px;
+}
+/* line 36, ../sass/_card.scss */
+.Card-businessCards--portrait {
+  max-width: 280px;
+  min-width: 400px;
+  min-height: 710.12px;
+}
+/* line 42, ../sass/_card.scss */
+.Card-businessCards--image {
+  width: 100%;
+  height: 100%;
+}
+/* line 48, ../sass/_card.scss */
 .Card-body {
+  display: flex;
+  align-content: center;
   border-radius: .5rem;
   height: 100%;
   width: 100%;
-  padding: .5rem;
+  padding: .25rem;
   background: #4488ee;
 }
-/* line 25, ../sass/_card.scss */
+/* line 57, ../sass/_card.scss */
 .Card-body img {
+  margin: auto auto;
   width: 98%;
   height: 98%;
 }
@@ -160,21 +182,26 @@ body {
 }
 
 /* line 76, ../sass/_commons.scss */
+.shaded-p {
+  filter: drop-shadow(0 0 6px rgba(68, 136, 238, 0.5));
+}
+
+/* line 80, ../sass/_commons.scss */
 .shaded-r {
   filter: drop-shadow(-2px -5px 6px rgba(0, 0, 0, 0.5));
 }
 
-/* line 80, ../sass/_commons.scss */
+/* line 84, ../sass/_commons.scss */
 .Percent-40 {
   animation: Percent40Out .5s forwards;
   animation-timing-function: ease-in-out;
 }
-/* line 84, ../sass/_commons.scss */
+/* line 88, ../sass/_commons.scss */
 .Percent-40 :hover {
   animation: Percent40In .5s forwards;
   animation-timing-function: ease-in-out;
 }
-/* line 89, ../sass/_commons.scss */
+/* line 93, ../sass/_commons.scss */
 .Percent-40 p:hover {
   animation: Percent40In .5s forwards;
   animation-timing-function: ease-in-out;

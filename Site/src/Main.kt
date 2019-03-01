@@ -12,13 +12,44 @@ fun main(args: Array<String>) {
     AlbumArt.values().forEach {
         albumArt?.appendChild(Card().let { album_art ->
             album_art.apply {
-                container.addClass("Card")
-                card.addClass("Card-body", "Card-body--art", "shaded")
+                container.addClass("Card", "Card-albumArt")
+                card.addClass("Card-body", "shaded")
                 image.src = it.value
                 card.append(image)
                 container.append(card)
             }
             album_art.container
+        })
+    }
+
+    val cards = document.getElementById("cards_landscape")
+
+    BusinessCardsLandscape.values().forEach {
+        cards?.appendChild(Card().let { bizCard ->
+            bizCard.apply {
+                container.addClass("Card", "Card-businessCards" ,"Card-businessCards--landscape")
+                card.addClass("Card-body", "shaded")
+                image.src = it.value
+                card.append(image)
+                container.append(card)
+            }
+            bizCard.container
+        })
+    }
+
+    val cardsPortrait = document.getElementById("cards_portrait")
+
+
+    BusinessCardsPortrait.values().forEach {
+        cardsPortrait?.appendChild(Card().let { bizCard ->
+            bizCard.apply {
+                container.addClass("Card", "Card-businessCards" ,"Card-businessCards--portrait")
+                card.addClass("Card-body", "shaded")
+                image.src = it.value
+                card.append(image)
+                container.append(card)
+            }
+            bizCard.container
         })
     }
 }
