@@ -1,0 +1,170 @@
+* {
+  color: $white;
+  text-align: center;
+  border: none;
+  padding: 0;
+  margin: 0;
+  z-index: 10000;
+  font-family: Arial, Helvetica, "Helvetica Neue", sans-serif;
+}
+
+.Kotlin-injection-target {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.Space {
+  margin: 5rem auto !important;
+
+  @include respond-to($small) {
+    margin: 10rem auto !important;
+  }
+
+  @include respond-to($large) {
+    margin: 15rem auto !important;
+  }
+
+  &-small {
+    margin: 2rem auto !important;
+
+    @include respond-to($small) {
+      margin: 4rem auto !important;
+    }
+
+    @include respond-to($large) {
+      margin: 6rem auto !important;
+    }
+  }
+
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  line-height: 1.8rem;
+}
+
+body {
+  background: $secondary;
+}
+
+.blue {
+  background: $primary;
+
+  &-light {
+    background: $primary-light;
+  }
+
+  &-lighter {
+    background: $primary-lighter;
+
+  }
+}
+
+.red {
+  background: $red;
+
+  &-light {
+    background: $red-light;
+  }
+
+  &-lighter {
+    background: $red-lighter;
+
+  }
+}
+
+.yellow {
+  background: $yellow;
+
+  &-light {
+    background: $yellow-light;
+  }
+
+}
+
+.clearfix {
+  clear: both;
+}
+
+.margin-bottom {
+  margin-bottom: 4rem;
+}
+
+.padded-bottom {
+  padding-bottom: 4rem;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.bold {
+  font-weight: bolder;
+}
+
+.shaded {
+  filter: drop-shadow(2px 5px 6px rgba(0, 0, 0, .5));
+}
+
+.shaded-p {
+  filter: drop-shadow(0 0 6px rgba(68, 136, 238, .5));
+}
+
+.shaded-r {
+  filter: drop-shadow(-2px -5px 6px rgba(0, 0, 0, .5));
+}
+
+.hover {
+  :hover {
+    transition: opacity .5s ease-in-out 0s;
+    opacity: .7;
+  }
+}
+
+.hide {
+  transition: opacity .5s ease-in-out 0s;
+  opacity: 0;
+
+  * {
+    transition: opacity .5s ease-in-out 0s;
+    opacity: 0;
+  }
+}
+
+.minimize {
+  transition: height .5s ease .5s;
+  height: 0;
+  display: none;
+  * {
+    transition: height .5s ease .5s;
+    height: 0;
+  }
+
+}
+
+.show {
+  transition: opacity .5s ease-in-out 1s;
+  opacity: 1;
+}
+
+.Percent-40 {
+  animation: Percent40Out .5s forwards;
+  animation-timing-function: ease-in-out;
+
+  :hover {
+    animation: Percent40In .5s forwards;
+    animation-timing-function: ease-in-out;
+  }
+
+  p:hover {
+    animation: Percent40In .5s forwards;
+    animation-timing-function: ease-in-out;
+  }
+}

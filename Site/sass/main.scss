@@ -1,15 +1,15 @@
-@import "hamburgers"; 
+// theme and mixins
+@import "constants";
+@import "respond-to";
+@import "animations";
 
-.hamburger {
-    position: fixed;
-    top: 1.5rem;
-    right: 1.5rem;
-}
-
-.Navigation-Header {
-    float: left;
-}
-
-nav {
-    
-}
+// Styles
+@import "button";
+@import "card";
+@import "commons";
+@import "footer";
+@import "form";
+@import "hamburgers";
+@import "hero";
+@import "navigation";
+@import "portfolio";

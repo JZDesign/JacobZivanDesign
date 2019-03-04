@@ -1,0 +1,1 @@
+data class Card(val container: _Div_ = div(), val card: _Div_ = div(), val image: _Image_ = img())
