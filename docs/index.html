@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JZDesign</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+</head>
+<body>
+
+<!--   Navigation   -->
+
+<nav>
+    <div class="Navigation">
+        <button id="hamburger" class="hamburger hamburger--collapse">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+        </button>
+    </div>
+    <div id="nav_items"
+         class="Navigation Navigation-items Navigation-items--invisible shaded hover">
+        <a data-nav="home" href="#"><h2 class="uppercase">Home</h2></a>
+        <a data-nav="art" href="#"><h2 class="uppercase">Art</h2></a>
+        <a data-nav="mobile" href="#"><h2 class="uppercase">Mobile</h2></a>
+    </div>
+</nav>
+
+<div id="Kotlin-injection-target-index">
+    <!--  Hero  -->
+
+    <div class="Hero">
+        <img class="Hero-image Hero-image--withText" src="images/ja.jpg">
+        <h1 class="Hero-title">Welcome!</h1>
+    </div>
+
+    <!--  About  -->
+
+    <div class="Portfolio Space">
+        <h1 class="Portfolio-title">Hey! I'm Jacob.</h1>
+        <br>
+        <p class="Portfolio-text">I'm a Developer with many interests. My focus is Native Mobile
+            development but I've recently found a fondness for web as well,
+            thanks to Kotlin, Ruby on Rails, and Sass.
+            Some of my technical skills include mobile development with experience in legacy code
+            bases, front end development, TDD, and design.
+        </p>
+        <br>
+        <h2 class="Portfolio-title">Checkout some of my work.</h2>
+    </div>
+    <!--  Work injection point -->
+    <div id="portfolio_work_space" class="Portfolio Portfolio-work Space">
+    </div>
+
+</div>
+
+<div id="Kotlin-injection-target-portfolio" class="hide minimize">
+    <br class="Space-small">
+    <div id="album_art" class="Portfolio-gallery Portfolio-gallery--art">
+    </div>
+
+    <br class="Space">
+
+    <div id="cards_landscape" class="Portfolio-gallery Portfolio-gallery--businessCards">
+    </div>
+
+    <div id="cards_portrait" class="Portfolio-gallery Portfolio-gallery--businessCards">
+    </div>
+
+    <br class="Space-small">
+
+    <div id="logos" class="Portfolio-gallery Portfolio-gallery--logos">
+    </div>
+    <br class="Space">
+</div>
+
+<div id="Kotlin-injection-target-mobile" class="hide minimize">
+    <br class="Space-small">
+    <div id="mobile_portfolio" class="Portfolio-gallery">
+    </div>
+    <br class="Space">
+</div>
+
+<!-- Footer -->
+<footer class="shaded-r">
+    <div class="Footer">
+        <h2 class="Footer-stack">
+            This site was built with
+            <a target="_blank" href="https://kotlinlang.org/">
+                <img class="Image Image--kotlin" src="images/kotlin.png" alt="Kotlin Logo">
+            </a>
+
+            and
+
+            <a target="_blank" href="https://sass-lang.com/">
+                <img class="Image Image--sass" src="images/saas.png" alt="Sass Logo">
+            </a>
+        </h2>
+
+        <div class="Footer-nav">
+
+            <div class="Footer-social">
+                <a class="Percent-40"
+                   href="https://www.linkedin.com/in/jacob-rakidzich-b8722436"
+                   target="_blank"><img class="Image--social"
+                                        src="images/linkedin.png"></a>
+                <a class="Percent-40" href="https://www.github.com/JZDesign"
+                   target="_blank"><img class="Image--social" src="images/git.png"></a>
+            </div>
+
+            <div class="Footer-siteMap">
+                <a data-nav="home" class="Percent-40" href="#"><p>Home</p></a>
+                <a data-nav="art" class="Percent-40" href="#"><p>Art</p></a>
+                <a data-nav="mobile" class="Percent-40" href="#"><p>Mobile</p></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="out/production/JacobZivanDesign/lib/kotlin.js"></script>
+<script type="text/javascript"
+        src="out/production/JacobZivanDesign/JacobZivanDesign.js"></script>
+
+</body>
+</html>
