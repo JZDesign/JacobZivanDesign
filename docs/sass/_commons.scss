@@ -1,5 +1,4 @@
 * {
-  image-orientation: initial;
   color: $white;
   text-align: center;
   border: none;
@@ -7,10 +6,6 @@
   margin: 0;
   z-index: 10000;
   font-family: Arial, Helvetica, "Helvetica Neue", sans-serif;
-}
-
-img {
-  image-orientation:unset;
 }
 
 .Kotlin-injection-target {
