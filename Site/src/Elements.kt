@@ -23,6 +23,8 @@ fun cardsPortrait() = getElement("cards_portrait")
 fun logos() = getElement("logos")
 
 fun portfolio() = getElement(PORTFOLIO)
+fun mobilePortfolio() = getElement(MOBILE_PORTFOLIO)
+fun mobilePortfolioTarget() = getElement(MOBILE_PORTFOLIO_TARGET)
 fun index() = getElement(INDEX)
 
 fun getElement(string: String) = document.getElementById(string) as? HTMLElement

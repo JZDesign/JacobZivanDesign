@@ -1,10 +1,7 @@
+import image_path.*
 import kotlin.dom.addClass
 import kotlin.dom.hasClass
 import kotlin.dom.removeClass
-import image_path.AlbumArt
-import image_path.BusinessCardsLandscape
-import image_path.BusinessCardsPortrait
-import image_path.Logos
 import org.w3c.dom.asList
 import kotlin.browser.document
 import kotlin.math.log
@@ -33,7 +30,13 @@ class Navigation {
             })
 
         }
-            // TODO: mobile
+
+        document.querySelectorAll("[data-nav='mobile']").asList().forEach {
+            it.addEventListener("click", {
+                viewMobile()
+            })
+
+        }
     }
 
     fun setUpHamburger() = hamburger()?.apply {
@@ -50,14 +53,25 @@ class Navigation {
 
 fun goHome() {
     portfolio()?.hide()
+    mobilePortfolio()?.hide()
     destroyPortfolio()
     index()?.show()
 }
 
 fun viewArt() {
-    showPortfolioItems()
     index()?.hide()
+    mobilePortfolio()?.hide()
+    destroyPortfolio()
+    showPortfolioItems()
     portfolio()?.show()
+}
+
+fun viewMobile() {
+    index()?.hide()
+    portfolio()?.hide()
+    destroyPortfolio()
+    mobilePortfolio()?.show()
+    showMobileItems()
 }
 
 fun destroyPortfolio() {
@@ -65,6 +79,25 @@ fun destroyPortfolio() {
     cards()?.defenestrate()
     cardsPortrait()?.defenestrate()
     logos()?.defenestrate()
+    mobilePortfolioTarget()?.defenestrate()
+}
+
+fun showMobileItems() {
+    mobilePortfolioTarget()?.appendChild(headerWithText("Mobile Applications"))
+    MobileApp.MobileAppImages.values().forEach {
+        mobilePortfolioTarget()?.appendChild(Card().let { card ->
+            card.buildCard("Card", "Card-art", withBackground = true, imageURL = it.value)
+            card.container
+        })
+    }
+
+    mobilePortfolioTarget()?.appendChild(headerWithText("Ipad App"))
+    MobileApp.IpadAppImages.values().forEach {
+        mobilePortfolioTarget()?.appendChild(Card().let { card ->
+            card.buildCard("Card", "Card-art", withBackground = true, imageURL = it.value)
+            card.container
+        })
+    }
 }
 
 fun showPortfolioItems() {

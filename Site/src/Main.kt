@@ -1,4 +1,5 @@
 import image_path.AlbumArt
+import image_path.MobileApp
 import kotlin.dom.addClass
 
 fun main(args: Array<String>) {
@@ -26,11 +27,9 @@ fun main(args: Array<String>) {
         addClass("hover")
         this.appendChild(Card().let {
             it.apply {
-                val image = AlbumArt.SB_FLAME_LOGO
-                buildCard("Card", "Card-art", withBackground = true, imageURL = image.value)
-                container.addEventListener("click", {
-                    // TODO: Add nav
-                })
+                val image = MobileApp.WY_ART
+                buildCard("Card", "Card-art", withBackground = true, imageURL = image)
+                container.addEventListener("click", { viewMobile() })
             }
             it.container
         })
