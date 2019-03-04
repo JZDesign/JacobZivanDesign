@@ -41,7 +41,7 @@ button {
   height: 280px;
   width: 280px;
 }
-@media (min-width: 750px) {
+@media (min-width: 751px) {
   /* line 8, ../sass/_card.scss */
   .Card-albumArt {
     width: 400px;
@@ -59,7 +59,7 @@ button {
 .Card-art {
   width: 280px;
 }
-@media (min-width: 750px) {
+@media (min-width: 751px) {
   /* line 24, ../sass/_card.scss */
   .Card-art {
     width: 400px;
@@ -128,7 +128,7 @@ button {
 .Space {
   margin: 5rem auto !important;
 }
-@media (min-width: 750px) {
+@media (min-width: 751px) {
   /* line 20, ../sass/_commons.scss */
   .Space {
     margin: 10rem auto !important;
@@ -144,7 +144,7 @@ button {
 .Space-small {
   margin: 2rem auto !important;
 }
-@media (min-width: 750px) {
+@media (min-width: 751px) {
   /* line 31, ../sass/_commons.scss */
   .Space-small {
     margin: 4rem auto !important;
@@ -314,7 +314,7 @@ footer {
   margin: 0 auto;
   width: 100%;
 }
-@media (min-width: 750px) {
+@media (min-width: 751px) {
   /* line 10, ../sass/_footer.scss */
   .Footer {
     padding: 2rem;
@@ -335,7 +335,7 @@ footer {
   flex-direction: column;
   align-content: space-evenly;
 }
-@media (min-width: 750px) {
+@media (min-width: 751px) {
   /* line 24, ../sass/_footer.scss */
   .Footer-social {
     margin: 0 auto;
@@ -367,7 +367,7 @@ footer {
   font-size: 1rem;
   padding-bottom: 2rem;
 }
-@media (min-width: 750px) {
+@media (min-width: 751px) {
   /* line 61, ../sass/_footer.scss */
   .Footer-stack {
     font-size: 1.5rem;
@@ -384,7 +384,7 @@ footer {
 .Image--kotlin {
   width: 4rem;
 }
-@media (min-width: 750px) {
+@media (min-width: 751px) {
   /* line 76, ../sass/_footer.scss */
   .Image--kotlin {
     width: 6.5rem;
@@ -394,7 +394,7 @@ footer {
 .Image--sass {
   width: 1.5rem;
 }
-@media (min-width: 750px) {
+@media (min-width: 751px) {
   /* line 83, ../sass/_footer.scss */
   .Image--sass {
     width: 2.5rem;
@@ -1504,7 +1504,7 @@ input {
   max-width: 33.33%;
   font-size: 2rem;
 }
-@media (min-width: 750px) {
+@media (min-width: 751px) {
   /* line 27, ../sass/_hero.scss */
   .Hero-title {
     font-size: 3rem;
@@ -1587,7 +1587,7 @@ input {
   width: 100%;
   max-width: 1200px;
 }
-@media (min-width: 750px) {
+@media (min-width: 751px) {
   /* line 1, ../sass/_portfolio.scss */
   .Portfolio {
     width: 600px;
@@ -1605,7 +1605,7 @@ input {
   width: 90%;
   clear: both;
 }
-@media (min-width: 750px) {
+@media (min-width: 751px) {
   /* line 20, ../sass/_portfolio.scss */
   .Portfolio-work {
     align-content: center;
@@ -1621,7 +1621,7 @@ input {
   margin: 2rem auto;
   width: 66%;
 }
-@media (min-width: 750px) {
+@media (min-width: 751px) {
   /* line 30, ../sass/_portfolio.scss */
   .Portfolio-work-item {
     width: 45%;
@@ -1632,7 +1632,7 @@ input {
   padding: 3rem;
   font-size: 1.2rem;
 }
-@media (min-width: 750px) {
+@media (min-width: 751px) {
   /* line 42, ../sass/_portfolio.scss */
   .Portfolio-text {
     font-size: 1.3rem;
