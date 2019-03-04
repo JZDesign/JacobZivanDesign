@@ -1,73 +1,40 @@
-import kotlin.browser.document
+import image_path.AlbumArt
 import kotlin.dom.addClass
 
 fun main(args: Array<String>) {
     Navigation().setUpHamburger()
     //    View().create()
 
-    val albumArt = document.getElementById("album_art")
-
-    AlbumArt.values().forEach {
-        albumArt?.appendChild(Card().let { album_art ->
-            album_art.apply {
-                container.addClass("Card", "Card-albumArt")
-                card.addClass("Card-body", background(), "shaded")
-                image.src = it.value
-                card.append(image)
-                container.append(card)
+    val work = getElement("portfolio_work_space")
+    val art = a().apply {
+        href = "#"
+        innerHTML = "Design and Art"
+        addClass("hover")
+        this.appendChild(Card().let {
+            it.apply {
+                val image = AlbumArt.SB_THE_FUSE_INSIDE
+                buildCard("Card", "Card-art", withBackground = true, imageURL = image.value)
+                container.addEventListener("click", { viewArt() })
             }
-            album_art.container
+            it.container
         })
     }
 
-    val cards = document.getElementById("cards_landscape")
-
-    BusinessCardsLandscape.values().forEach {
-        cards?.appendChild(Card().let { bizCard ->
-            bizCard.apply {
-                container.addClass("Card", "Card-businessCards", "Card-businessCards--landscape")
-                card.addClass("Card-body", background(), "shaded")
-                image.src = it.value
-                card.append(image)
-                container.append(card)
+    val mobile = a().apply {
+        href = "#"
+        innerHTML = "Mobile Applications"
+        addClass("hover")
+        this.appendChild(Card().let {
+            it.apply {
+                val image = AlbumArt.SB_FLAME_LOGO
+                buildCard("Card", "Card-art", withBackground = true, imageURL = image.value)
+                container.addEventListener("click", {
+                    // TODO: Add nav
+                })
             }
-            bizCard.container
+            it.container
         })
     }
 
-    val cardsPortrait = document.getElementById("cards_portrait")
-
-    BusinessCardsPortrait.values().forEach {
-        cardsPortrait?.appendChild(Card().let { bizCard ->
-            bizCard.apply {
-                container.addClass("Card", "Card-businessCards", "Card-businessCards--portrait")
-                card.addClass("Card-body", background(), "shaded")
-                image.src = it.value
-                card.append(image)
-                container.append(card)
-            }
-            bizCard.container
-        })
-    }
-
-    val logos = document.getElementById("logos")
-
-    Logos.values().forEach {
-        logos?.appendChild(Card().let { logo ->
-            logo.apply {
-                container.addClass("Card", "Card-art")
-                card.addClass("Card-body", "shaded")
-                image.src = it.value
-                card.append(image)
-                container.append(card)
-            }
-            logo.container
-        })
-    }
+    work?.append(art, mobile)
 }
-
-fun background() = arrayOf(*red, *blue, *blue, *blue, *blue, *blue, *yellow).random()
-
-val red = arrayOf("red", "red-light", "red-lighter")
-val yellow = arrayOf("yellow", "yellow-light")
-val blue = arrayOf("blue", "blue-light", "blue-lighter")

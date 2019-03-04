@@ -5,6 +5,7 @@
   padding: 0;
   margin: 0;
   z-index: 10000;
+  font-family: Arial, Helvetica, "Helvetica Neue", sans-serif;
 }
 
 .Kotlin-injection-target {
@@ -46,7 +47,7 @@ a {
 }
 
 p {
-  line-height: 1.75rem;
+  line-height: 1.8rem;
 }
 
 body {
@@ -68,6 +69,7 @@ body {
 
 .red {
   background: $red;
+
   &-light {
     background: $red-light;
   }
@@ -80,6 +82,7 @@ body {
 
 .yellow {
   background: $yellow;
+
   &-light {
     background: $yellow-light;
   }
@@ -102,16 +105,53 @@ body {
   text-transform: uppercase;
 }
 
+.bold {
+  font-weight: bolder;
+}
+
 .shaded {
   filter: drop-shadow(2px 5px 6px rgba(0, 0, 0, .5));
 }
 
 .shaded-p {
-  filter: drop-shadow(0 0 6px rgba(68,136,238,.5));
+  filter: drop-shadow(0 0 6px rgba(68, 136, 238, .5));
 }
 
 .shaded-r {
   filter: drop-shadow(-2px -5px 6px rgba(0, 0, 0, .5));
+}
+
+.hover {
+  :hover {
+    transition: opacity .5s ease-in-out 0s;
+    opacity: .7;
+  }
+}
+
+.hide {
+  transition: opacity .5s ease-in-out 0s;
+  opacity: 0;
+
+  * {
+    transition: opacity .5s ease-in-out 0s;
+    opacity: 0;
+  }
+}
+
+.minimize {
+  transition: height .5s ease .5s;
+  height: 0;
+  display: none;
+  * {
+    transition: height .5s ease .5s;
+    height: 0;
+  }
+
+}
+
+.show {
+  transition: opacity .5s ease-in-out 1s;
+  opacity: 1;
 }
 
 .Percent-40 {
@@ -120,11 +160,11 @@ body {
 
   :hover {
     animation: Percent40In .5s forwards;
-  animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
   }
 
   p:hover {
     animation: Percent40In .5s forwards;
-  animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
   }
 }
