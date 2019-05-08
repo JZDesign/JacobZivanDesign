@@ -19,9 +19,10 @@ button {
   height: 1.5rem;
   border-radius: 5px;
   box-shadow: -1px -1px -1px #efefef;
+  outline: none;
 }
 
-/* line 7, ../sass/_button.scss */
+/* line 8, ../sass/_button.scss */
 .button {
   margin: 0 auto;
   width: 5rem;
