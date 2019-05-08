@@ -15,7 +15,7 @@ enum class AlbumArt(val value: String) {
     SB_I_AM_THE_HORIZON("$IMAGES$ART" + "iamthehorizon$JPG"),
     SB_LOGO("$IMAGES$ART" + "sblogo2017$JPG"),
     SB_LOGO_OLD("$IMAGES$ART" + "slowburnlogo$JPG"),
-    SB_FLAME_LOGO("$IMAGES$ART" + "flameslogo$JPG"),
+    SB_FLAME_LOGO("$IMAGES$ART" + "flamesLogo$JPG"),
     SB_DRUMHEAD("$IMAGES$ART" + "drumhead$JPG"),
     SB_TIDAL_WAVE("$IMAGES$ART" + "TidalWave$JPG");
 

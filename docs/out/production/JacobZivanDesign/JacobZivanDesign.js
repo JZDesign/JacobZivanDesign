@@ -522,7 +522,7 @@ var JacobZivanDesign = function (_, Kotlin) {
     AlbumArt$SB_I_AM_THE_HORIZON_instance = new AlbumArt('SB_I_AM_THE_HORIZON', 7, 'images/art/' + 'iamthehorizon.jpg');
     AlbumArt$SB_LOGO_instance = new AlbumArt('SB_LOGO', 8, 'images/art/' + 'sblogo2017.jpg');
     AlbumArt$SB_LOGO_OLD_instance = new AlbumArt('SB_LOGO_OLD', 9, 'images/art/' + 'slowburnlogo.jpg');
-    AlbumArt$SB_FLAME_LOGO_instance = new AlbumArt('SB_FLAME_LOGO', 10, 'images/art/' + 'flameslogo.jpg');
+    AlbumArt$SB_FLAME_LOGO_instance = new AlbumArt('SB_FLAME_LOGO', 10, 'images/art/' + 'flamesLogo.jpg');
     AlbumArt$SB_DRUMHEAD_instance = new AlbumArt('SB_DRUMHEAD', 11, 'images/art/' + 'drumhead.jpg');
     AlbumArt$SB_TIDAL_WAVE_instance = new AlbumArt('SB_TIDAL_WAVE', 12, 'images/art/' + 'TidalWave.jpg');
   }
