@@ -197,6 +197,11 @@ var JacobZivanDesign = function (_, Kotlin) {
     $receiver.container.append($receiver.card);
     return $receiver;
   }
+  function buildLazyCard($receiver, containerClasses, withBackground, imageURL) {
+    var $receiver_0 = buildCard($receiver, containerClasses.slice(), withBackground, imageURL);
+    addClass($receiver.image, ['lazy']);
+    return $receiver_0;
+  }
   var Random = Kotlin.kotlin.random.Random;
   var random = Kotlin.kotlin.collections.random_lj338n$;
   function background() {
@@ -400,7 +405,7 @@ var JacobZivanDesign = function (_, Kotlin) {
       var tmp$_2;
       if ((tmp$_2 = mobilePortfolioTarget()) != null) {
         var card = new Card();
-        buildCard(card, ['Card', 'Card-art'], true, element.value);
+        buildLazyCard(card, ['Card', 'Card-art'], true, element.value);
         tmp$_2.appendChild(card.container);
       }
     }
@@ -412,7 +417,7 @@ var JacobZivanDesign = function (_, Kotlin) {
       var tmp$_4;
       if ((tmp$_4 = mobilePortfolioTarget()) != null) {
         var card_0 = new Card();
-        buildCard(card_0, ['Card', 'Card-art'], true, element_0.value);
+        buildLazyCard(card_0, ['Card', 'Card-art'], true, element_0.value);
         tmp$_4.appendChild(card_0.container);
       }
     }
@@ -427,7 +432,7 @@ var JacobZivanDesign = function (_, Kotlin) {
       var tmp$_2;
       if ((tmp$_2 = albumArt()) != null) {
         var album_art = new Card();
-        buildCard(album_art, ['Card', 'Card-albumArt'], true, element.value);
+        buildLazyCard(album_art, ['Card', 'Card-albumArt'], true, element.value);
         tmp$_2.appendChild(album_art.container);
       }
     }
@@ -439,7 +444,7 @@ var JacobZivanDesign = function (_, Kotlin) {
       var tmp$_4;
       if ((tmp$_4 = cards()) != null) {
         var bizCard = new Card();
-        buildCard(bizCard, ['Card', 'Card-businessCards', 'Card-businessCards--landscape'], true, element_0.value);
+        buildLazyCard(bizCard, ['Card', 'Card-businessCards', 'Card-businessCards--landscape'], true, element_0.value);
         tmp$_4.appendChild(bizCard.container);
       }
     }
@@ -450,7 +455,7 @@ var JacobZivanDesign = function (_, Kotlin) {
       var tmp$_6;
       if ((tmp$_6 = cardsPortrait()) != null) {
         var bizCard_0 = new Card();
-        buildCard(bizCard_0, ['Card', 'Card-businessCards', 'Card-businessCards--portrait'], true, element_1.value);
+        buildLazyCard(bizCard_0, ['Card', 'Card-businessCards', 'Card-businessCards--portrait'], true, element_1.value);
         tmp$_6.appendChild(bizCard_0.container);
       }
     }
@@ -461,7 +466,7 @@ var JacobZivanDesign = function (_, Kotlin) {
       var tmp$_8;
       if ((tmp$_8 = logos()) != null) {
         var logo = new Card();
-        buildCard(logo, ['Card', 'Card-art'], false, element_2.value);
+        buildLazyCard(logo, ['Card', 'Card-art'], false, element_2.value);
         tmp$_8.appendChild(logo.container);
       }
     }
@@ -522,7 +527,7 @@ var JacobZivanDesign = function (_, Kotlin) {
     AlbumArt$SB_I_AM_THE_HORIZON_instance = new AlbumArt('SB_I_AM_THE_HORIZON', 7, 'images/art/' + 'iamthehorizon.jpg');
     AlbumArt$SB_LOGO_instance = new AlbumArt('SB_LOGO', 8, 'images/art/' + 'sblogo2017.jpg');
     AlbumArt$SB_LOGO_OLD_instance = new AlbumArt('SB_LOGO_OLD', 9, 'images/art/' + 'slowburnlogo.jpg');
-    AlbumArt$SB_FLAME_LOGO_instance = new AlbumArt('SB_FLAME_LOGO', 10, 'images/art/' + 'flameslogo.jpg');
+    AlbumArt$SB_FLAME_LOGO_instance = new AlbumArt('SB_FLAME_LOGO', 10, 'images/art/' + 'flamesLogo.jpg');
     AlbumArt$SB_DRUMHEAD_instance = new AlbumArt('SB_DRUMHEAD', 11, 'images/art/' + 'drumhead.jpg');
     AlbumArt$SB_TIDAL_WAVE_instance = new AlbumArt('SB_TIDAL_WAVE', 12, 'images/art/' + 'TidalWave.jpg');
   }
@@ -1122,6 +1127,7 @@ var JacobZivanDesign = function (_, Kotlin) {
   _.hide_y4uc6z$ = hide;
   _.defenestrate_y4uc6z$ = defenestrate;
   _.buildCard_bmjtf$ = buildCard;
+  _.buildLazyCard_bmjtf$ = buildLazyCard;
   _.background = background;
   _.main_kand9s$ = main;
   _.NameAndEmail = NameAndEmail;
