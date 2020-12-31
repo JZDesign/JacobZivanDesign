@@ -18,9 +18,14 @@ a:hover {
 
 body {
   background: #fff;
-  color: #000;
-  font-family: Helvetica, Arial;
+  color: #1f2426;
+  font-family: "Main", Helvetica, Arial;
   text-align: center;
+}
+
+.date {
+  padding-top: 1rem;
+  font-weight: bold;
 }
 
 .wrapper {
@@ -32,10 +37,9 @@ body {
 }
 
 header {
-  background: linear-gradient(217deg, rgba(242, 13, 11, 0.9), rgba(242, 101, 82, 0) 70.71%), linear-gradient(127deg, rgba(82, 13, 11, 0.9), rgba(242, 101, 82, 0) 70.71%), linear-gradient(236deg, rgba(82, 13, 11, 0.9), rgba(242, 101, 82, 0) 70.71%);
+  background: linear-gradient(217deg, rgba(242, 13, 11, 0.9), rgba(242, 101, 82, 0) 50%), linear-gradient(127deg, rgba(82, 13, 11, 0.9), rgba(242, 101, 82, 0) 50%), linear-gradient(236deg, rgba(82, 13, 11, 0.9), rgba(242, 101, 82, 0) 50%);
   background-color: #cc3925;
   color: #fff;
-  height: 150px;
 }
 header .wrapper {
   height: 100%;
@@ -46,14 +50,17 @@ header .wrapper {
   justify-content: space-around;
   flex-direction: column;
 }
+header .wrapper p {
+  margin-bottom: 10px;
+}
 header .site-name {
   font-size: 1.5em;
   font-weight: bold;
 }
-
-nav {
-  margin-top: 20px;
+header .site-icon > img {
+  max-width: 160px;
 }
+
 nav li {
   display: inline-block;
   margin: 0 7px;
@@ -73,7 +80,9 @@ h2 {
 }
 
 p {
-  margin-bottom: 10px;
+  margin-bottom: 1.3rem;
+  line-height: 1.5;
+  font-size: 1.05em;
 }
 
 a {
@@ -89,7 +98,7 @@ a {
   display: block;
   padding: 20px;
   border-radius: 20px;
-  background: linear-gradient(217deg, rgba(242, 13, 11, 0.9), rgba(242, 101, 82, 0) 70.71%), linear-gradient(127deg, rgba(82, 13, 11, 0.9), rgba(242, 101, 82, 0) 70.71%), linear-gradient(236deg, rgba(82, 13, 11, 0.9), rgba(242, 101, 82, 0) 70.71%);
+  background: linear-gradient(45deg, #cc3925, #f26552 150%);
   background-color: #cc3925;
   margin-bottom: 20px;
 }
@@ -110,11 +119,16 @@ a {
 }
 .tag-list li, .tag-list .tag, .all-tags li, .all-tags .tag {
   display: inline-block;
-  background-color: #cc3925;
+  background-color: #1f2426;
+  border: 1px solid #e64640;
   color: #fff;
   padding: 4px 6px;
   border-radius: 5px;
   margin-right: 5px;
+}
+.tag-list li a:hover, .tag-list .tag a:hover, .all-tags li a:hover, .all-tags .tag a:hover {
+  color: #e64640;
+  text-decoration: none;
 }
 
 .item-page .tag-list {
@@ -136,14 +150,83 @@ footer {
 
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #222;
-    color: #ddd;
+    background-color: #1f2426;
+    color: #eee;
   }
 }
 @media (max-width: 600px) {
   .wrapper {
     padding: 40px 20px;
   }
+}
+blockquote {
+  font-family: ui-monospace;
+  font-size: 1.3rem;
+  padding: 1rem;
+  margin: 2rem;
+  border-left: 3px solid #f26552;
+  background: linear-gradient(45deg, #cc3925, #f26552 150%);
+  border-radius: 1rem;
+  color: #fff;
+}
+blockquote > p {
+  padding: 0;
+  margin: 0;
+}
+
+pre {
+  margin-bottom: 1.5em;
+  background-color: #1a1a1a;
+  padding: 16px 0;
+  border-radius: 16px;
+}
+
+pre code {
+  font-family: monospace;
+  display: block;
+  padding: 0 20px;
+  color: #a9bcbc;
+  line-height: 1.4em;
+  font-size: 0.95em;
+  overflow-x: auto;
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+}
+
+pre code .keyword {
+  color: #FC5FA3;
+}
+
+pre code .type {
+  color: #5DD8FF;
+}
+
+pre code .call {
+  color: #41A1C0;
+}
+
+pre code .property {
+  color: #75B492;
+}
+
+pre code .number {
+  color: #9686F5;
+}
+
+pre code .string {
+  color: #FC6A5D;
+}
+
+pre code .comment {
+  color: #6C7986;
+}
+
+pre code .dotAccess {
+  color: #AEF37D;
+}
+
+pre code .preprocessing {
+  color: #FD8F3F;
 }
 
 /*# sourceMappingURL=styles.css.map */

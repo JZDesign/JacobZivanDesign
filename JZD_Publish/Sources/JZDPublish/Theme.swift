@@ -7,7 +7,7 @@ extension Theme where Site == JZDPublish {
         Theme(
             htmlFactory: JZD_Factory(),
             resourcePaths: ["Resources/stylesheets/styles.css"]
-)
+        )
         
     }
     
@@ -72,7 +72,7 @@ extension Theme where Site == JZDPublish {
                                 .class("content"),
                                 .contentBody(item.body)
                             ),
-                            .span("Tagged with: "),
+                            .span("Tags: "),
                             .tagList(for: item, on: context.site)
                         )
                     ),
@@ -170,8 +170,8 @@ private extension Node where Context == HTML.BodyContext {
         
         return .header(
             .wrapper(
-                .a(.class("site-name"), .href("/"), .text(context.site.name)),
-                .p("A site about learning to think and living by principle."),
+                .a(.class("site-icon"), .href("/"), .img(.src("/images/memoji.png"), .alt("Memoji of Jacob giving a thumbs up"))),
+//                .p("A site about learning to think and living by principle."),
                 .if(sectionIDs.count > 1,
                     .nav(
                         .ul(.forEach(sectionIDs) { section in
@@ -197,7 +197,8 @@ private extension Node where Context == HTML.BodyContext {
                         .text(item.title)
                     )),
                     .tagList(for: item, on: site),
-                    .p(.text(item.description))
+                    .p(.text(item.description)),
+                    .p(.text(item.date.formatted()), .class("date"))
                 ))
             }
         )
@@ -226,5 +227,14 @@ private extension Node where Context == HTML.BodyContext {
                 .href("/feed.rss")
             ))
         )
+    }
+}
+
+extension Date {
+    func formatted() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM dd yyyy"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        return formatter.string(from: self)
     }
 }
