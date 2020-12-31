@@ -225,7 +225,12 @@ private extension Node where Context == HTML.BodyContext {
             .p(.a(
                 .text("RSS feed"),
                 .href("/feed.rss")
-            ))
+            )),
+            .div(
+                .a(.img(.src("/images/git.svg")), .target(.blank), .class("find-me"), .href("https://github.com/JZDesign/")),
+                .a(.img(.src("/images/linkedin.svg")), .target(.blank), .class("find-me"), .href("https://www.linkedin.com/in/jacob-rakidzich-b8722436/")),
+                .class("social")
+            )
         )
     }
 }

@@ -113,6 +113,20 @@ a {
   margin-bottom: 0;
 }
 
+.social {
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 900px;
+  margin: 2rem auto;
+}
+.social .find-me img {
+  max-width: 24px;
+  max-height: 24px;
+}
+.social .find-me:hover {
+  opacity: 0.7;
+}
+
 .tag-list, .all-tags {
   text-decoration: none;
   margin-bottom: 15px;
