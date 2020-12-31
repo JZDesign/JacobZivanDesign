@@ -4,15 +4,26 @@
  **  MIT license, see LICENSE file for details
 */
 
+$red4: #f26552;
+$red5: #e64640;
 $red6: #cc3925;
+
+$gray9: #1f2426;
+$gray7: #495257;
+
 $header-gradient-dark: 
-  linear-gradient(217deg, rgba(82, 13, 11, 0.9), rgba(242, 101, 82, 0) 70.71%),
-  linear-gradient(127deg, rgba(82, 13, 11, 0.9), rgba(242, 101, 82, 0) 70.71%),
-  linear-gradient(236deg, rgba(82, 13, 11, 0.9), rgba(242, 101, 82, 0) 70.71%);
+  linear-gradient(217deg, rgba(82, 13, 11, 0.9), rgba(242, 101, 82, 0) 50%),
+  linear-gradient(127deg, rgba(82, 13, 11, 0.9), rgba(242, 101, 82, 0) 50%),
+  linear-gradient(236deg, rgba(82, 13, 11, 0.9), rgba(242, 101, 82, 0) 50%);
+
+  
+$content-gradient : linear-gradient(45deg, $red6, $red4 150%);
+
+
 $header-gradient: 
-  linear-gradient(217deg, rgba(242, 13, 11, 0.9), rgba(242, 101, 82, 0) 70.71%),
-  linear-gradient(127deg, rgba(82, 13, 11, 0.9), rgba(242, 101, 82, 0) 70.71%),
-  linear-gradient(236deg, rgba(82, 13, 11, 0.9), rgba(242, 101, 82, 0) 70.71%);
+  linear-gradient(217deg, rgba(242, 13, 11, 0.9), rgba(242, 101, 82, 0) 50%),
+  linear-gradient(127deg, rgba(82, 13, 11, 0.9), rgba(242, 101, 82, 0) 50%),
+  linear-gradient(236deg, rgba(82, 13, 11, 0.9), rgba(242, 101, 82, 0) 50%);
 
 * {
   margin: 0;
@@ -30,9 +41,14 @@ a {
 
 body {
   background: #fff;
-  color: #000;
-  font-family: Helvetica, Arial;
+  color: $gray9;
+  font-family: "Main", Helvetica, Arial;
   text-align: center;
+}
+
+.date {
+  padding-top: 1rem;
+  font-weight: bold;
 }
 
 .wrapper {
@@ -47,7 +63,6 @@ header {
   background: $header-gradient;
   background-color: $red6;
   color: #fff;
-  height: 150px;
   
   .wrapper {
     height: 100%;
@@ -57,16 +72,26 @@ header {
     display: flex;
     justify-content: space-around;
     flex-direction: column;
+
+    p {
+      margin-bottom: 10px;
+    }
   }
   
-  .site-name {
+  .site {
+    &-name {
     font-size: 1.5em;
     font-weight: bold;
+    }
+    
+    &-icon > img {
+      max-width: 160px;
+    }
   }
+
 }
 
 nav {
-  margin-top: 20px;
 
   li {
     display: inline-block;
@@ -89,7 +114,9 @@ h2 {
 }
 
 p {
-  margin-bottom: 10px;
+  margin-bottom: 1.3rem;
+  line-height: 1.5;
+  font-size: 1.05em;
 }
 
 a {
@@ -106,7 +133,7 @@ a {
     display: block;
     padding: 20px;
     border-radius: 20px;
-    background: $header-gradient;
+    background: $content-gradient;
     background-color: $red6;
     margin-bottom: 20px;
   }
@@ -131,11 +158,20 @@ a {
   
   li, .tag {
       display: inline-block;
-      background-color: $red6;
+      background-color: $gray9;
+      border: 1px solid $red5;
       color: #fff;
       padding: 4px 6px;
       border-radius: 5px;
       margin-right: 5px;
+      
+      a {
+
+        &:hover {
+          color: $red5;
+          text-decoration: none;
+        }
+      }
 
   }
 }
@@ -160,8 +196,8 @@ footer {
 
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #222;
-    color: #ddd;
+    background-color: $gray9;
+    color: #eee;
   }
 }
 
@@ -169,4 +205,78 @@ footer {
   .wrapper {
     padding: 40px 20px;
   }
+}
+
+blockquote {
+  font-family: ui-monospace;
+  font-size: 1.3rem;
+  padding: 1rem;
+  margin: 2rem;
+  border-left: 3px solid $red4;
+  background: $content-gradient;
+  border-radius: 1rem;
+  color: #fff;
+
+  & > p {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+
+// Splash
+
+pre {
+  margin-bottom: 1.5em;
+  background-color: #1a1a1a;
+  padding: 16px 0;
+  border-radius: 16px;
+}
+
+pre code {
+  font-family: monospace;
+  display: block;
+  padding: 0 20px;
+  color: #a9bcbc;
+  line-height: 1.4em;
+  font-size: 0.95em;
+  overflow-x: auto;
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+}
+
+pre code .keyword {
+  color: #FC5FA3;
+}
+
+pre code .type {
+  color: #5DD8FF;
+}
+
+pre code .call {
+  color: #41A1C0;
+}
+
+pre code .property {
+  color: #75B492;
+}
+
+pre code .number {
+  color: #9686F5;
+}
+
+pre code .string {
+  color: #FC6A5D;
+}
+
+pre code .comment {
+  color: #6C7986;
+}
+
+pre code .dotAccess {
+  color: #AEF37D;
+}
+
+pre code .preprocessing {
+  color: #FD8F3F;
 }
