@@ -7,9 +7,8 @@ import CNAMEPublishPlugin
 // This type acts as the configuration for your website.
 struct JZDPublish: Website {
     enum SectionID: String, WebsiteSectionID {
-        // Add the sections that you want your website to contain here:
         case musings
-        case technology
+        //        case technology
     }
     
     struct ItemMetadata: WebsiteItemMetadata {
@@ -24,18 +23,10 @@ struct JZDPublish: Website {
     var imagePath: Path? { "images/memoji.png" }
 }
 
-// This will generate your website using the built-in Foundation theme:
-//try JZDPublish().publish(withTheme: .JZD, plugins: [.splash(withClassPrefix: "")])
-
 try JZDPublish()
-    .publish(using:
-                [
-                    .generateHTML(withTheme: .JZD),
-                    .installPlugin(.splash(withClassPrefix: "")),
-                    .installPlugin(.generateCNAME(with: "jacobzivandesign.com", "www.jacobzivandesign.com")),
-                    .deploy(using:.gitHub("JZDesign/JacobZivanDesign", useSSH: false))
-                ])
-
-
-
-
+    .publish(withTheme: .JZD,
+             additionalSteps: [
+                .deploy(using:.gitHub("JZDesign/JacobZivanDesign", useSSH: false))
+             ],
+             plugins: [.splash(withClassPrefix: ""), .addCNAME()]
+    )
