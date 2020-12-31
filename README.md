@@ -1,2 +1,0 @@
-# JacobZivanDesign
-Personal Site
