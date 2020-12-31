@@ -2,6 +2,7 @@ import Foundation
 import Publish
 import Plot
 import SplashPublishPlugin
+import CNAMEPublishPlugin
 
 // This type acts as the configuration for your website.
 struct JZDPublish: Website {
@@ -31,6 +32,7 @@ try JZDPublish()
                 [
                     .generateHTML(withTheme: .JZD),
                     .installPlugin(.splash(withClassPrefix: "")),
+                    .installPlugin(.generateCNAME(with: "jacobzivandesign.com", "www.jacobzivandesign.com")),
                     .deploy(using:.gitHub("JZDesign/JacobZivanDesign", useSSH: false))
                 ])
 
