@@ -31,7 +31,7 @@ try JZDPublish()
                 [
                     .generateHTML(withTheme: .JZD),
                     .installPlugin(.splash(withClassPrefix: "")),
-                    .deploy(using:.gitHub("JZDesign/JZDesign.github.io", useSSH: false))
+                    .deploy(using:.gitHub("JZDesign/JacobZivanDesign", useSSH: false))
                 ])
 
 
