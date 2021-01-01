@@ -1,5 +1,4 @@
 ---
-
 date: 2020-09-19 08:13
 description: Make the infamous component from scratch!
 tags: SwiftUI, Technology, Tutorial, UI/UX
@@ -8,7 +7,7 @@ tags: SwiftUI, Technology, Tutorial, UI/UX
 # A Precise 5 Star Rating with SwiftUI
 
 
-![x](../../images/5star.png)
+![5 star view](../../images/5star.png)
 
 <br/>
 <br/>
@@ -165,7 +164,7 @@ private struct ForegroundStars: View {
 
 ## Crap!
 
-![x](../../images/5star_fail.png)
+![broken 5 star view](../../images/5star_fail.png)
 
 <br/>
 <br/>

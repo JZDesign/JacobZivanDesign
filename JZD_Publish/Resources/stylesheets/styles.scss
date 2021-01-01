@@ -8,6 +8,7 @@ $red4: #f26552;
 $red5: #e64640;
 $red6: #cc3925;
 
+$gray2: #e8eced;
 $gray9: #1f2426;
 $gray7: #495257;
 
@@ -117,6 +118,10 @@ p {
   margin-bottom: 1.3rem;
   line-height: 1.5;
   font-size: 1.05em;
+
+  code {
+    color: $red4;
+  }
 }
 
 a {
@@ -202,7 +207,8 @@ a {
   margin-bottom: 40px;
 
   img {
-    margin: 0 auto;
+    max-width: 800px;
+    margin: 2rem auto;
     display: block;
   }
 
@@ -218,18 +224,6 @@ footer {
   color: #8a8a8a;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: $gray9;
-    color: #eee;
-  }
-}
-
-@media (max-width: 600px) {
-  .wrapper {
-    padding: 40px 20px;
-  }
-}
 
 blockquote {
   font-family: ui-monospace;
@@ -247,6 +241,13 @@ blockquote {
   }
 }
 
+ol {
+  margin: 2rem;
+  li {
+    margin: 1rem 0;
+  }
+}
+
 table {
   border-collapse: collapse;
   width: 90%;
@@ -255,10 +256,10 @@ table {
 th, td {
   padding: 0.25rem;
   text-align: left;
-  border: 1px solid $red6;
+  border: 1px solid $gray2;
 }
 tbody tr:nth-child(odd) {
-  background: $red4;
+  background: $gray2;
 }
 
 // Splash
@@ -316,4 +317,28 @@ pre code .dotAccess {
 
 pre code .preprocessing {
   color: #FD8F3F;
+}
+
+// MEDIA
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: $gray9;
+    color: #eee;
+  }
+
+  th, td {
+    border: 1px solid $red6;
+  }
+  
+  tbody tr:nth-child(odd) {
+    background: $red4;
+  }
+
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    padding: 40px 20px;
+  }
 }

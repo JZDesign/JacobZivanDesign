@@ -84,6 +84,9 @@ p {
   line-height: 1.5;
   font-size: 1.05em;
 }
+p code {
+  color: #f26552;
+}
 
 a {
   color: inherit;
@@ -153,7 +156,8 @@ a {
   margin-bottom: 40px;
 }
 .content img {
-  margin: 0 auto;
+  max-width: 800px;
+  margin: 2rem auto;
   display: block;
 }
 
@@ -166,17 +170,6 @@ footer {
   color: #8a8a8a;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #1f2426;
-    color: #eee;
-  }
-}
-@media (max-width: 600px) {
-  .wrapper {
-    padding: 40px 20px;
-  }
-}
 blockquote {
   font-family: ui-monospace;
   font-size: 1.3rem;
@@ -192,6 +185,13 @@ blockquote > p {
   margin: 0;
 }
 
+ol {
+  margin: 2rem;
+}
+ol li {
+  margin: 1rem 0;
+}
+
 table {
   border-collapse: collapse;
   width: 90%;
@@ -201,11 +201,11 @@ table {
 th, td {
   padding: 0.25rem;
   text-align: left;
-  border: 1px solid #cc3925;
+  border: 1px solid #e8eced;
 }
 
 tbody tr:nth-child(odd) {
-  background: #f26552;
+  background: #e8eced;
 }
 
 pre {
@@ -261,6 +261,26 @@ pre code .dotAccess {
 
 pre code .preprocessing {
   color: #FD8F3F;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1f2426;
+    color: #eee;
+  }
+
+  th, td {
+    border: 1px solid #cc3925;
+  }
+
+  tbody tr:nth-child(odd) {
+    background: #f26552;
+  }
+}
+@media (max-width: 600px) {
+  .wrapper {
+    padding: 40px 20px;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */
