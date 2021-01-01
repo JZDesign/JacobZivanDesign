@@ -200,6 +200,12 @@ a {
 
 .content {
   margin-bottom: 40px;
+
+  img {
+    margin: 0 auto;
+    display: block;
+  }
+
 }
 
 .browse-all {
@@ -241,6 +247,19 @@ blockquote {
   }
 }
 
+table {
+  border-collapse: collapse;
+  width: 90%;
+  margin: 2rem;
+}
+th, td {
+  padding: 0.25rem;
+  text-align: left;
+  border: 1px solid $red6;
+}
+tbody tr:nth-child(odd) {
+  background: $red4;
+}
 
 // Splash
 
