@@ -1,6 +1,6 @@
 ---
 description: A blog on software development, principles, and growth.
 ---
-# Tech Blog
+# Technology
 
 ## A blog on software development, principles, and growth.
