@@ -1,7 +1,7 @@
 ---
 date: 2020-12-30 08:13
 description: How do you ingest information? Actively or Passively?
-tags: Article, Lifestyle, Romans 12:2, Media
+tags: Lifestyle, Romans 12:2, Musing, Media
 ---
 
 # A Soap Box on the Media

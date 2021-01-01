@@ -152,6 +152,10 @@ a {
 .content {
   margin-bottom: 40px;
 }
+.content img {
+  margin: 0 auto;
+  display: block;
+}
 
 .browse-all {
   display: block;
@@ -186,6 +190,22 @@ blockquote {
 blockquote > p {
   padding: 0;
   margin: 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 90%;
+  margin: 2rem;
+}
+
+th, td {
+  padding: 0.25rem;
+  text-align: left;
+  border: 1px solid #cc3925;
+}
+
+tbody tr:nth-child(odd) {
+  background: #f26552;
 }
 
 pre {

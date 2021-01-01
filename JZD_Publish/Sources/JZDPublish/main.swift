@@ -4,21 +4,20 @@ import Plot
 import SplashPublishPlugin
 import CNAMEPublishPlugin
 
-// This type acts as the configuration for your website.
 struct JZDPublish: Website {
     enum SectionID: String, WebsiteSectionID {
         case musings
-        //        case technology
+        case technology
+//        case about
     }
     
     struct ItemMetadata: WebsiteItemMetadata {
         // Add any site-specific metadata that you want to use here.
     }
     
-    // Update these properties to configure your website:
     var url = URL(string: "https://JacobZivanDesign.com")!
     var name = "Jacob Zivan Design"
-    var description = "Some musings and learnings from a banker turned nerd."
+    var description = "Musings and learnings from a banker turned nerd - Tips, tutorials, principles, and thought processes on life and software."
     var language: Language { .english }
     var imagePath: Path? { "images/memoji.png" }
 }
