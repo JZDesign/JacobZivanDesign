@@ -273,12 +273,10 @@ tbody tr:nth-child(odd) {
     }
   }
   &fix {
-    display: inline-block;
-    &::after {
-      display: inline-block;
-    }
+    display: block;
+    clear: both;
   }
-  }
+}
 
 .left-item {
   float: left;

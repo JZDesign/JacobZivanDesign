@@ -216,10 +216,8 @@ tbody tr:nth-child(odd) {
   clear: left;
 }
 .clearfix {
-  display: inline-block;
-}
-.clearfix::after {
-  display: inline-block;
+  display: block;
+  clear: both;
 }
 
 .left-item {
