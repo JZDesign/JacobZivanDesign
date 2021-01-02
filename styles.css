@@ -209,6 +209,35 @@ tbody tr:nth-child(odd) {
   background: #e8eced;
 }
 
+.clearfix {
+  display: inline-block;
+}
+.clearfix::after {
+  display: inline-block;
+}
+
+.left-item {
+  float: left;
+  margin: 2rem !important;
+}
+@media (max-width: 820px) {
+  .left-item {
+    float: none;
+    margin: 2rem auto !important;
+  }
+}
+
+.right-item {
+  float: right;
+  margin: 2rem !important;
+}
+@media (max-width: 820px) {
+  .right-item {
+    float: none;
+    margin: 2rem auto !important;
+  }
+}
+
 pre {
   margin-bottom: 1.5em;
   background-color: #1a1a1a;
