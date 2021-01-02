@@ -187,11 +187,15 @@ private struct StarImage: View {
 ```
 <br/>
 
-<span class="clearfix" style="overflow:auto;"/>
+<img class="right-item" style="max-width: 300px;" alt="5 star view" src="../../images/5star_upright.png"/>
+
+<span class="clear-left"></span>
 
 ## Viola!
 Like magic! This was a fun little project. In comparison to UIKit (SwiftUI's predecessor), it was far less code and dramatically more enjoyable to create. You can checkout the source code on [Github](https://github.com/JZDesign/FiveStarRating_SwiftUI).
 
 
+
+<span class="clearfix" style="overflow:auto;"/>
 
 _This article was originally posted on Medium_

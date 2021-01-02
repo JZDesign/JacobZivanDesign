@@ -263,12 +263,22 @@ tbody tr:nth-child(odd) {
   background: $gray2;
 }
 
-.clearfix {
-  display: inline-block;
-  &::after {
-    display: inline-block;
+.clear {
+  &-left {
+    clear:left;
+    
+    & + h2, + p {
+      clear:left;
+      
+    }
   }
-}
+  &fix {
+    display: inline-block;
+    &::after {
+      display: inline-block;
+    }
+  }
+  }
 
 .left-item {
   float: left;

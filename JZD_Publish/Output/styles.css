@@ -209,6 +209,12 @@ tbody tr:nth-child(odd) {
   background: #e8eced;
 }
 
+.clear-left {
+  clear: left;
+}
+.clear-left + h2, .clear-left + p {
+  clear: left;
+}
 .clearfix {
   display: inline-block;
 }
