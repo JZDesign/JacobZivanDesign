@@ -191,7 +191,7 @@ private struct StarImage: View {
 
 <span class="clear-left"></span>
 
-## Viola!
+## Voila!
 Like magic! This was a fun little project. In comparison to UIKit (SwiftUI's predecessor), it was far less code and dramatically more enjoyable to create. You can checkout the source code on [Github](https://github.com/JZDesign/FiveStarRating_SwiftUI).
 
 
