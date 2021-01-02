@@ -6,7 +6,7 @@ tags: SwiftUI, Technology, Tutorial, UI/UX
 
 # A Precise 5 Star Rating with SwiftUI
 
-<img style="max-width: 300px;" alt="5 star view" src="../../images/5star.png"/>
+![5 star view](../../images/5star.png)
 
 <br/>
 <br/>
