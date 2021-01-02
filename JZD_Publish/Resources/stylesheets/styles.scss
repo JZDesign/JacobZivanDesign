@@ -209,6 +209,7 @@ a {
 
   a {
     color: $red5;
+
   }
 
   img {
@@ -301,6 +302,12 @@ tbody tr:nth-child(odd) {
     @media (max-width: 820px) {
       float:none;
       margin: 2rem auto !important;
+  }
+}
+
+article {
+  a:hover {
+    color: #fff;
   }
 }
 // Splash
