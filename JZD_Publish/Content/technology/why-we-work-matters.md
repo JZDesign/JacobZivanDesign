@@ -15,7 +15,7 @@ I hate that we do that. So I sat down and thought about our passionless haste as
 
 ## We don't understand _Why We Work._
 
-Why are you a software engineer? Yea, it's fun, it's interesting, and it can pay pretty well. But that's not where I'm going. We're hired for the way our brains work. We're quite adept at looking at something, understanding it, and offering solutions. We are hired to solve _user problems._ We're also hired to make systems that can scale, are resilient to the future, and has a low lift for others to enter and work on after we've moved on to other projects. 
+Why are you a software engineer? Yea, it's fun, it's interesting, and it can pay pretty well. But that's not where I'm going. We're hired for the way our brains work. We're quite adept at looking at something, understanding it, and offering solutions. We are hired to solve _user problems._ We're also hired to make systems that can scale, are resilient to the future, and have a low lift for others to enter and work on after we've moved on to other projects. 
 
 > We are hired to solve user problems.
 
