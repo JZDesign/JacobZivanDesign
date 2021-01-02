@@ -246,6 +246,10 @@ tbody tr:nth-child(odd) {
   }
 }
 
+article a:hover {
+  color: #fff;
+}
+
 pre {
   margin-bottom: 1.5em;
   background-color: #e8eced;
