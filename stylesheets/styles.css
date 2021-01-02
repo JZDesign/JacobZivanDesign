@@ -156,6 +156,7 @@ a {
   margin-bottom: 40px;
 }
 .content img {
+  width: 95%;
   max-width: 800px;
   margin: 2rem auto;
   display: block;
