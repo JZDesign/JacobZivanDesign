@@ -24,7 +24,7 @@ I decided to go with option two: Masking over 5 stars. Though I quickly realized
 
 
 ## A 5 point scale
-Each star needs to represent a portion of the scale. The first star represents 0 to 1, the second 1 to 2 and so on. The simplest solution I could think of was to iterate over an array of stars and create the mask from rating - index with a floor of 0 and a ceiling of 1.
+Each star needs to represent a portion of the scale. The first star represents 0 to 1, the second 1 to 2 and so on. The simplest solution I could think of was to iterate over an array of stars and create the mask value from `rating - index` then normalizing it with a floor of 0 and a ceiling of 1.
 
 For example, if the 5 star rating was 3.6, this is what the mask results would look like:
 
