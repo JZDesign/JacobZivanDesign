@@ -302,62 +302,104 @@ tbody tr:nth-child(odd) {
 
 pre {
   margin-bottom: 1.5em;
-  background-color: #1a1a1a;
+  background-color: $gray2;
   padding: 16px 0;
   border-radius: 16px;
-}
 
-pre code {
-  font-family: monospace;
-  display: block;
-  padding: 0 20px;
-  color: #a9bcbc;
-  line-height: 1.4em;
-  font-size: 0.95em;
-  overflow-x: auto;
-  white-space: pre;
-  -webkit-overflow-scrolling: touch;
-}
+  code {
+    font-family: monospace;
+    display: block;
+    padding: 0 20px;
+    color: $gray9;
+    line-height: 1.4em;
+    font-size: 0.95em;
+    overflow-x: auto;
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
 
-pre code .keyword {
-  color: #FC5FA3;
-}
+    .keyword {
+      color: #9B2393;
+    }
 
-pre code .type {
-  color: #5DD8FF;
-}
+    .type {
+      color: #0B4F79;
+    }
 
-pre code .call {
-  color: #41A1C0;
-}
+    .call {
+      color: #0F68A0;
+    }
 
-pre code .property {
-  color: #75B492;
-}
+    .property {
+      color: #6C36A9;
+    }
 
-pre code .number {
-  color: #9686F5;
-}
+    .number {
+      color: #1C00CF;
+    }
 
-pre code .string {
-  color: #FC6A5D;
-}
+    .string {
+      color: #C41A16;
+    }
 
-pre code .comment {
-  color: #6C7986;
-}
+    .comment {
+      color: #6C7986;
+    }
 
-pre code .dotAccess {
-  color: #AEF37D;
-}
+    .dotAccess {
+      color: #326D74;
+    }
 
-pre code .preprocessing {
-  color: #FD8F3F;
+    .preprocessing {
+      color: #643820;
+    }
+  }
 }
-
 // MEDIA
 
 @media (prefers-color-scheme: dark) {
+  pre {
+    background-color: #1a1a1a;
+    code {
+      color: $gray2;
+
+    .keyword {
+      color: #FC5FA3;
+    }
+
+    .type {
+      color: #5DD8FF;
+    }
+
+    .call {
+      color: #41A1C0;
+    }
+
+    .property {
+      color: #75B492;
+    }
+
+    .number {
+      color: #9686F5;
+    }
+
+    .string {
+      color: #FC6A5D;
+    }
+
+    .comment {
+      color: #6C7986;
+    }
+
+    .dotAccess {
+      color: #AEF37D;
+    }
+
+    .preprocessing {
+      color: #FD8F3F;
+    }
+    }
+  }
+
   body {
     background-color: $gray9;
     color: #eee;

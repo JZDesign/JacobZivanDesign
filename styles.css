@@ -244,60 +244,84 @@ tbody tr:nth-child(odd) {
 
 pre {
   margin-bottom: 1.5em;
-  background-color: #1a1a1a;
+  background-color: #e8eced;
   padding: 16px 0;
   border-radius: 16px;
 }
-
 pre code {
   font-family: monospace;
   display: block;
   padding: 0 20px;
-  color: #a9bcbc;
+  color: #1f2426;
   line-height: 1.4em;
   font-size: 0.95em;
   overflow-x: auto;
   white-space: pre;
   -webkit-overflow-scrolling: touch;
 }
-
 pre code .keyword {
-  color: #FC5FA3;
+  color: #9B2393;
 }
-
 pre code .type {
-  color: #5DD8FF;
+  color: #0B4F79;
 }
-
 pre code .call {
-  color: #41A1C0;
+  color: #0F68A0;
 }
-
 pre code .property {
-  color: #75B492;
+  color: #6C36A9;
 }
-
 pre code .number {
-  color: #9686F5;
+  color: #1C00CF;
 }
-
 pre code .string {
-  color: #FC6A5D;
+  color: #C41A16;
 }
-
 pre code .comment {
   color: #6C7986;
 }
-
 pre code .dotAccess {
-  color: #AEF37D;
+  color: #326D74;
 }
-
 pre code .preprocessing {
-  color: #FD8F3F;
+  color: #643820;
 }
 
 @media (prefers-color-scheme: dark) {
+  pre {
+    background-color: #1a1a1a;
+  }
+  pre code {
+    color: #e8eced;
+  }
+  pre code .keyword {
+    color: #FC5FA3;
+  }
+  pre code .type {
+    color: #5DD8FF;
+  }
+  pre code .call {
+    color: #41A1C0;
+  }
+  pre code .property {
+    color: #75B492;
+  }
+  pre code .number {
+    color: #9686F5;
+  }
+  pre code .string {
+    color: #FC6A5D;
+  }
+  pre code .comment {
+    color: #6C7986;
+  }
+  pre code .dotAccess {
+    color: #AEF37D;
+  }
+  pre code .preprocessing {
+    color: #FD8F3F;
+  }
+
   body {
     background-color: #1f2426;
     color: #eee;
