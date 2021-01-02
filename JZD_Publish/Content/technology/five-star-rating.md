@@ -15,9 +15,10 @@ tags: SwiftUI, Technology, Tutorial, UI/UX
 Recently, during some slack time at work, I took a look at a mockup we were showing customers during our discovery interviews. The mockup contained a 5 star rating view. You know the one I'm talking about, they're everywhere. Amazon, Airbnb, Walmart… you name it. To get some practice in SwiftUI, I decided I'd create that view component from scratch.
 
 I had a few ideas on how to create the view:
-- Give a progress view a custom mask.
-- Layout 5 stars and mask over the top of them with a rectangle.
-- And finally to use Apple's new [SFSymbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/) to create a simple version using the full star and half star symbols, but that wasn't going to be precise enough to match the mock up.
+
+1. Give a progress view a custom mask.
+1. Layout 5 stars and mask over the top of them with a rectangle.
+1. And finally to use Apple's new [SFSymbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/) to create a simple version using the full star and half star symbols, but that wasn't going to be precise enough to match the mock up.
 
 I decided to go with option two: Masking over 5 stars. Though I quickly realized that it wasn't a simple as masking over the collection of the stars. I had forgotten to account for the space between each star! After some thought, I chose to mask each star individually. This is how it works:
 
