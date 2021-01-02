@@ -6,8 +6,7 @@ tags: SwiftUI, Technology, Tutorial, UI/UX
 
 # A Precise 5 Star Rating with SwiftUI
 
-
-![5 star view](../../images/5star.png)
+<img style="max-width: 300px;" alt="5 star view" src="../../images/5star.png"/>
 
 <br/>
 <br/>
@@ -165,7 +164,7 @@ private struct ForegroundStars: View {
 
 ## Crap!
 
-![broken 5 star view](../../images/5star_fail.png)
+<img style="max-width: 300px;" alt="broken 5 star view" src="../../images/5star_fail.png"/>
 
 <br/>
 <br/>
@@ -187,5 +186,6 @@ private struct StarImage: View {
 ## Viola!
 Like magic! This was a fun little project. In comparison to UIKit (SwiftUI's predecessor), it was far less code and dramatically more enjoyable to create. You can checkout the source code on [Github](https://github.com/JZDesign/FiveStarRating_SwiftUI).
 
+<span style="overflow:auto;"/>
 
 _This article was originally posted on Medium_
