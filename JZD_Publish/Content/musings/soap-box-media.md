@@ -1,6 +1,6 @@
 ---
 date: 2020-12-30 08:13
-description: How do you ingest information? Actively or Passively?
+description: Media Brainwashing? How do you ingest information? Actively or Passively?
 tags: Lifestyle, Romans 12:2, Musing, Media
 ---
 

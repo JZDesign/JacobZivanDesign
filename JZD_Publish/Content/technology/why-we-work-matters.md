@@ -1,6 +1,6 @@
 ---
 date: 2021-01-01 09:10
-description: Work with purpose, and be diligent, even in the little things.
+description: Become a better Software Engineer. Discover who your users really are, then, work with purpose and be diligent even in the little things.
 tags: Colossians 3:23, Mindset, Principle, Technology, Tips, Workflow,
 ---
 # Why We Work Matters

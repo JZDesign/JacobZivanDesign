@@ -1,6 +1,6 @@
 ---
 date: 2020-12-31 08:13
-description: We are conditioned to consume. Would you trade your future for your present?
+description: How we view "Disposable income" is ruining our lives. We are conditioned to consume. Would you trade your future for your present?
 tags: Lifestyle, Romans 12:2, Musing  
 ---
 # Disposable...

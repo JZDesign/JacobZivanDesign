@@ -1,6 +1,6 @@
 ---
 date: 2020-09-19 08:13
-description: Make the infamous component from scratch!
+description: SwiftUI 5 Star Rating View Tutorial - Use SwiftUI to make a Star Review component from scratch!
 tags: iOS, MacOS, SwiftUI, Technology, Tutorial, UI/UX
 ---
 

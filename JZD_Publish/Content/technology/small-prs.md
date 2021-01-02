@@ -1,6 +1,6 @@
 ---
 date: 2021-01-01 06:13
-description: Work faster, find more bugs, write better code, be a better coworker.
+description: Large vs Small Pull Requests. How to make small pull requests and the benefits. Work faster, find more bugs, write better code, be a better coworker.
 tags: Principle, Single Conceptual Change, Technology, Tips, Workflow
 ---
 # Small Pull Requests 
@@ -73,40 +73,40 @@ Each one of those PR's covers a small amount of work. The person reviewing them 
 
 <br/>
 
-## How to be effective with Small PRs
+## How to be effective with Small Pull Requests
 <br/>
 
 ### 1. Understand the Problem
 
 <br/>
 
-First you need to understand the problem. Here is where we explore in code, ask our questions and get clarity on the task, or try and cut scope if we can. 
+First we need to understand the problem. Here is where we explore in code, ask our questions and get clarity on the task, or try and cut scope if we can. 
 <br/>
 
 ### 2. Design First
 <br/>
 
-After you've researched the problem and found some potential solutions, often times the next best foot forward is to write up a design document and send it to your peers. 
+After we've researched the problem and found some potential solutions, often times the next best foot forward is to write up a design document and send it to our peers. 
 
-Seems heavy handed? Sometimes it is. Even so, the exercise is worth it. When you're good at it, you can skip it for the truly small stuff. At the very least grab someone who would generally review your code _(if not possible anyone nerdy will do)_, take them to a whiteboard and start explaining the problem, what you've learned, and how you plan on solving it.
+Seems heavy handed? Sometimes it is. Even so, the exercise is worth it. When we get good at it, we can skip it for the truly small stuff. At the very least we should grab someone who would generally review our code _(if not possible anyone nerdy will do)_, take them to a whiteboard and start explaining the problem, what was learned, and how we plan on solving it.
 
 #### Why?
 
 Several awesome things happen here. 
 
 1. Steps can be named and PR's can be planned in advance
-2. The person or persons reviewing your code have context. This allows them to push back on stuff that is important, and to _not_ push back on stuff that they know will be addressed in the coming small prs.
-3. You get feedback _before_ you implement a solution. This can sometimes alter your solution so dramatically and save an incredible amount of time. 
+2. The person or persons reviewing our code have more context. This allows them to push back on stuff that is important, and to _not_ push back on stuff that they know will be addressed in the coming small prs.
+3. We get feedback _before_ we implement a solution. This can sometimes alter the solution so dramatically and save an incredible amount of time. 
 4. Naming and conceptual integrity concerns can often be addressed and solved before code review
 
-_There are many more benefits to pairing with others on designing the solution for your problem._ 
+_There are many more benefits to pairing with others on designing the solution for a problem._ 
 
 <br/>
 
 ### 3. Commit to Single Concept PRs
 <br/>
 
-If you don't do this, even if you did steps 1 + 2, by not breaking the work apart the code change will still end up being a monster that the team will take time to review and will often miss defects or other code smells. 
+By not breaking the work apart, the code change will still end up being a monster that the team will take time to review and will often miss defects or other code smells. 
 <br/>
 
 **Single Concept PR's for dummies**
