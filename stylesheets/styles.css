@@ -243,6 +243,9 @@ tbody tr:nth-child(odd) {
   }
 }
 
+.jbmono {
+  font-family: JetBrains Mono;
+}
 article p {
   overflow-wrap: break-word;
 }
