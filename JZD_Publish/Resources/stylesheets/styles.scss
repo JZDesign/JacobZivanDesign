@@ -316,6 +316,10 @@ tbody tr:nth-child(odd) {
 }
 
 article {
+  p {
+    overflow-wrap: break-word;
+  }
+  
   a:hover {
     color: #fff;
   }
