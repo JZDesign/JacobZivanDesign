@@ -13,6 +13,13 @@ extension Node where Context == HTML.BodyContext {
                     .href("https://github.com/johnsundell/publish")
                 )
             ),
+            .p(
+                .text("Code typeface "),
+                .a(
+                    .text("JetBrains Mono"),
+                    .href("https://www.jetbrains.com/lp/mono/")
+                )
+            ),
             .p(.a(
                 .text("RSS feed"),
                 .href("/feed.rss")
