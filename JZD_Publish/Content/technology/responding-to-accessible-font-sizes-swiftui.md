@@ -122,7 +122,7 @@ Notice how the `RStack` has the same syntax of the `HStack` and `VStack`? That's
 <br/>
 
 ```swift
-let debitCardImageName = "creditcard.fill" // # debt is dumb...
+let debitCardImageName = "creditcard.fill" // #DebtIsDumb
 
 struct ContentView: View {
     var body: some View {
