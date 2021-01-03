@@ -1,8 +1,7 @@
-/**
- **  Publish Foundation theme
- **  Copyright (c) John Sundell 2019
- **  MIT license, see LICENSE file for details
-*/
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../JacobZivanDesign/fonts/JetBrainsMono-Light.woff2") format("woff2"), url("../JacobZivanDesign/fonts/JetBrainsMono-LightItalic.woff2") format("woff2"), url("../JacobZivanDesign/fonts/JetBrainsMono-ExtraLight.woff2") format("woff2"), url("../JacobZivanDesign/fonts/JetBrainsMono-ExtraLightItalic.woff2") format("woff2"), url("../JacobZivanDesign/fonts/JetBrainsMono-Bold.woff2") format("woff2"), url("../JacobZivanDesign/fonts/JetBrainsMono-BoldItalic.woff2") format("woff2"), url("../JacobZivanDesign/fonts/JetBrainsMono-ExtraBold.woff2") format("woff2"), url("../JacobZivanDesign/fonts/JetBrainsMono-ExtraBoldItalic.woff2") format("woff2"), url("../JacobZivanDesign/fonts/JetBrainsMono-Italic.woff2") format("woff2"), url("../JacobZivanDesign/fonts/JetBrainsMono-Thin.woff2") format("woff2"), url("../JacobZivanDesign/fonts/JetBrainsMono-ThinItalic.woff2") format("woff2"), url("../JacobZivanDesign/fonts/JetBrainsMono-Medium.woff2") format("woff2"), url("../JacobZivanDesign/fonts/JetBrainsMono-MediumItalic.woff2") format("woff2"), url("../JacobZivanDesign/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+}
 * {
   margin: 0;
   padding: 0;
@@ -216,7 +215,7 @@ tbody tr:nth-child(odd) {
 .clear-left {
   clear: left;
 }
-.clear-left + h2, .clear-left + p {
+.clear-left + * {
   clear: left;
 }
 .clearfix {
@@ -226,7 +225,6 @@ tbody tr:nth-child(odd) {
 
 .left-item {
   float: left;
-  margin: 2rem !important;
 }
 @media (max-width: 820px) {
   .left-item {
@@ -237,7 +235,6 @@ tbody tr:nth-child(odd) {
 
 .right-item {
   float: right;
-  margin: 2rem !important;
 }
 @media (max-width: 820px) {
   .right-item {
@@ -251,6 +248,7 @@ article a:hover {
 }
 
 pre {
+  font-family: "JetBrains Mono";
   margin-bottom: 1.5em;
   background-color: #e8eced;
   padding: 16px 0;
