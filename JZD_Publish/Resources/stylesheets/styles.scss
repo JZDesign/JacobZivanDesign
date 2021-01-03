@@ -60,6 +60,10 @@ body {
   text-align: center;
 }
 
+code {
+  font-family: JetBrains Mono;
+}
+
 .date {
   padding-top: 1rem;
   font-weight: bold;
@@ -340,7 +344,6 @@ pre {
   border-radius: 16px;
   
   code {
-    font-family: JetBrains Mono;
     display: block;
     padding: 0 20px;
     color: $gray9;

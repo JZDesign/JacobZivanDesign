@@ -55,7 +55,7 @@ On it, there is a computed property, `isAccessibilityCategory`, that returns wha
 We can add use it like this:
 
 ```swift
-public struct SomeView : AccessibleView {
+public struct SomeView : View {
     @Environment(\.sizeCategory) public var size: ContentSizeCategory
 
     public var body: some View {
@@ -122,10 +122,12 @@ Notice how the `RStack` has the same syntax of the `HStack` and `VStack`? That's
 <br/>
 
 ```swift
+let debitCardImageName = "creditcard.fill" // # debt is dumb...
+
 struct ContentView: View {
     var body: some View {
         RStack {
-            Image(systemName: "creditcard.fill")
+            Image(systemName: .debitCardImageName)
                 .foregroundColor(.red)
                 .padding(.trailing)
             
@@ -216,7 +218,7 @@ Alright, let's go back to our content view, and use our new component.
 struct ContentView: View {
     var body: some View {
         RStack {
-            Image(systemName: "creditcard.fill")
+            Image(systemName: .debitCardImageName)
                 .foregroundColor(.red)
             RDualText(
                 firstText: Text("Joe's Coffee Shop"),
@@ -233,5 +235,22 @@ struct ContentView: View {
 
 ## Accessible apps don't have to be ugly.
 
-Making a component that accounts for a user's accessibility settings was far more difficult in the world of UIKit. But we've only scratched the surface, there is a lot more to handling accessibility well than what we covered here. 
+Good work! You've learned how to create a `ViewBuilder`, and respond to a user's preferred font size! Making a component that accounts for a user's accessibility settings was far more difficult in the world of UIKit. But we've only scratched the surface, there is a lot more to handling accessibility well than what we covered here. There are settings for color blindness, preferring bold fonts, reducing motions and more. And that is just the visual side of accessibility!
 
+<br/>
+
+### Homework
+<br/>
+
+If you'd like to learn more, I have a challenge for you!
+
+Take the `RStack` component and modify it to take a threshold. If the selected font size is greater than the threshold then the `RStack` flips from horizontal to vertical. When you instantiate your `RStack`, it should look like this:
+
+
+```swift
+RStack(threshold: .accessibilityMedium) {
+    Text("Top")
+    Spacer()
+    Text("Bottom")
+}
+```
