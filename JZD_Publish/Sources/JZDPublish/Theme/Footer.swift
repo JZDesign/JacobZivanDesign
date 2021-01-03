@@ -14,11 +14,12 @@ extension Node where Context == HTML.BodyContext {
                 )
             ),
             .p(
-                .text("Code typeface "),
+                .text("Code typeface == "),
                 .a(
                     .text("JetBrains Mono"),
                     .href("https://www.jetbrains.com/lp/mono/")
-                )
+                ),
+                .class("jbmono")
             ),
             .p(.a(
                 .text("RSS feed"),
