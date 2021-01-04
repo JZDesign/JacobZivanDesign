@@ -1,0 +1,3 @@
+- JetPack Compose
+- RSS app (android + iOS D+KMP)
+- ??? Unwrap or Throw operator like Kotlin

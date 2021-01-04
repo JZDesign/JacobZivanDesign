@@ -6,7 +6,7 @@ tags: Accessibility, iOS, SwiftUI, Technology, Tutorial, UI/UX
 
 # Responsive View Components
 
-I used to write my iOS views to be pixel perfect, until I discovered UIKit's [Preferred Font](https://developer.apple.com/documentation/uikit/uifont/1619030-preferredfont) method and how it worked. After that, I struggled to implement views that were useful at scale, or even beautiful, on smaller screens like that of the iPhone 8. Eventually I designed a UIKit component that accounted for accessible font sizes. In this article we'll remake that component in SwiftUI. 
+I used to write my iOS views to be pixel perfect, until I discovered UIKit's [Preferred Font](https://developer.apple.com/documentation/uikit/uifont/1619030-preferredfont) method and how it worked. After that, I struggled to implement views that were useful at scale, or even beautiful on smaller screens like that of the iPhone 8. Eventually I designed a UIKit component that accounted for accessible font sizes. In this article we'll remake that component in SwiftUI. 
 
 <br/>
 ## The Problem
@@ -127,7 +127,7 @@ let debitCardImageName = "creditcard.fill" // #DebtIsDumb
 struct ContentView: View {
     var body: some View {
         RStack {
-            Image(systemName: .debitCardImageName)
+            Image(systemName: debitCardImageName)
                 .foregroundColor(.red)
                 .padding(.trailing)
             
@@ -218,7 +218,7 @@ Alright, let's go back to our content view, and use our new component.
 struct ContentView: View {
     var body: some View {
         RStack {
-            Image(systemName: .debitCardImageName)
+            Image(systemName: debitCardImageName)
                 .foregroundColor(.red)
             RDualText(
                 firstText: Text("Joe's Coffee Shop"),
