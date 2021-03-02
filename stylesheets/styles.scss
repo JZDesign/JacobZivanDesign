@@ -91,6 +91,10 @@ header {
     justify-content: space-around;
     flex-direction: column;
 
+    a {
+      color: white;
+    }
+    
     p {
       margin-bottom: 10px;
     }
@@ -142,7 +146,8 @@ p {
 }
 
 a {
-  color: inherit;
+  color: $red5;
+  // color: inherit;
 }
 
 .description {
@@ -158,6 +163,10 @@ a {
     background: $content-gradient;
     background-color: $red6;
     margin-bottom: 20px;
+  }
+
+  a {
+    color: white;
   }
 
   &:last-child {
@@ -206,7 +215,7 @@ a {
       margin-right: 5px;
       
       a {
-
+        color: white;
         &:hover {
           color: $red5;
           text-decoration: none;
@@ -225,7 +234,6 @@ a {
 
   a {
     color: $red5;
-
   }
 
   img {

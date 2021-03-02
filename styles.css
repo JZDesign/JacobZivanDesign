@@ -54,6 +54,9 @@ header .wrapper {
   justify-content: space-around;
   flex-direction: column;
 }
+header .wrapper a {
+  color: white;
+}
 header .wrapper p {
   margin-bottom: 10px;
 }
@@ -93,7 +96,7 @@ p code {
 }
 
 a {
-  color: inherit;
+  color: #e64640;
 }
 
 .description {
@@ -108,6 +111,9 @@ a {
   background: linear-gradient(45deg, #cc3925, #f26552 150%);
   background-color: #cc3925;
   margin-bottom: 20px;
+}
+.item-list a {
+  color: white;
 }
 .item-list:last-child {
   margin-bottom: 0;
@@ -146,6 +152,9 @@ a {
   padding: 4px 6px;
   border-radius: 5px;
   margin-right: 5px;
+}
+.tag-list li a, .tag-list .tag a, .all-tags li a, .all-tags .tag a {
+  color: white;
 }
 .tag-list li a:hover, .tag-list .tag a:hover, .all-tags li a:hover, .all-tags .tag a:hover {
   color: #e64640;
