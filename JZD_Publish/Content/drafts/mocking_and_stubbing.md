@@ -44,7 +44,7 @@ _A more specific description can be found on [stack overflow](https://stackoverf
 
 **Stubs** are hardcoded responses that we can force into our test code that allow us to easily test a function fully, without having to configure the rest of the environment to achieve all of the possible outcomes. _[Here is a good summary](https://stackoverflow.com/a/463305/9333764) of mocking and stubbing if you'd like more info._
 
-There are 2 primary reasons I use mocking and stubbing. First, there is a significant reduction in the amount of boilerplate code required to configure each test. Second, we can automate tests that verify a code path was executed _this can not easily be done without the mock_.
+There are 3 primary reasons I use mocking and stubbing. First, there is a significant reduction in the amount of boilerplate code required to configure each test. Second, we can prevent noisy or expensive tasks from occurring, like log outs or database reads and writes, by replacing those dependencies with mocks. Finally, we can automate tests that verify a code path was executed _this can not easily be done without the mock_.
 
 <br/>
 <br/>
@@ -72,7 +72,7 @@ Swift is an awesome language. There's a lot to love about it, but, its implement
 ### Hand Rolled Mocks
 <br/>
 
-Much of the Swift community manually creates the mocks they need as they need them. To demonstrate how this is done, we'll make a simple example of a controller, a data store, and a logger using [Protocols](https://www.swiftbysundell.com/basics/protocols/).
+Much of the Swift community manually creates the mocks they need as they need them. To demonstrate how this is done, we'll make a simple example of a controller, a data store, and a logger using [Protocols](https://www.swiftbysundell.com/basics/protocols/). _Note the following example does not actually create a logger or store, only their interface._
 
 This is what the implementation might look like:
 
@@ -109,7 +109,7 @@ class Controller {
 <br/>
 <br/>
 
-To test this code, we will need a mocked version of a logger and a data store. That might look something like this:
+The function `loadDataForUser` should read from a data store, log that it did so, and update the controller's `data` value. To test this code without actually logging an event or reading from our databases, we will need a mocked version of a logger and a data store. That might look something like this:
 
 <br/>
 <br/>
@@ -132,7 +132,7 @@ struct MockStore: DataStore {
 <br/>
 <br/>
 
-These mocks will allow us to verify that `Controller.loadDataForUser` modifies the data variable and that the logger gets called. We do this like so:
+These mocks will allow us to verify that `Controller.loadDataForUser` modifies the data variable, **and** that the logger gets called _(which is near impossible to do without a mock)_. We do this like so:
 
 <br/>
 <br/>
