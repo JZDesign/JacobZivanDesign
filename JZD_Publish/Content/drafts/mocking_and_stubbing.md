@@ -9,7 +9,7 @@ _And how do those concepts help write cleaner, more effective unit tests?_
 
 <br/>
 
-Writing tests is one of those things in software engineering that many of us don't pick up until we've been at it for several years. We get started begrudgingly, then we accept testing and write tests dutifully, eventually we come to love them and write them enthusiastically.
+<!-- Writing tests is one of those things in software engineering that many of us don't pick up until we've been at it for several years. We get started begrudgingly, then we accept testing and write tests dutifully, eventually we come to love them and write them enthusiastically. -->
 
 Early on, I encountered the concepts of **Stubbing** and **Mocking** for the first time. I reacted to the discovery much like I did to testing in general. _"What's the point?"_ I clearly didn't get it. In this article, we'll cover what mocks and stubs are, why they're used, and how they're used effectively.
 
