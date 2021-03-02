@@ -1,3 +1,8 @@
 - JetPack Compose
 - RSS app (android + iOS D+KMP)
-- ??? Unwrap or Throw operator like Kotlin
+- Programming for beginners
+	
+23  
+229  
+166  
+3

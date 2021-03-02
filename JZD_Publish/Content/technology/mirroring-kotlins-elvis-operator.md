@@ -47,7 +47,7 @@ It's not terrible, but Kotlin's `?:` is much nicer, _in my opinion._
 
 Swift allows us to write [custom operators](https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html#ID46) to handle things like this. Unfortunately, the `:` character is [unavailable](https://docs.swift.org/swift-book/ReferenceManual/LexicalStructure.html#ID418) for use. So we can't make our operator syntactically identical to Kotlin's.
 
-The operator we'll be creating is an infix operator. Meaning that the operator will fall **in**between it's arguments, just like `argument1 ?? argument2`. In Swift, infix operators must adhere to a [Precedence Group](https://developer.apple.com/documentation/swift/swift_standard_library/operator_declarations). This grouping tells the compiler what order functions should get executed, much like the [Order of Operations](https://en.wikipedia.org/wiki/Order_of_operations) in mathematics.
+The operator we'll be creating is an infix operator. Meaning that the operator will fall **in**between its arguments, just like `argument1 ?? argument2`. In Swift, infix operators must adhere to a [Precedence Group](https://developer.apple.com/documentation/swift/swift_standard_library/operator_declarations). This grouping tells the compiler what order functions should get executed, much like the [Order of Operations](https://en.wikipedia.org/wiki/Order_of_operations) in mathematics.
 
 There is a lot there, so we won't go into the specifics on all of that in this tutorial.
 

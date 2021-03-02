@@ -43,6 +43,7 @@ extension Theme where Site == JZDPublish {
             .page(for: context, location: section, body:
                 .body(
                     .comment("SECTION HTML"),
+                    .comment(section.id.rawValue),
                     .header(for: context, selectedSection: section.id),
                     .wrapper(
                         .h1(.text(section.title)),
