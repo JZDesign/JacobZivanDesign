@@ -5,7 +5,7 @@ tags: iOS, Swift, Mocking, Stubbing, Testing, Technology, Tutorial
 ---
 
 # What's Mocking and Stubbing?
-_And how do those concepts help write write cleaner, more effective unit tests in Swift?_
+_And how do those concepts help write cleaner, more effective unit tests in Swift?_
 
 <br/>
 
