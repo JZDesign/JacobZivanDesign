@@ -159,7 +159,7 @@ class ControllerTests: XCTestCase {
 <br/>
 <br/>
 
-In that example, we created the two mocked interfaces we needed to create and effectively test the `Controller`. Because of the mocks, we were able to verify the functionality of the Controller without testing the functionality of the `DataStore` or the `Logger`. The actual implementations of those will get tested in isolation.
+In that example, we created the two mocked interfaces we needed to create and, effectively tested the `Controller`. Because of the mocks, we were able to verify the functionality of the Controller without testing the functionality of the `DataStore` or the `Logger`. The actual implementations of those will get tested in isolation.
 
 Now, you may have noticed that there was a bit of configuration code required to run those tests. And I told you that mocking _reduces_ the amount of test configuration we need to write.
 
@@ -168,7 +168,7 @@ They do. Even hand rolled mocks like these do. But I prefer to have my mocks gen
 <br/>
 <br/>
 
-## Auto-Magically Generated Mocks using [Mockingbird](https://github.com/birdrides/mockingbird)
+## Auto-Magically generate mocks using [Mockingbird](https://github.com/birdrides/mockingbird)
 <br/>
 
 I personally use the [Mockingbird](https://github.com/birdrides/mockingbird) framework to generate my mocks for me. I don't like having to mock an entire interface for every code path I want to test. [Mockingbird](https://github.com/birdrides/mockingbird) affords me the convenience and versatility I've been looking for in the Swift world. It does have its limitations, but it's far better than doing all of that work by hand.
@@ -176,7 +176,7 @@ I personally use the [Mockingbird](https://github.com/birdrides/mockingbird) fra
 <br/>
 <br/>
 
-### [Installing](https://github.com/birdrides/mockingbird) Mockingbird
+### Installing Mockingbird
 <br/>
 
 To get started, follow the [instructions](https://github.com/birdrides/mockingbird) to install and use Mockingbird in your project. They support CocoaPods, Carthage, and SPM. Please follow the instructions to the letter. This isn't a _"normal"_ package. It is generating source code for your test suite on build. So you need to pay attention to the details.
@@ -189,7 +189,7 @@ To get started, follow the [instructions](https://github.com/birdrides/mockingbi
 
 After you've installed Mockingbird in your project and added the run script phases in your test target, you're ready to rock! 🎸🎸 
 
-Before we begin, there are several functions you should get to know in order to effectively use Mockingbird. You'll need to know how to create a mock, stub the mock, and verify the results from the mock.
+Before we begin, there are several functions you should get to know in order to effectively use Mockingbird. You'll need to know how to create a mock, stub them, and verify the results from them.
 
 <br/>
 <br/>
@@ -213,11 +213,12 @@ We want to assign the mock to a variable, in most cases, so that we can verify i
 <br/>
 
 
-Stubbing is handled with Mockinbird's `given` function. Given will take a mock and one of its functions or variables and allow you to define the result of its invocation. This is handled with the `~>` operand like so:
+Stubbing is handled with Mockinbird's `given` function. `given` will take a mock and one of its functions or variables and allow you to define the result of its invocation. This is handled with the `~>` operator like so:
 
 ```swift 
-given(myMock.someFunction())
-    ~> "You da man!" // the ~> defines the stub return type and value.
+given(myMock.someFunction()) ~> "You da man!"
+// or to throw 🤯
+given(myMock.someFunction()) ~> { throw SomeError() }
 ```
 <br/>
 
@@ -232,6 +233,8 @@ One of the most useful things about mocking, is verifying that a code path was e
 
 ```swift
 verify(mock.someFunc()).wasCalled()
+// Or if the function should get triggered multiple times
+verify(mock.someFunc()).wasCalled(exactly(10))
 ```
 
 <br/>
