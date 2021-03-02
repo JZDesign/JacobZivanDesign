@@ -44,7 +44,7 @@ _A more specific description can be found on [stack overflow](https://stackoverf
 
 **Stubs** are hardcoded responses that we can force into our test code that allow us to easily test a function fully, without having to configure the rest of the environment to achieve all of the possible outcomes. _[Here is a good summary](https://stackoverflow.com/a/463305/9333764) of mocking and stubbing if you'd like more info._
 
-There are 2 primary reasons I use mocking and stubbing. First, there is a significant reduction in the amount of boilerplate code required to configure each test. Second, we can automate tests verifying a code path was executed that is not easily done without the mock.
+There are 2 primary reasons I use mocking and stubbing. First, there is a significant reduction in the amount of boilerplate code required to configure each test. Second, we can automate tests that verify a code path was executed _this can not easily be done without the mock_.
 
 <br/>
 <br/>
