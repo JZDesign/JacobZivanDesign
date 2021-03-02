@@ -21,7 +21,7 @@ Early on, I encountered the concepts of **Stubbing** and **Mocking** for the fir
 
 ## Are you Mocking me?
 
-**Mocking** and **Stubbing** are used primarily for **Unit Testing.** But what are Mocks, or Stubs? And what is "Unit" test? Yea... There's a lot of assumed knowledge here. Let's start by laying out some definitions and context:
+**Mocking** and **Stubbing** are used primarily for **Unit Testing.** But what are Mocks, or Stubs? And what is a "Unit" test? Yea... There's a lot of assumed knowledge here. Let's start by laying out some definitions and context:
 
 <br/>
 
@@ -29,9 +29,9 @@ Early on, I encountered the concepts of **Stubbing** and **Mocking** for the fir
 
 <br/>
 
-Unit testing is the act of writing tests where we run a small chunk of code in isolation. This small chunk _(AKA a "unit")_ should do exactly `A` under `X` conditions or exactly `B` under `Y` conditions etc., We control the variables and observe the outcomes at a very small scale.  
+Unit testing is the act of writing tests where we run a small chunk of code in isolation, specifically, a single function. This "unit" should do exactly `A` under `X` conditions or exactly `B` under `Y` conditions etc., We control the variables and observe the outcomes at a very small scale.
 
-Because unit tests target such small pieces of our code, we are able to verify that all the little pieces work in isolation. This gives us confidence that multiple units will integrate together without any surprises. And, what I like most about unit tests, when a test is written well, automated checks catch bugs _before_ they ship to production. 
+Because unit tests target singular functions in the code base, we are able to verify how all the little pieces work in isolation. This gives us confidence that multiple units will integrate together without any surprises. And, what I like most about unit tests, when a test is written well, automated checks catch bugs _before_ they ship to production. 
 
 _A more specific description can be found on [stack overflow](https://stackoverflow.com/a/1393/9333764), among other places._ [Pure Functions](https://en.wikipedia.org/wiki/Pure_function) are ideal for unit testing.
 
@@ -40,11 +40,11 @@ _A more specific description can be found on [stack overflow](https://stackoverf
 
 ## What are mocks and stubs?
 
-**Mocks** are essentially test doubles of an object that we place inside of our tests. They operate exactly as they are told to, and report back to you what happened in the test. "Test double" may not be the best term to describe them now that I've thought about it... They're more akin to a spy.
+**Mocks** are essentially test doubles of an object that we place inside of our tests. They operate exactly as they are told to, and report back to you what happened in the test.
 
 **Stubs** are hardcoded responses that we can force into our test code that allow us to easily test a function fully, without having to configure the rest of the environment to achieve all of the possible outcomes. _[Here is a good summary](https://stackoverflow.com/a/463305/9333764) of mocking and stubbing if you'd like more info._
 
-There are 2 primary reasons I use mocking and stubbing. First, there is a significant reduction in boilerplate code we need to write to configure the tests to run as expected. Second, we can automate tests verifying a code path was executed that is not easily done without the mock.
+There are 2 primary reasons I use mocking and stubbing. First, there is a significant reduction in the amount of boilerplate code required to configure each test. Second, we can automate tests verifying a code path was executed that is not easily done without the mock.
 
 <br/>
 <br/>
@@ -187,13 +187,9 @@ To get started, follow the [instructions](https://github.com/birdrides/mockingbi
 ### Using Mockingbird
 <br/>
 
-After you've installed Mockingbird in your project and added the run script phases in your test target, you're ready to rock! 🎸🎸 Let's recreate that test using Mockingbird instead of hand rolled mocks.
+After you've installed Mockingbird in your project and added the run script phases in your test target, you're ready to rock! 🎸🎸 
 
-To start, that means delete `MockLogger`, and `MockStore`.
-
-You heard me. Delete them.... Go ahead.
-
-There are a couple of functions you should get to know in order to effectively use Mockingbird. You'll need to know how to create a mock, stub the mock, and verify the results from the mock.
+Before we begin, there are several functions you should get to know in order to effectively use Mockingbird. You'll need to know how to create a mock, stub the mock, and verify the results from the mock.
 
 <br/>
 <br/>
@@ -207,7 +203,7 @@ Mockingbird has an awesome helper function, `mock`, that handles most of this fo
 let myMock = mock(MyClass.self)
 ```
 
-We want to assign the mock to a variable, in most cases, so that we can verify if a function it contains was or will be called.
+We want to assign the mock to a variable, in most cases, so that we can verify if a function it contains was, or will be, called.
 
 <br/>
 <br/>
@@ -217,7 +213,7 @@ We want to assign the mock to a variable, in most cases, so that we can verify i
 <br/>
 
 
-Stubbing is handled with Mockinbird's `given` function. Given will take a mock and one of it's functions or variables and allow you to define the result of it's invocation. This is handled with the `~>` operand like so:
+Stubbing is handled with Mockinbird's `given` function. Given will take a mock and one of its functions or variables and allow you to define the result of it's invocation. This is handled with the `~>` operand like so:
 
 ```swift 
 given(myMock.someFunction())
@@ -257,29 +253,43 @@ given(store.getDataForUser(user: any())) ~> any() // Inline stubbing!!
 
 <br/>
 
+Let's recreate that test using Mockingbird instead of hand rolled mocks. To start, that means delete `MockLogger`, and `MockStore`.
+
+You heard me. Delete them.... Go ahead.
+
+What we'll do instead is use the generated mocks provided to us by Mockingbird. Inside of the test function we wrote earlier, `testLoadDataForUser`, delete all of the code and add the following.
+
+<br/>
+
 ```swift
-class ControllerTests: XCTestCase {
-    let logger = mock(Logger.self)
-    let store = mock(DataStore.self)
-    let user = User(named: "Test")
+let logger = mock(Logger.self)
+let store = mock(DataStore.self)
+let user = User(named: "Test")
+let controller = Controller(logger, store, user)
+```
 
-    func testLoadDataForUser() {
-        // Given
-        let controller = Controller(logger, store, user)
+<br/>
 
-        XCTAssertFalse(logger.wasCalled)
-        XCTAssertNil(controller.data)
+Then we can **Stub** the **Mock** `DataStore` like:
 
-        given(store.getDataForUser(user: user)) ~> any() // Inline stubbing!!
-        
-        // When
-        controller.loadDataForUser()
-        
-        // Then
-        verify(logger.log(any())).wasCalled() // Inline verifications!!
-        XCTAssertNotNil(controller.data)
-    }
-}
+<br/>
+
+```swift
+given(store.getDataForUser(user: user)) ~> any()
+```
+
+<br/>
+
+And finally we can invoke the controller function and run our assertions:
+
+
+<br/>
+
+```swift
+controller.loadDataForUser()
+
+verify(logger.log(any())).wasCalled()
+XCTAssertNotNil(controller.data)
 ```
 <br/>
 <br/>
