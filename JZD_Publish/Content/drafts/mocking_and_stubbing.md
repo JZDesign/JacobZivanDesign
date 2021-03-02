@@ -64,7 +64,7 @@ Mocks, when created, have the same interface as its target, but none of the func
 
 ## Writing Mocks and Stubs in Swift
 
-Swift is an awesome language. There's a lot to love about it, but, it's implementation of [reflection](https://en.wikipedia.org/wiki/Reflective_programming) is somewhat limited. Because of that, for a long time there was no good way to generate a mock and so, many developers have been manually creating them. Fortunately, Swift if is a [Protocol Oriented Programming](https://bit.ly/3uJjpc8) Language, and we can account for this slight shortcoming.
+Swift is an awesome language. There's a lot to love about it, but, its implementation of [reflection](https://en.wikipedia.org/wiki/Reflective_programming) is somewhat limited. Because of that, for a long time there was no good way to generate a mock and so, many developers have been manually creating them. Fortunately, Swift if is a [Protocol Oriented Programming](https://bit.ly/3uJjpc8) Language, and we can account for this slight shortcoming.
 
 <br/>
 <br/>
@@ -171,7 +171,7 @@ They do. Even hand rolled mocks like these do. But I prefer to have my mocks gen
 ## Auto-Magically Generated Mocks using [Mockingbird](https://github.com/birdrides/mockingbird)
 <br/>
 
-I personally use the [Mockingbird](https://github.com/birdrides/mockingbird) framework to generate my mocks for me. I don't like having to mock an entire interface for every code path I want to test. [Mockingbird](https://github.com/birdrides/mockingbird) affords me the convenience and versatility I've been looking for in the Swift world. It does have it's limitations, but it's far better than doing all of that work by hand.
+I personally use the [Mockingbird](https://github.com/birdrides/mockingbird) framework to generate my mocks for me. I don't like having to mock an entire interface for every code path I want to test. [Mockingbird](https://github.com/birdrides/mockingbird) affords me the convenience and versatility I've been looking for in the Swift world. It does have its limitations, but it's far better than doing all of that work by hand.
 
 <br/>
 <br/>
@@ -213,7 +213,7 @@ We want to assign the mock to a variable, in most cases, so that we can verify i
 <br/>
 
 
-Stubbing is handled with Mockinbird's `given` function. Given will take a mock and one of its functions or variables and allow you to define the result of it's invocation. This is handled with the `~>` operand like so:
+Stubbing is handled with Mockinbird's `given` function. Given will take a mock and one of its functions or variables and allow you to define the result of its invocation. This is handled with the `~>` operand like so:
 
 ```swift 
 given(myMock.someFunction())
