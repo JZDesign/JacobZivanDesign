@@ -27,40 +27,43 @@ Early on, I encountered the concepts of **Stubbing** and **Mocking** for the fir
 
 ### Unit Testing
 
-<br/>
-
 Unit testing is the act of writing tests where we run a small chunk of code in isolation, specifically, a single function. This "unit" should do exactly `A` under `X` conditions or exactly `B` under `Y` conditions etc., We control the variables and observe the outcomes at a very small scale.
 
 Because unit tests target singular functions in the code base, we are able to verify how all the little pieces work in isolation. This gives us confidence that multiple units will integrate together without any surprises. And, what I like most about unit tests, when a test is written well, automated checks catch bugs _before_ they ship to production. 
 
 _A more specific description can be found on [stack overflow](https://stackoverflow.com/a/1393/9333764), among other places._ [Pure Functions](https://en.wikipedia.org/wiki/Pure_function) are ideal for unit testing.
 
+
+### Mocks
+
+Mocks are test doubles of an object that we place inside of our tests. They operate exactly as they are told to, and report back to you what happened in the test.
+
+Mocks, when created, have the same interface as its target, but none of the functionality. Instead, the mock can be told to return stubbed data or to verify whether or not a mock's function was executed. In short, Mocking and Stubbing allow us to focus on the code we're writing. 
+
+
+### Stubs
+
+Stubs are hardcoded responses that we can force into our test code that allow us to easily test a function fully, without having to configure the rest of the environment to achieve all of the possible outcomes. 
+
+_[Here is a good summary](https://stackoverflow.com/a/463305/9333764) of mocking and stubbing if you'd like more info._
+
 <br/>
-<br/>
 
-## What are mocks and stubs?
-
-**Mocks** are essentially test doubles of an object that we place inside of our tests. They operate exactly as they are told to, and report back to you what happened in the test.
-
-**Stubs** are hardcoded responses that we can force into our test code that allow us to easily test a function fully, without having to configure the rest of the environment to achieve all of the possible outcomes. _[Here is a good summary](https://stackoverflow.com/a/463305/9333764) of mocking and stubbing if you'd like more info._
+### But why?
 
 There are 3 primary reasons I use mocking and stubbing. First, there is a significant reduction in the amount of boilerplate code required to configure each test. Second, we can prevent noisy or expensive tasks from occurring, like log outs or database reads and writes, by replacing those dependencies with mocks. Finally, we can automate tests that verify a code path was executed _this can not easily be done without the mock_.
 
 <br/>
 <br/>
 
+> Mocking and Stubbing allow us to focus on the code we're writing. 
+
+<br/>
+
 ## TLDR - What the mock?
 
 <br/>
 
-Mocks, when created, have the same interface as its target, but none of the functionality. Instead, the mock can be told to return stubbed data or to verify whether or not a mock's function was executed. In short, Mocking and Stubbing allow us to focus on the code we're writing. 
-
-<br/>
-
-> Mocking and Stubbing allow us to focus on the code we're writing. 
-
-<br/>
-<br/>
 
 ## Writing Mocks and Stubs in Swift
 
