@@ -59,9 +59,6 @@ There are 3 primary reasons I use mocking and stubbing. First, there is a signif
 > Mocking and Stubbing allow us to focus on the code we're writing. 
 
 <br/>
-
-## TLDR - What the mock?
-
 <br/>
 
 
