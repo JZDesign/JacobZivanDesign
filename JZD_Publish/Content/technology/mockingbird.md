@@ -99,7 +99,7 @@ Let's recreate that test using Mockingbird instead of hand rolled mocks. To star
 
 You heard me. Delete them.... Go ahead.
 
-What we'll do instead is use the generated mocks provided to us by Mockingbird. Inside of the test function we wrote earlier, `testLoadDataForUser`, delete all of the code and add the following.
+What we'll do instead is use the generated mocks provided to us by Mockingbird. Inside of the test function we wrote [earlier](../mocking_and_stubbing), `testLoadDataForUser`, delete all of the code and add the following.
 
 <br/>
 
