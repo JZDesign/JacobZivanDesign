@@ -338,10 +338,6 @@ article {
   p {
     overflow-wrap: break-word;
   }
-
-  a:hover {
-    color: #fff;
-  }
 }
 // Splash
 
@@ -455,6 +451,12 @@ pre {
   
   tbody tr:nth-child(odd) {
     background: $red4;
+  }
+
+  article {
+    a:hover {
+      color: #fff;
+    }
   }
 
 }

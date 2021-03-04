@@ -262,9 +262,6 @@ tbody tr:nth-child(odd) {
 article p {
   overflow-wrap: break-word;
 }
-article a:hover {
-  color: #fff;
-}
 
 pre {
   margin-bottom: 1.5em;
@@ -356,6 +353,10 @@ pre code .preprocessing {
 
   tbody tr:nth-child(odd) {
     background: #f26552;
+  }
+
+  article a:hover {
+    color: #fff;
   }
 }
 @media (max-width: 600px) {
