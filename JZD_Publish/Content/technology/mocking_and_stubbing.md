@@ -43,9 +43,9 @@ _A more specific description can be found on [stack overflow](https://stackoverf
 ### Mocks
 <br/>
 
-Mocks are essentially test doubles of an object that we place inside of our tests. They operate exactly as they are told to, and report back to you what happened in the test.
+Mocks are test doubles of an object that we place inside of our tests. They operate exactly as they are told to, and report back to you what happened in the test.
 
-Mocks, when created, have the same interface as its target, but none of the functionality. Instead, the mock can be told to return stubbed data or to verify whether or not a mock's function was executed. In short, Mocking and Stubbing allow us to focus on the code we're writing. 
+Mocks, when created, have the same interface as its target, but none of the functionality. Instead, the mock can be told to return stubbed data or to verify whether or not a mock's function was executed. 
 
 <br/>
 <br/>
@@ -65,7 +65,7 @@ _[Here is a good summary](https://stackoverflow.com/a/463305/9333764) of mocking
 ### But Why?
 <br/>
 
-There are 3 primary reasons I use mocking and stubbing. First, there is a significant reduction in the amount of boilerplate code required to configure each test. Second, we can prevent noisy or expensive tasks from occurring, like log outs or database reads and writes, by replacing those dependencies with mocks. Finally, we can automate tests that verify a code path was executed _this can not easily be done without the mock_.
+There are 3 primary reasons I use mocking and stubbing. First, there is a significant reduction in the amount of boilerplate code required to configure each test. Second, we can prevent noisy or expensive tasks from occurring, like log outs or database reads and writes, by replacing those dependencies with mocks. Finally, we can automate tests that verify a code path was executed _this can not easily be done without the mock_. In short, Mocking and Stubbing allow us to focus on the code we're writing. 
 
 <br/>
 <br/>
