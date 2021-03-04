@@ -95,7 +95,7 @@ given(store.getDataForUser(user: any())) ~> any() // Inline stubbing!!
 
 <br/>
 
-Let's recreate that test using Mockingbird instead of hand rolled mocks. To start, that means delete `MockLogger`, and `MockStore`.
+Let's recreate [that test](../mocking_and_stubbing) using Mockingbird instead of hand rolled mocks. To start, that means delete `MockLogger`, and `MockStore`.
 
 You heard me. Delete them.... Go ahead.
 
