@@ -89,25 +89,57 @@ I use this a lot, especially for the harder to define values like the `Data` typ
 given(store.getDataForUser(user: any())) ~> any() // Inline stubbing!!
 ```
 <br/>
+<br/>
 
 
-#### Doing it, for real....
+## Doing it, for real....
 
 <br/>
 
-Let's recreate [that test](../mocking_and_stubbing) using Mockingbird instead of hand rolled mocks. To start, that means delete `MockLogger`, and `MockStore`.
+Let's recreate [the example](../mocking_and_stubbing) from my last article, but for the tests we'll do things a little differently. Below is a controller that has a logger and a data store. There is a function that reads from the store and logs the event.
 
-You heard me. Delete them.... Go ahead.
+```swift
+protocol Loggable {
+    func log(_ message: String)
+}
 
-What we'll do instead is use the generated mocks provided to us by Mockingbird. Inside of the test function we wrote [earlier](../mocking_and_stubbing), `testLoadDataForUser`, delete all of the code and add the following.
+protocol DataStore {
+    func getDataFor(_ user: User) -> Data?
+}
+
+class Controller {
+    let logger: Loggable
+    let store: DataStore
+    let user: User
+    var data: Data? = nil
+
+    init(_ logger: Loggable, _ store: DataStore, _ user: User) {
+        self.logger = logger
+        self.store = store
+        self.user = user
+    }
+
+    func loadDataForUser() {
+        data = store.getDataFor(user)
+        logger.log("data retrieved")
+    }
+}
+```
+<br/>
+
+What we'll do instead of hand writing the mocks is use the generated mocks provided to us by Mockingbird. The setup will look like this:
 
 <br/>
 
 ```swift
-let logger = mock(Logger.self)
-let store = mock(DataStore.self)
-let user = User(named: "Test")
-let controller = Controller(logger, store, user)
+class ControllerTests: XCTestCase {
+    func testLoadDataForUser() {
+        let logger = mock(Logger.self)
+        let store = mock(DataStore.self)
+        let user = User(named: "Test")
+        let controller = Controller(logger, store, user)
+    }
+}
 ```
 
 <br/>
