@@ -6,10 +6,39 @@
 <span class="comment">// Or if the function should get triggered multiple times</span>
 <span class="call">verify</span>(mock.<span class="call">someFunc</span>()).<span class="call">wasCalled</span>(<span class="call">exactly</span>(<span class="number">10</span>))
 </code></pre><br/><br/><h4>Mocking Parameters and Return Values</h4><br/><p>Another incredibly useful feature of Mockingbird is the <code>any()</code> function. This little gizmo will inspect the type of the object it is supposed to fill, and create a mock of that type on the fly. It's incredibly handy if we need to test what happens if a dependency returns <code>nil</code> or not but we don't care about a specific value.</p><p>I use this a lot, especially for the harder to define values like the <code>Data</code> type:</p><pre><code><span class="call">given</span>(store.<span class="call">getDataForUser</span>(user: <span class="call">any</span>())) ~&gt; <span class="call">any</span>() <span class="comment">// Inline stubbing!!</span>
-</code></pre><br/><h4>Doing it, for real....</h4><br/><p>Let's recreate <a href="../mocking_and_stubbing">that test</a> using Mockingbird instead of hand rolled mocks. To start, that means delete <code>MockLogger</code>, and <code>MockStore</code>.</p><p>You heard me. Delete them.... Go ahead.</p><p>What we'll do instead is use the generated mocks provided to us by Mockingbird. Inside of the test function we wrote <a href="../mocking_and_stubbing">earlier</a>, <code>testLoadDataForUser</code>, delete all of the code and add the following.</p><br/><pre><code><span class="keyword">let</span> logger = <span class="call">mock</span>(<span class="type">Logger</span>.<span class="keyword">self</span>)
-<span class="keyword">let</span> store = <span class="call">mock</span>(<span class="type">DataStore</span>.<span class="keyword">self</span>)
-<span class="keyword">let</span> user = <span class="type">User</span>(named: <span class="string">"Test"</span>)
-<span class="keyword">let</span> controller = <span class="type">Controller</span>(logger, store, user)
+</code></pre><br/><br/><h2>Doing it, for real....</h2><br/><p>Let's recreate <a href="../mocking_and_stubbing">the example</a> from my last article, but for the tests we'll do things a little differently. Below is a controller that has a logger and a data store. There is a function that reads from the store and logs the event.</p><pre><code><span class="keyword">protocol</span> Loggable {
+    <span class="keyword">func</span> log(<span class="keyword">_</span> message: <span class="type">String</span>)
+}
+
+<span class="keyword">protocol</span> DataStore {
+    <span class="keyword">func</span> getDataFor(<span class="keyword">_</span> user: <span class="type">User</span>) -&gt; <span class="type">Data</span>?
+}
+
+<span class="keyword">class</span> Controller {
+    <span class="keyword">let</span> logger: <span class="type">Loggable</span>
+    <span class="keyword">let</span> store: <span class="type">DataStore</span>
+    <span class="keyword">let</span> user: <span class="type">User</span>
+    <span class="keyword">var</span> data: <span class="type">Data</span>? = <span class="keyword">nil
+
+    init</span>(<span class="keyword">_</span> logger: <span class="type">Loggable</span>, <span class="keyword">_</span> store: <span class="type">DataStore</span>, <span class="keyword">_</span> user: <span class="type">User</span>) {
+        <span class="keyword">self</span>.<span class="property">logger</span> = logger
+        <span class="keyword">self</span>.<span class="property">store</span> = store
+        <span class="keyword">self</span>.<span class="property">user</span> = user
+    }
+
+    <span class="keyword">func</span> loadDataForUser() {
+        data = store.<span class="call">getDataFor</span>(user)
+        logger.<span class="call">log</span>(<span class="string">"data retrieved"</span>)
+    }
+}
+</code></pre><br/><p>What we'll do instead of hand writing the mocks is use the generated mocks provided to us by Mockingbird. The setup will look like this:</p><br/><pre><code><span class="keyword">class</span> ControllerTests: <span class="type">XCTestCase</span> {
+    <span class="keyword">func</span> testLoadDataForUser() {
+        <span class="keyword">let</span> logger = <span class="call">mock</span>(<span class="type">Logger</span>.<span class="keyword">self</span>)
+        <span class="keyword">let</span> store = <span class="call">mock</span>(<span class="type">DataStore</span>.<span class="keyword">self</span>)
+        <span class="keyword">let</span> user = <span class="type">User</span>(named: <span class="string">"Test"</span>)
+        <span class="keyword">let</span> controller = <span class="type">Controller</span>(logger, store, user)
+    }
+}
 </code></pre><br/><p>Then we can <strong>Stub</strong> the <strong>Mock</strong> <code>DataStore</code> like:</p><br/><pre><code><span class="call">given</span>(store.<span class="call">getDataForUser</span>(user: user)) ~&gt; <span class="call">any</span>()
 </code></pre><br/><p>And finally we can invoke the controller function and run our assertions:</p><br/><pre><code>controller.<span class="call">loadDataForUser</span>()
 
