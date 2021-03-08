@@ -1,6 +1,6 @@
 ---
 date: 2021-03-07 08:13
-description: Sharing dark mode capable colors in SwiftUI using `@Environment(\.colorScheme)`, protocols, and extensions. Forget `UITraitCollection.userInterfaceStyle`. Learn how to create shareable, responsive colors using computed properties in SwiftUI.
+description: Sharing dark mode capable colors in SwiftUI using @Environment(\.colorScheme), protocols, and extensions. Forget `\UITraitCollection.userInterfaceStyle. Learn how to create shareable, responsive colors using computed properties in SwiftUI.
 tags: iOS, MacOS, SwiftUI, Technology, Tutorial, UI/UX, Dark Mode
 ---
 
