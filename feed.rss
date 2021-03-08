@@ -1,4 +1,82 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content"><channel><title>Jacob Zivan Design</title><description>Musings and learnings from a banker turned nerd - Tips, tutorials, principles, and thought processes on life and software.</description><link>https://JacobZivanDesign.com</link><language>en</language><lastBuildDate>Fri, 5 Mar 2021 07:55:44 -0600</lastBuildDate><pubDate>Fri, 5 Mar 2021 07:55:44 -0600</pubDate><ttl>250</ttl><atom:link href="https://JacobZivanDesign.com/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://JacobZivanDesign.com/technology/mockingbird</guid><title>Auto-Magically generate mocks using Mockingbird</title><description>Now that you understand Mocking and Stubbing, I'll show you how to avoid writing hand-rolled mocks using Mockingbird; an amazing framework that makes unit testing a breeze.</description><link>https://JacobZivanDesign.com/technology/mockingbird</link><pubDate>Thu, 4 Mar 2021 10:13:00 -0600</pubDate><content:encoded><![CDATA[<h1>Auto-Magically generate mocks using Mockingbird</h1><br/><p>I personally use the <a href="https://github.com/birdrides/mockingbird">Mockingbird</a> framework to generate my mocks for me. I don't like having to mock an entire interface for every code path I want to test. <a href="https://github.com/birdrides/mockingbird">Mockingbird</a> affords me the convenience and versatility I've been looking for in the Swift world. It does have its limitations, but it's far better than doing all of that work by hand.</p><p><em>If you're not sure what mocking or stubbing is, check out <a href="../mocking_and_stubbing">this article.</a></em></p><br/><br/><h3>Installing Mockingbird</h3><br/><p>To get started, follow the <a href="https://github.com/birdrides/mockingbird">instructions</a> to install and use Mockingbird in your project. They support CocoaPods, Carthage, and Swift Package Manager (SPM). Please follow the instructions to the letter. This isn't a <em>"normal"</em> package. It is generating source code for your test suite on build. So you need to pay attention to the details.</p><p><em>I've done both Carthage and SPM in the past. I prefer the SPM route.</em></p><br/><br/><h3>Using Mockingbird</h3><br/><p>After you've installed Mockingbird in your project's test target, you're ready to rock! 🎸🎸 Before we begin, there are several functions you should get to know in order to effectively use Mockingbird. There is a lot that Mockingbird is <a href="https://github.com/birdrides/mockingbird#usage">capable of</a>, but for this tutorial, we'll focus on the following:</p><br/><br/><h4>Creating a mock</h4><br/><p>Mockingbird has an awesome helper function, <code>mock()</code>, that handles most of this for us. It's used rather simply:</p><pre><code><span class="keyword">let</span> myMock = <span class="call">mock</span>(<span class="type">MyClass</span>.<span class="keyword">self</span>)
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content"><channel><title>Jacob Zivan Design</title><description>Musings and learnings from a banker turned nerd - Tips, tutorials, principles, and thought processes on life and software.</description><link>https://JacobZivanDesign.com</link><language>en</language><lastBuildDate>Mon, 8 Mar 2021 15:24:46 -0600</lastBuildDate><pubDate>Mon, 8 Mar 2021 15:24:46 -0600</pubDate><ttl>250</ttl><atom:link href="https://JacobZivanDesign.com/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://JacobZivanDesign.com/technology/dark_mode_swift_ui</guid><title>Handling Dark Mode Elegantly in SwiftUI</title><description>Sharing dark mode capable colors in SwiftUI using `@Environment(\.colorScheme)`, protocols, and extensions. Forget `UITraitCollection.userInterfaceStyle`. Learn how to create shareable, responsive colors using computed properties in SwiftUI.</description><link>https://JacobZivanDesign.com/technology/dark_mode_swift_ui</link><pubDate>Sun, 7 Mar 2021 08:13:00 -0600</pubDate><content:encoded><![CDATA[<h1>Handling Dark Mode Elegantly in SwiftUI</h1><p>In SwiftUI, handling dark mode was made to be easy. The guys over at Apple thought things through and included the user's preferred color scheme as an <a href="https://developer.apple.com/documentation/swiftui/environmentvalues">environment value</a>, <code>@Environment(\.colorScheme)</code>. It's used like so:</p><br/><pre><code><span class="keyword">struct</span> DarkModeView: <span class="type">View</span> {
+    <span class="keyword">@Environment</span>(\.<span class="property">colorScheme</span>) <span class="keyword">var</span> colorScheme: <span class="type">ColorScheme</span>
+
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="type">Text</span>(<span class="string">"Hi"</span>)
+        .<span class="call">foregroundColor</span>(colorScheme == .<span class="dotAccess">dark</span> ? .<span class="dotAccess">white</span> : .<span class="dotAccess">black</span>)
+    }
+}
+</code></pre><br/><p>In the example above, we simply apply the <a href="https://www.hackingwithswift.com/sixty/3/7/the-ternary-operator">ternary operator</a> where we assign the color value. If it's <code>.dark</code> we return <code>.white</code>, if not we return <code>.black</code>. Usually, we need to handle more than one color in a view, so let's do it a few more times.</p><br/><pre><code><span class="keyword">struct</span> DarkModeView: <span class="type">View</span> {
+    <span class="keyword">@Environment</span>(\.<span class="property">colorScheme</span>) <span class="keyword">var</span> colorScheme: <span class="type">ColorScheme</span>
+
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="type">VStack</span> {
+            <span class="type">Text</span>(<span class="string">"Hi dude"</span>)
+                .<span class="call">foregroundColor</span>(colorScheme == .<span class="dotAccess">dark</span> ? .<span class="dotAccess">white</span> : .<span class="dotAccess">black</span>)
+
+            <span class="type">Button</span>(<span class="string">"Dude, this is neat"</span>) { <span class="call">print</span>(<span class="string">"neat"</span>) }
+                .<span class="call">foregroundColor</span>(colorScheme == .<span class="dotAccess">dark</span> ? .<span class="dotAccess">white</span> : .<span class="dotAccess">black</span>)
+
+            <span class="type">Text</span>(<span class="string">"Totally neat."</span>)
+                .<span class="call">foregroundColor</span>(colorScheme == .<span class="dotAccess">dark</span> ? .<span class="dotAccess">white</span> : .<span class="dotAccess">black</span>)
+
+        }.<span class="call">background</span>(colorScheme == .<span class="dotAccess">dark</span> ? <span class="type">Color</span>.<span class="property">black</span> : <span class="type">Color</span>.<span class="property">white</span>)
+    }
+}
+</code></pre><br/><p>That can get old pretty fast. Not only is it a lot to write, but the duplication leaves room for human error. If we chose to change the colors we'd need to change code in many locations. If done properly, we could change just one line of code. Instead of duplicating the color computation all over the place, let's use a computed property to handle that logic in one spot.</p><br/><pre><code><span class="keyword">struct</span> DarkModeView: <span class="type">View</span> {
+    <span class="keyword">@Environment</span>(\.<span class="property">colorScheme</span>) <span class="keyword">var</span> colorScheme: <span class="type">ColorScheme</span>
+    <span class="keyword">var</span> fontColor: <span class="type">Color</span> {
+        colorScheme == .<span class="dotAccess">dark</span> ? .<span class="dotAccess">white</span> : .<span class="dotAccess">black</span>
+    }
+
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="type">VStack</span> {
+            <span class="type">Text</span>(<span class="string">"Hi"</span>)
+                .<span class="call">foregroundColor</span>(fontColor)
+
+            <span class="type">Button</span>(<span class="string">"Dude, this is neat"</span>) { <span class="call">print</span>(<span class="string">"neat"</span>) }
+                .<span class="call">foregroundColor</span>(fontColor)
+
+            <span class="type">Text</span>(<span class="string">"Totally neat."</span>)
+                .<span class="call">foregroundColor</span>(fontColor)
+        }
+    }
+}
+</code></pre><br/><p>Nice! That works pretty well. Unfortunately, that font color declaration is only included in this view. To solve that and share dark mode friendly colors, we'll make a protocol that handles that.</p><br/><pre><code><span class="keyword">protocol</span> Themeable {
+    <span class="keyword">var</span> colorScheme: <span class="type">ColorScheme</span> { <span class="keyword">get</span> }
+}
+</code></pre><br/><p>This defines an interface of a <code>Themeable</code> object, but it does nothing to share the colors. In Swift, we are unable to define anything but the interface in a protocol's declaration, but we can extend protocols.</p><br/><pre><code><span class="keyword">extension</span> <span class="type">Themeable</span> {
+    <span class="keyword">var</span> fontColor: <span class="type">Color</span> {
+        colorScheme == .<span class="dotAccess">dark</span> ? .<span class="dotAccess">white</span> : .<span class="dotAccess">black</span>
+    }
+}
+</code></pre><br/><p>With that in place, we can modify the <code>DarkModeView</code> that we created earlier. It won't change much. We can also <em>share</em> <code>fontColor</code> in other views! Check it out:</p><br/><pre><code><span class="keyword">struct</span> DarkModeView: <span class="type">View</span>, <span class="type">Themeable</span> {
+    <span class="keyword">@Environment</span>(\.<span class="property">colorScheme</span>) <span class="keyword">var</span> colorScheme: <span class="type">ColorScheme</span>
+    
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="type">VStack</span> {
+            <span class="type">Text</span>(<span class="string">"Hi"</span>)
+                .<span class="call">foregroundColor</span>(fontColor)
+            
+            <span class="type">Button</span>(<span class="string">"Dude, this is neat"</span>) { <span class="call">print</span>(<span class="string">"neat"</span>) }
+                .<span class="call">foregroundColor</span>(fontColor)
+            
+            <span class="type">Text</span>(<span class="string">"Totally neat."</span>)
+                .<span class="call">foregroundColor</span>(fontColor)
+        }
+    }
+}
+
+<span class="keyword">struct</span> AnotherDarkModeView: <span class="type">View</span>, <span class="type">Themeable</span> {
+    <span class="keyword">@Environment</span>(\.<span class="property">colorScheme</span>) <span class="keyword">var</span> colorScheme: <span class="type">ColorScheme</span>
+    
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="type">Text</span>(<span class="string">"Pretty Cool!! Right?!"</span>)
+            .<span class="call">foregroundColor</span>(fontColor)
+    }
+}
+
+</code></pre><br/><p>With protocols, extensions, and computed properties, we created a dark mode friendly way to share colors. This method isn't limited to colors and the user's selected color scheme. What other user preferences could you account for in this way? Think about it and try it out on your own!</p><br/>]]></content:encoded></item><item><guid isPermaLink="true">https://JacobZivanDesign.com/technology/mockingbird</guid><title>Auto-Magically generate mocks using Mockingbird</title><description>Now that you understand Mocking and Stubbing, I'll show you how to avoid writing hand-rolled mocks using Mockingbird; an amazing framework that makes unit testing a breeze.</description><link>https://JacobZivanDesign.com/technology/mockingbird</link><pubDate>Thu, 4 Mar 2021 10:13:00 -0600</pubDate><content:encoded><![CDATA[<h1>Auto-Magically generate mocks using Mockingbird</h1><br/><p>I personally use the <a href="https://github.com/birdrides/mockingbird">Mockingbird</a> framework to generate my mocks for me. I don't like having to mock an entire interface for every code path I want to test. <a href="https://github.com/birdrides/mockingbird">Mockingbird</a> affords me the convenience and versatility I've been looking for in the Swift world. It does have its limitations, but it's far better than doing all of that work by hand.</p><p><em>If you're not sure what mocking or stubbing is, check out <a href="../mocking_and_stubbing">this article.</a></em></p><br/><br/><h3>Installing Mockingbird</h3><br/><p>To get started, follow the <a href="https://github.com/birdrides/mockingbird">instructions</a> to install and use Mockingbird in your project. They support CocoaPods, Carthage, and Swift Package Manager (SPM). Please follow the instructions to the letter. This isn't a <em>"normal"</em> package. It is generating source code for your test suite on build. So you need to pay attention to the details.</p><p><em>I've done both Carthage and SPM in the past. I prefer the SPM route.</em></p><br/><br/><h3>Using Mockingbird</h3><br/><p>After you've installed Mockingbird in your project's test target, you're ready to rock! 🎸🎸 Before we begin, there are several functions you should get to know in order to effectively use Mockingbird. There is a lot that Mockingbird is <a href="https://github.com/birdrides/mockingbird#usage">capable of</a>, but for this tutorial, we'll focus on the following:</p><br/><br/><h4>Creating a mock</h4><br/><p>Mockingbird has an awesome helper function, <code>mock()</code>, that handles most of this for us. It's used rather simply:</p><pre><code><span class="keyword">let</span> myMock = <span class="call">mock</span>(<span class="type">MyClass</span>.<span class="keyword">self</span>)
 </code></pre><p>We want to assign the mock to a variable, in most cases, so that we can verify if a function it contains was, or will be, called.</p><br/><br/><h4>Stubbing the mock</h4><br/><p>Stubbing is handled with Mockinbird's <code>given</code> function. <code>given</code> will take a mock and one of its functions or variables and allow you to define the result of its invocation. This is handled with the <code>~&gt;</code> operator like so:</p><pre><code><span class="call">given</span>(myMock.<span class="call">someFunction</span>()) ~&gt; <span class="string">"You da man!"</span>
 <span class="comment">// or to throw 🤯</span>
 <span class="call">given</span>(myMock.<span class="call">someFunction</span>()) ~&gt; { <span class="keyword">throw</span> <span class="type">SomeError</span>() }
