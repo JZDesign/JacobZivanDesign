@@ -16,7 +16,7 @@ struct DarkModeView: View {
 
     var body: some View {
         Text("Hi")
-        .foregroundColor(colorScheme == .dark ? .white : .black)
+            .foregroundColor(colorScheme == .dark ? .white : .black)
     }
 }
 ```
@@ -54,6 +54,7 @@ That can get old pretty fast. Not only is it a lot to write, but the duplication
 ```swift
 struct DarkModeView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+
     var fontColor: Color {
         colorScheme == .dark ? .white : .black
     }
@@ -85,7 +86,7 @@ protocol Themeable {
 ```
 <br/>
 
-This defines an interface of a `Themeable` object, but it does nothing to share the colors. In Swift, we are unable to define anything but the interface in a protocol's declaration, but we can extend protocols. 
+This defines an interface of a `Themeable` object, but it does nothing to share the colors. In Swift, we are unable to define anything but the interface in a protocol's declaration, but we **can** extend protocols to contain functions, static variables, and computed properties. 
 
 <br/>
 
@@ -98,7 +99,7 @@ extension Themeable {
 ```
 <br/>
 
-With that in place, we can modify the `DarkModeView` that we created earlier. It won't change much. We can also _share_ `fontColor` in other views! Check it out:
+With that in place, we can modify the `DarkModeView` that we created earlier. We can also use the new protocol to _share_ `fontColor` in other views! Check it out:
 
 <br/>
 
