@@ -92,6 +92,9 @@ p {
   font-size: 1.05em;
 }
 p code {
+  padding: 0.1rem 0.6rem !important;
+  background-color: #e8eced;
+  border-radius: 8px;
   color: #f26552;
 }
 
@@ -140,11 +143,15 @@ a {
   opacity: 0.7;
 }
 
-.tag-list, .all-tags {
+.tag-list,
+.all-tags {
   text-decoration: none;
   margin-bottom: 15px;
 }
-.tag-list li, .tag-list .tag, .all-tags li, .all-tags .tag {
+.tag-list li,
+.tag-list .tag,
+.all-tags li,
+.all-tags .tag {
   display: inline-block;
   background-color: #1f2426;
   border: 1px solid #e64640;
@@ -153,10 +160,16 @@ a {
   border-radius: 5px;
   margin-right: 5px;
 }
-.tag-list li a, .tag-list .tag a, .all-tags li a, .all-tags .tag a {
+.tag-list li a,
+.tag-list .tag a,
+.all-tags li a,
+.all-tags .tag a {
   color: white;
 }
-.tag-list li a:hover, .tag-list .tag a:hover, .all-tags li a:hover, .all-tags .tag a:hover {
+.tag-list li a:hover,
+.tag-list .tag a:hover,
+.all-tags li a:hover,
+.all-tags .tag a:hover {
   color: #e64640;
   text-decoration: none;
 }
@@ -215,7 +228,8 @@ table {
   margin: 2rem;
 }
 
-th, td {
+th,
+td {
   padding: 0.25rem;
   text-align: left;
   border: 1px solid #e8eced;
@@ -280,34 +294,38 @@ pre code {
   -webkit-overflow-scrolling: touch;
 }
 pre code .keyword {
-  color: #9B2393;
+  color: #9b2393;
 }
 pre code .type {
-  color: #0B4F79;
+  color: #0b4f79;
 }
 pre code .call {
-  color: #0F68A0;
+  color: #0f68a0;
 }
 pre code .property {
-  color: #6C36A9;
+  color: #6c36a9;
 }
 pre code .number {
-  color: #1C00CF;
+  color: #1c00cf;
 }
 pre code .string {
-  color: #C41A16;
+  color: #c41a16;
 }
 pre code .comment {
-  color: #6C7986;
+  color: #6c7986;
 }
 pre code .dotAccess {
-  color: #326D74;
+  color: #326d74;
 }
 pre code .preprocessing {
   color: #643820;
 }
 
 @media (prefers-color-scheme: dark) {
+  p code {
+    background-color: #1a1a1a;
+  }
+
   pre {
     background-color: #1a1a1a;
   }
@@ -315,31 +333,31 @@ pre code .preprocessing {
     color: #e8eced;
   }
   pre code .keyword {
-    color: #FC5FA3;
+    color: #fc5fa3;
   }
   pre code .type {
-    color: #5DD8FF;
+    color: #5dd8ff;
   }
   pre code .call {
-    color: #41A1C0;
+    color: #41a1c0;
   }
   pre code .property {
-    color: #75B492;
+    color: #75b492;
   }
   pre code .number {
-    color: #9686F5;
+    color: #9686f5;
   }
   pre code .string {
-    color: #FC6A5D;
+    color: #fc6a5d;
   }
   pre code .comment {
-    color: #6C7986;
+    color: #6c7986;
   }
   pre code .dotAccess {
-    color: #AEF37D;
+    color: #aef37d;
   }
   pre code .preprocessing {
-    color: #FD8F3F;
+    color: #fd8f3f;
   }
 
   body {
@@ -347,7 +365,8 @@ pre code .preprocessing {
     color: #eee;
   }
 
-  th, td {
+  th,
+td {
     border: 1px solid #cc3925;
   }
 
