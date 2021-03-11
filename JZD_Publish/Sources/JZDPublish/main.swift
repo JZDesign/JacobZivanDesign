@@ -19,7 +19,7 @@ struct JZDPublish: Website {
     var name = "Jacob Zivan Design"
     var description = "Musings and learnings from a banker turned nerd - Tips, tutorials, principles, and thought processes on life and software."
     var language: Language { .english }
-    var imagePath: Path? { "images/memoji.png" }
+    var imagePath: Path? { "images/social.jpg" }
 }
 
 try JZDPublish()
