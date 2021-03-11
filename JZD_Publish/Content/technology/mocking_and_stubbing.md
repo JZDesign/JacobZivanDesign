@@ -172,11 +172,11 @@ class ControllerTests: XCTestCase {
 <br/>
 <br/>
 
-In that example, we created the two mocked interfaces we needed to create and, effectively tested the `Controller`. Because of the mocks, we were able to verify the functionality of the Controller without testing the functionality of the `DataStore` or the `Logger`. The actual implementations of those will get tested in isolation.
+In that example we mocked two interfaces and effectively tested the `Controller`. Because of the mocks, we were able to verify the functionality of the `Controller` without testing the functionality of the `DataStore` or the `Logger`. The actual implementations of those will get tested in isolation.
 
 Now, you may have noticed that there was a bit of configuration code required to run those tests. And I told you that mocking _reduces_ the amount of test configuration we need to write.
 
-They do. Even hand rolled mocks like these do. But I prefer to have my mocks generated for me in such a way that reduces needing to create one off mocks like this. And there is a package that will do just that. In my next article, you'll learn how to generate fully functional mocks using mockingbird😊
+They do. Even hand rolled mocks like these do. But I prefer to have my mocks generated for me in such a way that eliminates the need to create one off mocks like this. Luckily, there is a package that will do just that. In my next article, you'll learn how to generate fully functional mocks using mockingbird 😊
 
 ### [`-> Auto-Magically generate mocks using Mockingbird ->`](../mockingbird)
 
