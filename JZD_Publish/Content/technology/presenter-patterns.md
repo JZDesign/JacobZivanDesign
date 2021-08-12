@@ -7,9 +7,9 @@ tags: iOS, MacOS, Technology, Tutorial, SwiftUI, Design-Patterns
 
 # The Presenter Pattern
 
-Often, when I read articles on how to do something in SwiftUI, I see a lot of bad patterns. _My friends and I call them "Code smells" because... well, they stink._ One of the most prevalent code smells I encounter are massive view files. You know the ones I'm talking about. The views that have a lot of logic in them. So much so that it becomes hard to read or figure out where the view begins and the application logic ends. 
+Often, when I read articles on how to do something in SwiftUI, I see a lot of bad patterns touted as "Better Programming" which they're not. _My friends and I call them [Code smells](https://refactoring.guru/refactoring/smells) because... well, they stink._ One of the most prevalent code smells I encounter is a massive view file _(what refactoring.guru calls "bloaters")_. You know the ones I'm talking about. The views that have a lot of application logic in them, so much so, that it becomes hard to read or figure out where the view begins and the application logic ends. 
 
-Here is a light example:
+It may look something like this:
 
 ```swift
 struct ContentView: View {
@@ -26,86 +26,70 @@ struct ContentView: View {
                 TextField("username", text: $username)
                 TextField("password", text: $password)
                 Spacer()
-                Button("Login", action: login)
+                Button("Login") {
+                    isLoading = true
+                    Task {
+                        defer { DispatchQueue.main.async { self.isLoading = false } }
+                        let result = try? await MyAuthenticationHandler.login(username, password)
+                        if result?.isLoggedIn == true {
+                            DispatchQueue.main.async {
+                                self.shouldPresentHomeScreen = true
+                            }
+                        }
+                    }
+                }
             }
         }
         .padding()
-        .fullScreenCover(isPresented: $shouldPresentHomeScreen, onDismiss: nil, content: {
+        .sheet(isPresented: $presenter.shouldPresentHomeScreen) {
             Text("You're in!")
-        })
-    }
-
-    func login() {
-        isLoading = true
-        Task {
-            defer { self.isLoading = false }
-            let result = try? await MyAuthenticationHandler.login(username, password)
-            if result?.isLoggedIn == true {
-                DispatchQueue.main.async {
-                    self.shouldPresentHomeScreen = true
-                }
-            }
         }
     }
 }
 ```
 
-This is not an extreme example, but even this is a lot to look at and it makes reading the View code more challenging. We can abstract much of this into a Presenter to make this a lot easier to reason about.
+This is not an extreme example, but even this is a lot to look at. There are several concepts represented here. I've found that the cost of context switching between these concepts can make reading the View code challenging. We can abstract much of this into a Presenter to reduce the conceptual load and make this a lot easier to reason about.
 
 <br/>
 
 ## What is a Presenter?
 
-A Presenter is an object that the View can observe and read the view state from, additionally the presenter can own more of the application logic so that the view can be nice and lean. This better adheres to the Single Responsibility Principle and it's cleaner to test.
+A Presenter is something that does the heavy lifting for a View, like network requests and data storage/manipulation. Afterwards, it _presents_ ready to process data to the view. In SwiftUI specifically, the view will [observe](https://developer.apple.com/documentation/swiftui/state-and-data-flow) the view state from the presenter. This pattern better adheres to the [Single Responsibility Principle](https://en.wikipedia.org/wiki/Single-responsibility_principle) and it's cleaner to test.
 
 <br/>
 
 ## Creating a Presenter
 
-Create a new class called SignInPresenter that conforms to `ObservableObject` like so:
-
-```swift
-class SignInPresenter: ObservableObject {
-
-}
-```
-
-Then lets add the 2 variables from `ContentView` that are responsible for displaying the correct view and a function called login.
+Create a new class called `SignInPresenter` that conforms to `ObservableObject`. This presenter is going to own the `isLoading` variable and it's also going to own an `isFinished` variable which the view will use.
 
 ```swift
 class SignInPresenter: ObservableObject {
     @Published var isLoading = false
-    @Published var shouldPresentHomeScreen = false
+    @Published var isFinished = false
 
-    func login(_ username: String, _ password: String) {
-    }
+    func login(_ username: String, _ password: String) {}
 }
 ```
 
-Great! Now we have the rough outline of the presenter. Now it needs to actually do the work. Let's cut the logic out of the login function in `ContentView` and paste it here.
+Great! Now we have the rough outline of the presenter, but, it needs to actually do the work. Let's cut the logic out of the button action from the `ContentView` and paste it here _changing the line inside of the second dispatch queue_.
 
 
 ```swift
-class SignInPresenter: ObservableObject {
-    @Published var isLoading = false
-    @Published var shouldPresentHomeScreen = false
-
-    func login(_ username: String, _ password: String) {
-        isLoading = true
-        Task {
-            defer { self.isLoading = false }
-            let result = try? await MyAuthenticationHandler.login(username, password)
-            if result?.isLoggedIn == true {
-                DispatchQueue.main.async {
-                    self.shouldPresentHomeScreen = true
-                }
+func login(_ username: String, _ password: String) {
+    isLoading = true
+    Task {
+        defer { DispatchQueue.main.async { self.isLoading = false } }
+        let result = try? await MyAuthenticationHandler.login(username, password)
+        if result?.isLoggedIn == true {
+            DispatchQueue.main.async {
+                self.isFinished = true
             }
         }
     }
 }
 ```
 
-Then we can remove all of the noise from the view and observe this object like:
+Next, we can remove all of the noise from the view and observe this object like:
 
 ```swift
 struct ContentView: View {
@@ -127,9 +111,9 @@ struct ContentView: View {
             }
         }
         .padding()
-        .fullScreenCover(isPresented: $presenter.shouldPresentHomeScreen, onDismiss: nil, content: {
+        .sheet(isPresented: $presenter.isFinished) {
             Text("You're in!")
-        })
+        }
     }
 }
 ```
@@ -138,4 +122,4 @@ struct ContentView: View {
 
 ## 🔥☝️
 
-That is much easer to read through! What other things can you do to clean up your views? 
+That is much easer to read through! Presenters are commonly used to handle user interactions that modify the view state, like performing complex tasks that manipulate the view data. This example was very simplistic. Where in your code bases could you use a presenter to simplify your view logic?
