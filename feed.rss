@@ -1,4 +1,72 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content"><channel><title>Jacob Zivan Design</title><description>Musings and learnings from a banker turned nerd - Tips, tutorials, principles, and thought processes on life and software.</description><link>https://JacobZivanDesign.com</link><language>en</language><lastBuildDate>Wed, 11 Aug 2021 21:16:38 -0500</lastBuildDate><pubDate>Wed, 11 Aug 2021 21:16:38 -0500</pubDate><ttl>250</ttl><atom:link href="https://JacobZivanDesign.com/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://JacobZivanDesign.com/technology/presenter-patterns</guid><title>The Presenter Pattern</title><description>Clean up your views with the Presenter pattern in Swift UI. Some people call it "BetterProgramming" when the view contains a lot of `@State` variables and functions. It's really not. Let's take a look on how to write a presenter with Swift 5.5</description><link>https://JacobZivanDesign.com/technology/presenter-patterns</link><pubDate>Wed, 11 Aug 2021 08:13:00 -0500</pubDate><content:encoded><![CDATA[<h1>The Presenter Pattern</h1><p>Often, when I read articles on how to do something in SwiftUI, I see a lot of bad patterns touted as "Better Programming" which they're not. <em>My friends and I call them <a href="https://refactoring.guru/refactoring/smells">Code smells</a> because... well, they stink.</em> One of the most prevalent code smells I encounter is a massive view file <em>(what refactoring.guru calls "bloaters")</em>. You know the ones I'm talking about. The views that have a lot of application logic in them, so much so, that it becomes hard to read or figure out where the view begins and the application logic ends.</p><p>It may look something like this:</p><pre><code><span class="keyword">struct</span> ContentView: <span class="type">View</span> {
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content"><channel><title>Jacob Zivan Design</title><description>Musings and learnings from a banker turned nerd - Tips, tutorials, principles, and thought processes on life and software.</description><link>https://JacobZivanDesign.com</link><language>en</language><lastBuildDate>Thu, 30 Sep 2021 07:25:59 -0500</lastBuildDate><pubDate>Thu, 30 Sep 2021 07:25:59 -0500</pubDate><ttl>250</ttl><atom:link href="https://JacobZivanDesign.com/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://JacobZivanDesign.com/technology/custom-fonts-from-swift-package</guid><title>Packaging your Custom Fonts in Swift Packages</title><description>A Tutorial for adding Custom Fonts to a Swift Package that can be consumed by another application. Allowing you to easily share fonts between your iOS, tvOS, MacOS, and WatchOS apps!</description><link>https://JacobZivanDesign.com/technology/custom-fonts-from-swift-package</link><pubDate>Thu, 30 Sep 2021 06:13:00 -0500</pubDate><content:encoded><![CDATA[<h1>Packaging your Custom Fonts in Swift Packages</h1><p>In a <a href="../custom-dynamic-fonts-in-swift-ui">previous article</a> we covered how to add custom fonts that respond to the user's preferred font sizes in Swift UI. In this article, we'll take that code and package it up inside of a Swift Package so we can share it with our Widgets, or other OS applications. If you haven't done so already, go ahead and read <a href="../custom-dynamic-fonts-in-swift-ui">that article</a>. We're going to use that code in this tutorial.</p><br/><h2>Creating the Package</h2><p>First things first. We need to make our <a href="https://swift.org/package-manager/">Swift Package</a>. Open your terminal and execute the following commands:</p><pre><code>mkdir <span class="type">JBMono</span>
+cd <span class="type">JBMono</span>
+swift package <span class="keyword">init</span> --name <span class="type">JBMono</span>
+xed .
+</code></pre><p>Let me take you through that line by line.</p><ol><li><code>mkdir</code> will create a file directory or "folder" on your mac.</li><li><code>cd</code> will move your terminal into the desired directory.</li><li>The third line does the most work. It creates several files and folders that output a Swift Package with the desired name.</li><li>The final command <code>xed .</code> tells Xcode to open the <code>Package.swift</code> created by the previous command.</li></ol><br/><h2>Preparing the Package</h2><p>Now that you've got a package, we need to move all of the code we wrote in the <a href="../custom-dynamic-fonts-in-swift-ui">previous article</a> into this package. I put all the font files in a directory named "Fonts" inside of "Sources/JBMono".</p><p>Copying the code and font files isn't all we need to do. Since this becomes a library an application will consume, the code inside of it is unusable unless we explicitly make the structures, extensions, and functions <code>public</code>. Go ahead and do that now.</p><p>Afterwards, we'll focus on the <code>Package.swift</code> file. You should see this <em>(plus some comments)</em>:</p><pre><code>
+
+<span class="keyword">let</span> package = <span class="type">Package</span>(
+    name: <span class="string">"JBMono"</span>,
+    products: [
+        .<span class="call">library</span>(
+            name: <span class="string">"JBMono"</span>,
+            targets: [<span class="string">"JBMono"</span>]),
+    ],
+    dependencies: [],
+    targets: [
+        .<span class="call">target</span>(
+            name: <span class="string">"JBMono"</span>,
+            dependencies: []),
+        .<span class="call">testTarget</span>(
+            name: <span class="string">"JBMonoTests"</span>,
+            dependencies: [<span class="string">"JBMono"</span>]),
+    ]
+)
+</code></pre><br/><p>That's a good start. First, lets specify what platforms we're targeting. Add the following line between <code>name: "JBMono</code> and <code>products</code>:</p><pre><code>platforms: [.<span class="call">iOS</span>(.<span class="dotAccess">v15</span>), .<span class="dotAccess">macOS</span>(.<span class="dotAccess">v12</span>), .<span class="dotAccess">watchOS</span>(.<span class="dotAccess">v8</span>), .<span class="dotAccess">tvOS</span>(.<span class="dotAccess">v15</span>)],
+</code></pre><br/><p>Then we need to include the Font files as resources for the target. Without this step, the font's wont be useable by this package or any of its consumers.</p><p>Find the <code>.target</code> and add a comma and a new line after the dependency array closes. Then add the following:</p><pre><code>resources: [.<span class="call">process</span>(<span class="string">"Fonts"</span>)]
+</code></pre><br/><blockquote><p>You'll get build errors if your file structure isn't right!</p></blockquote><br/><p>This tells Swift to package up all the files in the Fonts directory and make them available to the library. You'll get build errors if your file structure isn't right. So make sure your file structure looks like this:</p><pre><code><span class="type">Package</span>.<span class="property">swift</span>
+<span class="type">Sources</span>/
+    <span class="type">JBMono</span>/
+        <span class="type">Fonts</span>/
+            fontfile.<span class="property">ttf</span>
+            fontfile.<span class="property">ttf</span>
+            fontfile.<span class="property">ttf</span>
+            fontfile.<span class="property">ttf</span>
+</code></pre><br/><h2>Registering the Fonts</h2><p>In the <a href="../custom-dynamic-fonts-in-swift-ui">previous article</a>, we registered the fonts by including them in the applications' property list. With a Swift Package it works a little differently. Open up the <code>JBMono.swift</code> file that was generated for you and we'll add the code we need there.</p><br/><p>First, replace the contents with this empty public version:</p><pre><code><span class="keyword">import</span> Foundation
+<span class="keyword">import</span> SwiftUI
+
+<span class="keyword">public struct</span> JBMono { }
+</code></pre><br/><p>Then we need to add a function that will find the font file and tell the OS to register the font for use. Add a function to the struct:</p><pre><code><span class="keyword">fileprivate static func</span> registerFont(bundle: <span class="type">Bundle</span>, fontName: <span class="type">String</span>, fontExtension: <span class="type">String</span>) { }
+</code></pre><br/><p>We want this function to be private to the module, it needs the bundle, the name of the font file, and the file extension.</p><p>The first thing the function needs to do is try and locate a font file that matches the name and extension provided. To do that, we call a function off of bundle like so:</p><pre><code>bundle.<span class="call">url</span>(forResource: fontName, withExtension: fontExtension)
+</code></pre><br/><p>If that succeeds, we want to convert the found font URL to a <a href="https://developer.apple.com/documentation/coregraphics/cgdataprovider">Core Graphics Data Provider</a>, and finally we convert the data provider into a font. Inside of your <code>registerFont</code> function add the following lines:</p><pre><code><span class="keyword">guard let</span> fontURL = bundle.<span class="call">url</span>(forResource: fontName, withExtension: fontExtension),
+    <span class="keyword">let</span> fontDataProvider = <span class="type">CGDataProvider</span>(url: fontURL <span class="keyword">as</span> <span class="type">CFURL</span>),
+    <span class="keyword">let</span> font = <span class="type">CGFont</span>(fontDataProvider) <span class="keyword">else</span> {
+        <span class="call">fatalError</span>(<span class="string">"Couldn't create font from filename:</span> \(fontName) <span class="string">with extension</span> \(fontExtension)<span class="string">"</span>)
+}
+</code></pre><br/><p>But that's not it, after we've created the font, we need to actually register it with the Core Graphics Font Manager. To do so, we actually need to pass a reference to an unmanaged error. Add the following lines to the function after the guard statement closes:</p><pre><code><span class="keyword">var</span> error: <span class="type">Unmanaged</span>&lt;<span class="type">CFError</span>&gt;?
+
+<span class="type">CTFontManagerRegisterGraphicsFont</span>(font, &amp;error)
+</code></pre><br/><p>Alright! Now we have a function that will register a single font. Above this function add a new one to handle the registration of all the JetBrains Mono fonts.</p><pre><code><span class="keyword">public static func</span> registerFonts() {
+    <span class="type">JetBrainsMono</span>.<span class="property">allCases</span>.<span class="call">forEach</span> {
+        <span class="call">registerFont</span>(bundle: .<span class="dotAccess">module</span>, fontName: $0.<span class="property">rawValue</span>, fontExtension: <span class="string">"ttf"</span>)
+    }
+}
+</code></pre><p>The bundle we pass in here is dynamically generated by Swift because of the <code>.process("Fonts")</code> build command we added to the target. If you get red errors, you may want to check your file structure like I mentioned above. If you're still struggling, check out <a href="https://stackoverflow.com/a/66630000/9333764">this answer on Stack Overflow</a>.</p><br/><h2>Using the Fonts in an Application</h2><p>Now that you've done all the hard work, we just need to consume the package. After adding JBMono as a dependency to your project, you'll need to open the App.swift file <em>wherever <code>@main</code> is located</em>. For this example project it's <code>CustomFontSwiftUIExampleApp.swift</code>. Up top, you'll import JBMono. Then you'll add an initializer to the struct and call our register fonts function like so:</p><pre><code><span class="keyword">import</span> SwiftUI
+<span class="keyword">import</span> JBMono
+
+<span class="keyword">@main
+struct</span> CustomFontSwiftUIExampleApp: <span class="type">App</span> {
+    
+    <span class="keyword">init</span>() {
+        <span class="type">JBMono</span>.<span class="call">registerFonts</span>()
+    }
+    
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">Scene</span> {
+        <span class="type">WindowGroup</span> {
+            <span class="type">ContentView</span>()
+        }
+    }
+}
+</code></pre><h1>☝️🔥</h1><p>That's it! Using the custom fonts is no different than what we did in the <a href="../custom-dynamic-fonts-in-swift-ui">previous article</a>! You'll just need to remember to import the package first! I've uploaded the example code to <a href="https://github.com/JZDesign/CustomFontSwiftUIExample">Github</a> for reference.</p>]]></content:encoded></item><item><guid isPermaLink="true">https://JacobZivanDesign.com/technology/presenter-patterns</guid><title>The Presenter Pattern</title><description>Clean up your views with the Presenter pattern in Swift UI. Some people call it "BetterProgramming" when the view contains a lot of `@State` variables and functions. It's really not. Let's take a look on how to write a presenter with Swift 5.5</description><link>https://JacobZivanDesign.com/technology/presenter-patterns</link><pubDate>Wed, 11 Aug 2021 08:13:00 -0500</pubDate><content:encoded><![CDATA[<h1>The Presenter Pattern</h1><p>Often, when I read articles on how to do something in SwiftUI, I see a lot of bad patterns touted as "Better Programming" which they're not. <em>My friends and I call them <a href="https://refactoring.guru/refactoring/smells">Code smells</a> because... well, they stink.</em> One of the most prevalent code smells I encounter is a massive view file <em>(what refactoring.guru calls "bloaters")</em>. You know the ones I'm talking about. The views that have a lot of application logic in them, so much so, that it becomes hard to read or figure out where the view begins and the application logic ends.</p><p>It may look something like this:</p><pre><code><span class="keyword">struct</span> ContentView: <span class="type">View</span> {
     <span class="keyword">@State var</span> shouldPresentHomeScreen = <span class="keyword">false
     @State var</span> isLoading = <span class="keyword">false
     @State var</span> username = <span class="string">""</span>
@@ -38,7 +106,7 @@
 
     func</span> login(<span class="keyword">_</span> username: <span class="type">String</span>, <span class="keyword">_</span> password: <span class="type">String</span>) {}
 }
-</code></pre><p>Great! Now we have the rough outline of the presenter, but, it needs to actually do the work. Let's cut the logic out of the button action from the <code>ContentView</code> and paste it here <em>changing the line inside of the dispatch queue</em>.</p><pre><code><span class="keyword">func</span> login(<span class="keyword">_</span> username: <span class="type">String</span>, <span class="keyword">_</span> password: <span class="type">String</span>) {
+</code></pre><p>Great! Now we have the rough outline of the presenter, but, it needs to actually do the work. Let's cut the logic out of the button action from the <code>ContentView</code> and paste it here <em>changing the line inside of the second dispatch queue</em>.</p><pre><code><span class="keyword">func</span> login(<span class="keyword">_</span> username: <span class="type">String</span>, <span class="keyword">_</span> password: <span class="type">String</span>) {
     isLoading = <span class="keyword">true</span>
     <span class="type">Task</span> {
         <span class="keyword">defer</span> { <span class="type">DispatchQueue</span>.<span class="property">main</span>.<span class="call">async</span> { <span class="keyword">self</span>.<span class="property">isLoading</span> = <span class="keyword">false</span> } }

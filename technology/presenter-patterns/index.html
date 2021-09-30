@@ -38,7 +38,7 @@
 
     func</span> login(<span class="keyword">_</span> username: <span class="type">String</span>, <span class="keyword">_</span> password: <span class="type">String</span>) {}
 }
-</code></pre><p>Great! Now we have the rough outline of the presenter, but, it needs to actually do the work. Let's cut the logic out of the button action from the <code>ContentView</code> and paste it here <em>changing the line inside of the dispatch queue</em>.</p><pre><code><span class="keyword">func</span> login(<span class="keyword">_</span> username: <span class="type">String</span>, <span class="keyword">_</span> password: <span class="type">String</span>) {
+</code></pre><p>Great! Now we have the rough outline of the presenter, but, it needs to actually do the work. Let's cut the logic out of the button action from the <code>ContentView</code> and paste it here <em>changing the line inside of the second dispatch queue</em>.</p><pre><code><span class="keyword">func</span> login(<span class="keyword">_</span> username: <span class="type">String</span>, <span class="keyword">_</span> password: <span class="type">String</span>) {
     isLoading = <span class="keyword">true</span>
     <span class="type">Task</span> {
         <span class="keyword">defer</span> { <span class="type">DispatchQueue</span>.<span class="property">main</span>.<span class="call">async</span> { <span class="keyword">self</span>.<span class="property">isLoading</span> = <span class="keyword">false</span> } }
