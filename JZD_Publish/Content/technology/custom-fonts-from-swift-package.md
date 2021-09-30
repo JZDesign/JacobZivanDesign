@@ -79,11 +79,13 @@ resources: [.process("Fonts")]
 
 <br/>
 
+This tells Swift to package up all the files in the Fonts directory and make them available to the library.
+
+
 > You'll get build errors if your file structure isn't right!
 
-<br/>
 
-This tells Swift to package up all the files in the Fonts directory and make them available to the library. You'll get build errors if your file structure isn't right. So make sure your file structure looks like this:
+You'll get build errors if your file structure isn't right. So make sure your file structure looks like this:
 
 ```
 Package.swift
