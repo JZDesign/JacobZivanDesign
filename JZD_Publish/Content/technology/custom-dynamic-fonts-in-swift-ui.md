@@ -234,4 +234,4 @@ Now that is swifty!
 
 Good work! You've learned how to add fonts to an XCode project, represent the fonts and their base sizes in enumerations, and replicate SwiftUI's `preferredFont` implementation!
 
-In a [newer article](../custom-fonts-from-swfit-package) you'll learn how to package these fonts for reuse.
+In a [newer article](../custom-fonts-from-swift-package) you'll learn how to package these fonts for reuse.
