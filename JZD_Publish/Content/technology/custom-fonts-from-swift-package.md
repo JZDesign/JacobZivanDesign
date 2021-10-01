@@ -61,7 +61,7 @@ let package = Package(
 
 <br/>
 
-That's a good start. First, lets specify what platforms we're targeting. Add the following line between `name: "JBMono` and `products`:
+That's a good start. First, lets specify what platforms we're targeting. Add the following line between `name: "JBMono",` and `products`:
 
 ```swift
 platforms: [.iOS(.v15), .macOS(.v12), .watchOS(.v8), .tvOS(.v15)],
@@ -196,6 +196,6 @@ struct CustomFontSwiftUIExampleApp: App {
 }
 ```
 
-# ☝️🔥
+# 🔥☝️
 
 That's it! Using the custom fonts is no different than what we did in the [previous article](../custom-dynamic-fonts-in-swift-ui)! You'll just need to remember to import the package first! I've uploaded the example code to [Github](https://github.com/JZDesign/CustomFontSwiftUIExample) for reference. 
