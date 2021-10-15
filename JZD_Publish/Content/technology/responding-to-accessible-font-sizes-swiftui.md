@@ -1,6 +1,6 @@
 ---
 date: 2021-01-03 05:10
-description: A Tutorial for Handling Accessibility in SwiftUI using a ViewBuilder, PreferredFont, and ContentSizeCategory.isAccessibilityCategory
+description: A Tutorial for Handling Accessibility in SwiftUI using a ViewBuilder, PreferredFont, and DynamicTypeSize.isAccessibilitySize. Updated for Swift 5.5!
 tags: Accessibility, iOS, SwiftUI, Technology, Tutorial, UI/UX
 ---
 
@@ -48,21 +48,21 @@ Good news is, the SwiftUI team has given us easy access to the user's preferred 
 
 ## Responsive Stack View
 
-For this tutorial, we'll focus on a simple view that responds to accessible font sizes. To do that we'll use the [`ContentSizeCategory`](https://developer.apple.com/documentation/swiftui/contentsizecategory) Environment variable in SwiftUI. 
+For this tutorial, we'll focus on a simple view that responds to accessible font sizes. To do that we'll use the [`DynamicTypeSize`](https://developer.apple.com/documentation/swiftui/dynamictypesize) Environment variable in SwiftUI. 
 
-On it, there is a computed property, `isAccessibilityCategory`, that returns what we're looking for. If the user has selected to use large fonts **and** has scaled their font up into the larger fonts category, `isAccessibilityCategory` returns `true`.
+On it, there is a computed property, `isAccessibilitySize`, that returns what we're looking for. If the user has selected to use large fonts **and** has scaled their font up into the larger fonts category, `isAccessibilitySize` returns `true`.
 
 We can add use it like this:
 
 ```swift
 public struct SomeView : View {
-    @Environment(\.sizeCategory) public var size: ContentSizeCategory
+    @Environment(\.dynamicTypeSize) public var dynamicTypeSize: DynamicTypeSize
 
     public var body: some View {
-        if size.isAccessibilityCategory {
-            Text("isAccessibilityCategory == true")
+        if dynamicTypeSize.isAccessibilitySize {
+            Text("isAccessibilitySize == true")
         } else {
-            Text("isAccessibilityCategory == false")
+            Text("isAccessibilitySize == false")
         }
     }
 }
@@ -80,11 +80,11 @@ To make our own stack view we'll need to be able to pass in a bunch of subviews.
 
 _A [ViewBuilder](https://developer.apple.com/documentation/swiftui/viewbuilder) is a [property wrapper](https://docs.swift.org/swift-book/LanguageGuide/Properties.html#ID617) that allows us to pass one or more views into our stack view as a function._
 
-Alright! Let's put the Responsive Stack View together using the `ContentSizeCategory` and a `ViewBuilder`!
+Alright! Let's put the Responsive Stack View together using the `DynamicTypeSize` and a `ViewBuilder`!
 
 ```swift
 struct RStack<Content: View> : View {
-    @Environment(\.sizeCategory) var size: ContentSizeCategory
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize: DynamicTypeSize
     
     let content: () -> Content
     
@@ -93,7 +93,7 @@ struct RStack<Content: View> : View {
     }
     
     var body: some View {
-        if size.isAccessibilityCategory {
+        if dynamicTypeSize.isAccessibilitySize {
             VStack { content() }
         } else {
             HStack { content() }
@@ -174,7 +174,7 @@ Let's do it!
 
 ```swift
 struct RDualText: View {
-    @Environment(\.sizeCategory) var size: ContentSizeCategory
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize: DynamicTypeSize
 
     var firstText: Text
     var secondText: Text
@@ -188,7 +188,7 @@ struct RDualText: View {
     var body: some View {
         RStack {
             self.firstText
-            if !size.isAccessibilityCategory {
+            if !dynamicTypeSize.isAccessibilitySize {
                 spacer
             }
             self.secondText
