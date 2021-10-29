@@ -10,7 +10,13 @@ For a long time I had no idea what dependency injection was or why it mattered. 
 
 ## So what is Dependency Injection?
 
-Related to the [Dependency Inversion Principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) _(one of the [SOLID](https://en.wikipedia.org/wiki/SOLID) principles)_, dependency injection is the concept of providing things to an object that it relies on, instead of letting the object create the things it needs, itself. Often this is done in a constructor. To illustrate, here's a quick example of an object doing it all on its own:
+Related to the [Dependency Inversion Principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) _(one of the [SOLID](https://en.wikipedia.org/wiki/SOLID) principles)_, dependency injection is the concept of providing things to an object that it relies on, instead of letting the object create the things it needs, itself. Often this is done in a constructor. 
+
+### No Injection
+
+<br/>
+
+To illustrate, here's a quick example of an object **_not_** using dependency injection:
 
 ```swift
 struct SomeClient {
@@ -24,17 +30,22 @@ struct SomeClient {
 
 <br/>
 
-Notice how `SomeClient` needs _(or is "dependent" on)_ `SomeService` to do its job? `SomeService` is a dependency of `SomeClient`. Dependency injection takes the responsibility of creating a `SomeService` out of `SomeClient`, instead, an instance of the dependency is given to the client. 
+Notice how `SomeClient` needs _(or is "dependent" on)_ `SomeService` to do its job? `SomeService` is a dependency of `SomeClient`. Dependency injection takes the responsibility of creating a `SomeService` out of `SomeClient`. Instead, a dependency is first created and then given to the client. 
+
+### Constructor Injection
+
+<br/>
 
 It's super simple, you probably already know how to do it, even if you're not familiar with the terms.
 
-To illustrate, here is an example of Constructor Injection:
+This is what Constructor Injection looks like:
 
 
 ```swift
 struct SomeClient {
     private let someService: SomeService
 
+    // notice how the dependency is required in the constructor below?
     init(_ service: SomeService) {
         self.someService = service
     }
@@ -53,6 +64,8 @@ It's a subtle difference, but it's profound. By removing the creation of the ser
 > It's a subtle difference, but it's profound.
 
 ### Setter Injection
+
+<br/>
 
 If you know even a little about Object Oriented programming, you already know how to construct an object and pass in the dependencies. That is super intuitive and commonplace. Then there is [Setter Injection](https://en.wikipedia.org/wiki/Dependency_injection#Setter_injection) which you've probably done before too. Here's a quick example from my UIKit days:
 
@@ -81,17 +94,17 @@ It would look something like this:
 ```swift
 // pseudo code
 
-let manifest: Set<Injectable> = [
+let provider = DependencyProvider([
     SomeClient(),
     SomeService()
-]
+])
 
-let controller = Controller(client: manifest.get())
+let controller = Controller(client: provider.resolveDependency())
 
 // or
 
 struct MyView {
-    let service: SomeService = manifest.get()
+    let service: SomeService = provider.resolveDependency()
 }
 ```
 
