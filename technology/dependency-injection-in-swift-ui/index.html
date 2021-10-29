@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="og:site_name" content="Jacob Zivan Design"/><link rel="canonical" href="https://JacobZivanDesign.com/technology/dependency-injection-in-swift-ui"/><meta name="twitter:url" content="https://JacobZivanDesign.com/technology/dependency-injection-in-swift-ui"/><meta name="og:url" content="https://JacobZivanDesign.com/technology/dependency-injection-in-swift-ui"/><title>Dependency Injection | Jacob Zivan Design</title><meta name="twitter:title" content="Dependency Injection | Jacob Zivan Design"/><meta name="og:title" content="Dependency Injection | Jacob Zivan Design"/><meta name="description" content="SwiftUI comes with its own Dependency Injection framework. Learn what dependency injection is, and how to utilize the Setter Injection provided by swift."/><meta name="twitter:description" content="SwiftUI comes with its own Dependency Injection framework. Learn what dependency injection is, and how to utilize the Setter Injection provided by swift."/><meta name="og:description" content="SwiftUI comes with its own Dependency Injection framework. Learn what dependency injection is, and how to utilize the Setter Injection provided by swift."/><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Jacob Zivan Design"/><meta name="twitter:image" content="https://JacobZivanDesign.com/images/social.jpg"/><meta name="og:image" content="https://JacobZivanDesign.com/images/social.jpg"/></head><body class="item-page"><!--ITEM HTML--><header><div class="wrapper"><a class="site-icon" href="/"><img src="/images/memoji.png" alt="Memoji of Jacob giving a thumbs up"/></a><nav><ul><li><a href="/musings">Musings</a></li><li><a class="selected" href="/technology">Technology</a></li></ul></nav></div></header><div class="wrapper"><article><div class="content"><h1>Dependency Injection</h1><p>For a long time I had no idea what dependency injection was or why it mattered. When I realized I already knew one flavor of it, <a href="https://en.wikipedia.org/wiki/Dependency_injection#Constructor_injection">Constructor Injection</a>, it suddenly became obvious to me. In this article, I hope to provide a clear explanation of Dependency Injection and how you can use it in Swift.</p><h2>So what is Dependency Injection?</h2><p>Related to the <a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle">Dependency Inversion Principle</a> <em>(one of the <a href="https://en.wikipedia.org/wiki/SOLID">SOLID</a> principles)</em>, dependency injection is the concept of providing things to an object that it relies on, instead of letting the object create the things it needs, itself. Often this is done in a constructor. To illustrate, here's a quick example of an object doing it all on its own:</p><pre><code><span class="keyword">struct</span> SomeClient {
+    <span class="keyword">private let</span> someService = <span class="type">SomeService</span>()
+
+    <span class="keyword">func</span> doSomeWork() {
+        someService.<span class="call">doSomething</span>()
+    }
+}
+</code></pre><br/><p>Notice how <code>SomeClient</code> needs <em>(or is "dependent" on)</em> <code>SomeService</code> to do its job? <code>SomeService</code> is a dependency of <code>SomeClient</code>. Dependency injection takes the responsibility of creating a <code>SomeService</code> out of <code>SomeClient</code>, instead, an instance of the dependency is given to the client.</p><p>It's super simple, you probably already know how to do it, even if you're not familiar with the terms.</p><p>To illustrate, here is an example of Constructor Injection:</p><pre><code><span class="keyword">struct</span> SomeClient {
+    <span class="keyword">private let</span> someService: <span class="type">SomeService</span>
+
+    <span class="keyword">init</span>(<span class="keyword">_</span> service: <span class="type">SomeService</span>) {
+        <span class="keyword">self</span>.<span class="property">someService</span> = service
+    }
+
+    <span class="keyword">func</span> doSomeWork() {
+        someService.<span class="call">doSomething</span>()
+    }
+}
+</code></pre><br/><p>It's a subtle difference, but it's profound. By removing the creation of the service from the client we achieve a couple of important things. First, it becomes easier to make the client more reusable. We could pass it different versions of <code>SomeService</code>, and the client could do different kinds of work! And because we can pass in different versions of the dependency, <strong>testing that structure becomes far easier</strong>.</p><blockquote><p>It's a subtle difference, but it's profound.</p></blockquote><h3>Setter Injection</h3><p>If you know even a little about Object Oriented programming, you already know how to construct an object and pass in the dependencies. That is super intuitive and commonplace. Then there is <a href="https://en.wikipedia.org/wiki/Dependency_injection#Setter_injection">Setter Injection</a> which you've probably done before too. Here's a quick example from my UIKit days:</p><pre><code><span class="comment">// This example also demonstrates Interface Injection</span> 
+<span class="keyword">class</span> SomeViewController: <span class="type">UIViewController</span>, <span class="type">UITableViewDelegate</span> {
+    <span class="keyword">let</span> tableView = <span class="type">UITableView</span>()
+
+    <span class="keyword">override func</span> viewDidLoad() {
+        <span class="keyword">super</span>.<span class="call">viewDidLoad</span>()
+        <span class="keyword">self</span>.<span class="property">tableView</span>.<span class="property">delegate</span> = <span class="keyword">self</span> <span class="comment">// Setting the dependency</span>
+    }
+}
+</code></pre><br/><p>The <code>UITableView</code> relies on a delegate to handle specific tasks and it exposes a setter for us to inject that dependency after the table view was initialized. Again, this was another common sense one for me. It was what dependency injection evolved into that was confusing to me at first. Let's cover that next.</p><h2>Auto-Wired Dependency Injection</h2><p>Eventually, the people using Dependency Injection created a new pattern to inject dependencies. One that is similar to the injection patterns we've just discussed, only it happens automagically. The concept is that an application creates a manifest of dependencies inside of a dependency injection framework. Then an object in that applications says it needs one such dependency and the framework provides it.</p><p>It would look something like this:</p><pre><code><span class="comment">// pseudo code</span>
+
+<span class="keyword">let</span> manifest: <span class="type">Set</span>&lt;<span class="type">Injectable</span>&gt; = [
+    <span class="type">SomeClient</span>(),
+    <span class="type">SomeService</span>()
+]
+
+<span class="keyword">let</span> controller = <span class="type">Controller</span>(client: manifest.<span class="call">get</span>())
+
+<span class="comment">// or</span>
+
+<span class="keyword">struct</span> MyView {
+    <span class="keyword">let</span> service: <span class="type">SomeService</span> = manifest.<span class="call">get</span>()
+}
+</code></pre><br/><p>This auto wiring confused me at first. It's really not much different than what we talked about before, the only true difference is that the dependency provider knows which dependency to provide based on the interface required at the usage site. There are <a href="https://github.com/Liftric/DIKit">third party frameworks</a> that do this generically for many languages. However, Apple recently released a fully native way to do it.</p><h2>Swift's Environment Variables</h2><p>If you've done much with SwiftUI, you've probably seen an environment variable before. The one I use the most is probably the <code>colorScheme</code>:</p><pre><code><span class="keyword">struct</span> SomeView: <span class="type">View</span> {
+
+    <span class="keyword">@Environment</span>(\.<span class="property">colorScheme</span>) <span class="keyword">var</span> colorScheme : <span class="type">ColorScheme</span>
+
+    <span class="keyword">var</span> body: <span class="keyword">some</span> view {
+        <span class="type">Text</span>(<span class="string">""</span>)
+            .<span class="call">foregroundColor</span>(colorScheme == .<span class="dotAccess">dark</span> ? .<span class="dotAccess">white</span> : .<span class="dotAccess">black</span>)
+    }
+}
+</code></pre><br/><p>The line <code>@Environment(\.colorScheme) var colorScheme: ColorScheme</code> is one way to do the autowired dependency injection. Let's break it down.</p><p>On the left we use an annotation <em>(or <a href="https://www.swiftbysundell.com/articles/property-wrappers-in-swift/">property wrapper</a>)</em> <code>@Environment</code> This particular property wrapper takes a <a href="https://www.swiftbysundell.com/articles/the-power-of-key-paths-in-swift/">key path</a>. This particular key path was <code>\.colorScheme</code>. That tells Swift's Environment framework that we're looking for an object with that name, please provide it. The next section <code>var colorScheme</code> is the name assignment, which could be any name at all. The last section <code>: ColorScheme</code> is the type assignment, which is actually erroneous. We could simply write: <code>@Environment(\.colorScheme) var colorScheme</code>.</p><p>Now to override the default and inject our own value, we can do that like so:</p><pre><code><span class="keyword">struct</span> ContentView: <span class="type">View</span> {
+    
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="type">SomeView</span>()
+            .<span class="call">environment</span>(\.<span class="property">colorScheme</span>, .<span class="dotAccess">dark</span>) <span class="comment">// injecting Dark to Some View</span>
+    }
+
+}
+</code></pre><br/><h3>Creating our own Environment Variable</h3><p>We can create our own environment variables that we can place into Swift's Environment. To start, let's create a class to hold an access token.</p><pre><code><span class="keyword">class</span> TokenStore: <span class="type">ObservableObject</span> {
+    <span class="keyword">var</span> accessToken: <span class="type">String</span>? = <span class="keyword">nil</span>
+}
+</code></pre><br/><p>Then, to access it from the <code>@Environment</code> property wrapper, it needs to have an <a href="https://developer.apple.com/documentation/swiftui/environmentkey">Environment Key</a> associated with it.</p><pre><code><span class="keyword">struct</span> TokenStoreKey: <span class="type">EnvironmentKey</span> {
+    <span class="keyword">static let</span> defaultValue = <span class="type">TokenStore</span>()
+}
+</code></pre><br/><p>This key is used to make the <code>key path</code> on the environment. We can do that by extending Swift's <code>EnvironmentValues</code>:</p><pre><code><span class="keyword">extension</span> <span class="type">EnvironmentValues</span> {
+    <span class="keyword">var</span> tokenStore: <span class="type">TokenStore</span> {
+        <span class="keyword">get</span> { <span class="keyword">self</span>[<span class="type">TokenStoreKey</span>.<span class="keyword">self</span>] }
+        <span class="keyword">set</span> { <span class="keyword">self</span>[<span class="type">TokenStoreKey</span>.<span class="keyword">self</span>] = newValue }
+    }
+}
+</code></pre><br/><p>Now that we've done all that, we can use the token store like:</p><pre><code><span class="keyword">class</span> SomeHttpClient {
+    <span class="keyword">@Environment</span>(\.<span class="property">tokenStore</span>) <span class="keyword">var</span> store
+
+    <span class="keyword">func</span> setToken(<span class="keyword">_</span> token: <span class="type">String</span>) {
+        store.<span class="property">accessToken</span> = token
+    }
+
+    <span class="keyword">func</span> getToken() -&gt; <span class="type">String</span>? {
+        store.<span class="property">accessToken</span>
+    }
+}
+</code></pre><hr><h1>🔥☝️</h1><p>That's one way to use Dependency Injection natively with Swift. There are <a href="https://developer.apple.com/documentation/swiftui/environmentobject">other options</a> as well. I hope this has been helpful!</p></div><span>Tags: </span><ul class="tag-list"><li><a href="/tags/ios">iOS</a></li><li><a href="/tags/macos">MacOS</a></li><li><a href="/tags/swiftui">SwiftUI</a></li><li><a href="/tags/technology">Technology</a></li><li><a href="/tags/tutorial">Tutorial</a></li><li><a href="/tags/dependencyinjection">Dependency-Injection</a></li></ul></article></div><footer><p>Generated using <a href="https://github.com/johnsundell/publish">Publish</a></p><p class="jbmono">Code typeface == <a href="https://www.jetbrains.com/lp/mono/">JetBrains Mono</a></p><p><a href="/feed.rss">RSS feed</a></p><div class="social"><a target="_blank" class="find-me" href="https://github.com/JZDesign/"><img src="/images/git.svg"/></a><a target="_blank" class="find-me" href="https://www.linkedin.com/in/jacob-rakidzich-b8722436/"><img src="/images/linkedin.svg"/></a></div></footer></body></html>
