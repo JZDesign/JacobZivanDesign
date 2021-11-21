@@ -85,9 +85,9 @@ Great! Now you know how to serialize JSON into a specific type. It's a great sta
 
 ## Polymorphic Serialization
 
-Let's say that our API is responsible for the inventory of our players. It sends back an array of items. Those items can be different types: Weapons, Armor, Potions, Misc, etc., 
+Let's say that our API is responsible for managing the inventory of our players. It sends back an array of items. Those items can be different types: Weapons, Armor, Potions, Misc, etc., 
 
-Weapons and armor are 2 different items that one could expect to see in many video games. They are dramatically different things, and as such, they don't appear the same way in the JSON. Let's take a look at the following example.
+Weapons and armor are 2 different items that one could expect to see in many video games. They are dramatically different things, and as such, they aren't represented the same way in the JSON. Let's take a look at the following example.
 
 ```json
 {
@@ -129,7 +129,7 @@ With the `Item` model shown above, I would have to inspect the structure for spe
 
 > Don't do it.
 
-Polymorphic serialization is the process of making the model statically represent the different JSON objects in your model. To do that in Swift we'll use an enumeration.
+Polymorphic serialization is the process of making the model statically represent the different JSON objects. To do that in Swift we'll use an enumeration.
 
 <br/>
 
