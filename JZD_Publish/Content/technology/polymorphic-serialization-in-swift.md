@@ -137,7 +137,7 @@ Polymorphic serialization is the process of making the model statically represen
 
 <br/>
 
-Swift [Enumerations](https://docs.swift.org/swift-book/LanguageGuide/Enumerations.html) are quite powerful. One of my favorite features by far is the [Associated Value](https://www.swiftbysundell.com/tips/default-enum-associated-values/). This is somewhat advanced. It allows us to define a set of values _(the enum)_ that are always the same, but then inject other variable values into the enumeration _(the associated value)_. It looks like this:
+Swift [Enumerations](https://docs.swift.org/swift-book/LanguageGuide/Enumerations.html) are quite powerful. One of my favorite features by far is the [Associated Value](https://www.swiftbysundell.com/tips/default-enum-associated-values/). This is somewhat advanced. It allows us to define a set of values _(the enum)_ that are always the same, but then inject other values into the enumeration _(the associated value)_. It looks like this:
 
 ```swift
 enum Result<T> {
@@ -168,7 +168,7 @@ func handle(optional: Int?) {
 
 Notice how we can only create the 2 values of the enumeration `success` and `failure` but we can put so much more information inside of them!?
 
-We're going to define our own enumeration with associated values in a minute. Before we get there though, let's create 2 different item types that could be represented in the Inventory API.
+We're going to define our own enumeration with associated values in a minute. Before we get there though, let's create 2 different item types that are represented in the JSON response from the Inventory API.
 
 <br/>
 
