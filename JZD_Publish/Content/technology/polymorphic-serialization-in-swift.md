@@ -49,7 +49,7 @@ Just by adding `: Codable` to the structure declaration, swift will be able to [
 }
 ```
 
-Did you notice the difference, `"name"` instead of `"item_name"`? Swift automatically takes the name of the variable and encodes that. I'd like to use `Item.name` as the syntax in my Swift project instead of `Item.item_name`. To show you how to do that let's take a look at Coding Keys.
+Did you notice the difference, `"name"` instead of `"item_name"`? Swift automatically takes the name of the variable and encodes that as the JSON key. I'd like to use `Item.name` as the syntax in my Swift project instead of `Item.item_name`. To show you how to do that let's take a look at Coding Keys.
 
 <br/>
 ## Coding Keys
