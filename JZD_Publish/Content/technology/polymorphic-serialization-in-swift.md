@@ -41,7 +41,7 @@ struct Item: Codable {
     let name: String
 }
 ```
-Just by adding `: Codable` to the structure declaration, swift will be able to [encode](https://developer.apple.com/documentation/swift/encodable/2893603-encode) or [decode](https://developer.apple.com/documentation/swift/decodable/2894081-init) _(AKA serialize)_ the model. However, the JSON this particular model would expect to decode _(or would produce by encoding)_ looks like:
+Just by adding `: Codable` to the structure declaration, Swift will be able to [encode](https://developer.apple.com/documentation/swift/encodable/2893603-encode) or [decode](https://developer.apple.com/documentation/swift/decodable/2894081-init) _(AKA serialize)_ the model. However, the JSON this particular model would expect looks like:
 
 ```json
 {
