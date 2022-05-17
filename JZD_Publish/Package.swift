@@ -1,9 +1,10 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.6
 
 import PackageDescription
 
 let package = Package(
     name: "JZDPublish",
+    platforms: [.macOS(.v12)],
     products: [
         .executable(
             name: "JZDPublish",
@@ -11,15 +12,19 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/SwiftyGuerrero/CNAMEPublishPlugin", from: "0.1.0"),
-        .package(name: "Publish", url: "https://github.com/johnsundell/publish.git", from: "0.6.0"),
-        .package(name: "SplashPublishPlugin", url: "https://github.com/johnsundell/splashpublishplugin", from: "0.1.0")
+        .package(url: "https://github.com/JZDesign/CNAMEPublishPlugin", branch: "hotfix.support.macos.v12"),
+        .package(url: "https://github.com/johnsundell/publish.git", .upToNextMajor(from: "0.9.0")),
+        .package(url: "https://github.com/JZDesign/splash", branch: "hotfix.support.macos.v12")
 
     ],
     targets: [
         .target(
             name: "JZDPublish",
-            dependencies: ["Publish", "SplashPublishPlugin", "CNAMEPublishPlugin"]
+            dependencies: [
+                .product(name: "Publish", package: "publish"),
+                .product(name: "SplashPublishPlugin", package: "splash"),
+                .product(name: "CNAMEPublishPlugin", package: "CNAMEPublishPlugin")
+            ]
         )
     ]
 )
