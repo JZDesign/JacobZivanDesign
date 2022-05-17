@@ -75,10 +75,19 @@
     {
       "identity" : "splash",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/JZDesign/splash",
+      "location" : "https://github.com/johnsundell/Splash.git",
       "state" : {
-        "branch" : "hotfix.support.macos.v12",
-        "revision" : "1e2322223d5afb5495172308511d53ce873ac8c2"
+        "revision" : "7f4df436eb78fe64fe2c32c58006e9949fa28ad8",
+        "version" : "0.16.0"
+      }
+    },
+    {
+      "identity" : "splashpublishplugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/johnsundell/splashpublishplugin",
+      "state" : {
+        "revision" : "4fe79070f51e288bc8ba31934a3018cbe099d5f7",
+        "version" : "0.2.0"
       }
     },
     {

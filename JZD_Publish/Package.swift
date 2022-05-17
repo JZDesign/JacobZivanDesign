@@ -14,7 +14,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/JZDesign/CNAMEPublishPlugin", branch: "hotfix.support.macos.v12"),
         .package(url: "https://github.com/johnsundell/publish.git", .upToNextMajor(from: "0.9.0")),
-        .package(url: "https://github.com/JZDesign/splash", branch: "hotfix.support.macos.v12")
+        .package(url: "https://github.com/johnsundell/splashpublishplugin",.upToNextMajor(from: "0.2.0"))
 
     ],
     targets: [
@@ -22,7 +22,7 @@ let package = Package(
             name: "JZDPublish",
             dependencies: [
                 .product(name: "Publish", package: "publish"),
-                .product(name: "SplashPublishPlugin", package: "splash"),
+                .product(name: "SplashPublishPlugin", package: "splashpublishplugin"),
                 .product(name: "CNAMEPublishPlugin", package: "CNAMEPublishPlugin")
             ]
         )
