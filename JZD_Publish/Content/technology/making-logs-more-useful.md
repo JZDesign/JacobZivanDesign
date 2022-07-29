@@ -1,6 +1,6 @@
 ---
-date: 2022-17-28 13:13
-description: Swift Stack Traces are not very useful in most logs because they're obfuscated. In this article we'll learn how to determine the call site in a usable way using Swift's \#file, \#line, & \#function
+date: 2022-07-28 13:13
+description: Swift Stack Traces are not very useful in most logs because they're obfuscated. In this article, we'll learn how to determine the call site in a usable way using Swift's #file, #line, & #function
 tags: MacOS, iOS, Swift, Technology, Tutorial
 ---
 
@@ -30,11 +30,14 @@ Exception in thread "main" java.lang.NullPointerException
     at Printer.main(Printer.java:19)
 ```
 
+<br/>
+<br/>
+
 ## Symbolication
 
-There is a way to make the Swift Stack Trace more useful. That process is called ["Symbolication"](https://developer.apple.com/documentation/xcode/adding-identifiable-symbol-names-to-a-crash-report). 
+There is a way to make the Swift Stack Trace more useful. That process is called ["Symbolication"](https://developer.apple.com/documentation/xcode/adding-identifiable-symbol-names-to-a-crash-report). It maps the address to a more readable format. `Ox0000012345` becomes something like `getElementWithIndex`
 
-For example, here is a symbolicated stack trace that from an Objective-C crash report:
+For example, here is a symbolicated stack trace from an Objective-C crash report:
 
 ```
 NSRangeException: *** -[__NSArrayI objectAtIndex:]: index 3 beyond bounds [0 .. 2]
@@ -45,11 +48,14 @@ NSRangeException: *** -[__NSArrayI objectAtIndex:]: index 3 beyond bounds [0 .. 
 4 MyApplication       printAllElements (MyFile.m:27)
 ```
 
-It is better, but, I still find them cumbersome. The fact that we need to translate the stack trace into something useful while we're reading through logs is, well… annoying. That takes time and will power, and when you're dealing with thousands of logs… it's pretty easy to kill a lot of time and get confused.
+It is better, but, I still find them cumbersome. The fact that we need to translate the stack trace into something useful while we're reading through logs is, well… annoying. That takes time and willpower, and when you're dealing with thousands of logs… it's pretty easy to kill a lot of time and get confused.
+
+<br/>
+<br/>
 
 ## Swift's [Literal Expressions](https://docs.swift.org/swift-book/ReferenceManual/Expressions.html) to the rescue
 
-Thanfully, Swift provides a few nifty expressions to make it easier for us to track down what's happening. If you want to know the exact file, line number and function the offending code originated, we can use these three literals:
+Thankfully, Swift provides a few nifty expressions to make it easier for us to track down what's happening. If you want to know the exact file, line number, and function the offending code originated, we can use these three literals:
 
 ```swift
 func logSomething() {
@@ -67,9 +73,12 @@ Great!
 
 With that kind of information, we can make our logs work for us, instead of the other way around.
 
+<br/>
+<br/>
+
 ## In Practice
 
-These can come in handy, however, they can confuse just as easily as a stack trace if you're not careful. For one reason or another, we can use the literals as default arguments in a function and they will identify the location from witch the function is called, which is what we want. That is not true if we do the same in an initializer used as a default argument, it identifies the file, line and function name of the initializer invocation—which is the line where the default argument is supplied. That bit me once or twice already.
+These can come in handy, however, they can confuse just as easily as a stack trace if you're not careful. For one reason or another, we can use the literals as default arguments in a function and they will identify the location from which the function is called, which is what we want. That is not true if we do the same in an initializer used as a default argument, it identifies the file, line, and function name of the initializer invocation—which is the line where the default argument is supplied. That bit me once or twice already.
 
 For example:
 
@@ -82,11 +91,13 @@ func logError(file: String = #file, line: Int = #line, function: String = #funct
 
 //File B.swift
 // line 33
-logError(error: MyError()) // this will pass in default arguments from this exact location as if we wrote `logError(file: "B.swift", line: 3, function: logError(error:_))
+logError(error: MyError()) 
+// this will pass in default arguments from this exact location
+// as if we wrote `logError(file: "B.swift", line: 3, function: logError(error:_))
 
 // file ErrorDetails.swift 
 // Lines 1-15
-struct ErrorDetails {
+struct ErrorDetails: Codable {
     let file: String
     let line: Int
     let function: String
@@ -113,7 +124,7 @@ logErrorDetails(error: error)
 // Instead of `file: path/D.swift, line:100, function: someContainingFunctionName`
 ```
 
-Notice that? The initializer called in C.swift doesn't care about the place the function was called from. Instead it reads the location of where exaclty `.init()` was invoked. 
+Notice that? The initializer called in C.swift doesn't care about the place the function was called from. Instead, it reads the location of where exactly `.init()` was invoked. 
 
 We can skirt around that by passing the initializer as an argument explicitly like:
 
@@ -121,5 +132,34 @@ We can skirt around that by passing the initializer as an argument explicitly li
 logErrorDetails(.init(), error: error)
 ```
 
+That's all well and good, but with the way that's written, we only know where we chose to log from, not from where the error was thrown. Let's tackle that next.
 
+<br/>
+<br/>
 
+## Error With Details
+
+To make errors more useful, I recommend creating an error type that contains details like:
+
+```swift
+enum DetailedError: Error {
+    case dependencyError(rootCause: Error?, details: ErrorDetails)
+    case internalError(rootCause: Error?, details: ErrorDetails)
+}
+```
+
+Then we can throw the error and capture the exact location of the issue.
+
+```swift
+do {
+    try SomeDependency.logIn()
+} catch {
+    throw DetailedError.dependency(rootCause: error, details: .init())
+}
+```
+
+Just like that, we can know exactly where an error was thrown! We know what function it came from, and even an underlying cause if we're wrapping an external error. 
+
+For me, it's made a tremendous difference in tracking down bugs.
+
+**_Of course, this is all dependent on a logger that knows how to extract that information from the error and send it out to your log repository._
