@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="og:site_name" content="Jacob Zivan Design"/><link rel="canonical" href="https://JacobZivanDesign.com/technology/making-logs-more-useful"/><meta name="twitter:url" content="https://JacobZivanDesign.com/technology/making-logs-more-useful"/><meta name="og:url" content="https://JacobZivanDesign.com/technology/making-logs-more-useful"/><title>When Stack Traces Aren't Useful… | Jacob Zivan Design</title><meta name="twitter:title" content="When Stack Traces Aren't Useful… | Jacob Zivan Design"/><meta name="og:title" content="When Stack Traces Aren't Useful… | Jacob Zivan Design"/><meta name="description" content="Swift Stack Traces are not very useful in most logs because they're obfuscated. In this article, we'll learn how to determine the call site in a usable way using Swift's #file, #line, & #function"/><meta name="twitter:description" content="Swift Stack Traces are not very useful in most logs because they're obfuscated. In this article, we'll learn how to determine the call site in a usable way using Swift's #file, #line, & #function"/><meta name="og:description" content="Swift Stack Traces are not very useful in most logs because they're obfuscated. In this article, we'll learn how to determine the call site in a usable way using Swift's #file, #line, & #function"/><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Jacob Zivan Design"/><meta name="twitter:image" content="https://JacobZivanDesign.com/images/social.jpg"/><meta name="og:image" content="https://JacobZivanDesign.com/images/social.jpg"/></head><body class="item-page"><!--ITEM HTML--><header><div class="wrapper"><a class="site-icon" href="/"><img src="/images/memoji.png" alt="Memoji of Jacob giving a thumbs up"/></a><nav><ul><li><a href="/musings">Musings</a></li><li><a class="selected" href="/technology">Technology</a></li></ul></nav></div></header><div class="wrapper"><article><div class="content"><h1>When Stack Traces Aren't Useful…</h1><p>One of Swift's more prickly bits is its stack traces. They're obfuscated by default, because of that, they're pretty much unusable without <a href="https://stackoverflow.com/questions/11747802/symbolicating-stack-trace-without-crash">symbolicating</a> them. In interpreted languages like Java, the stack trace is legible out of the gate. To illustrate, here are some stack trace examples:</p><p><strong>Swift Stack Trace—out of the box</strong></p><pre><code><span class="type">Thread</span> <span class="number">0</span> name:  <span class="type">Dispatch</span> queue: com.<span class="property">apple</span>.<span class="property">main</span>-thread
+<span class="type">Thread</span> <span class="number">0</span> <span class="type">Crashed</span>:
+<span class="number">0</span>   libswiftCore.<span class="property">dylib</span>                0x00000001bd38da70 0x1bd149000 + <span class="number">2378352
+1</span>   libswiftCore.<span class="property">dylib</span>                0x00000001bd38da70 0x1bd149000 + <span class="number">2378352
+2</span>   libswiftCore.<span class="property">dylib</span>                0x00000001bd15958c 0x1bd149000 + <span class="number">66956
+3</span>   libswiftCore.<span class="property">dylib</span>                0x00000001bd15c814 0x1bd149000 + <span class="number">79892
+4</span>   <span class="type">TouchCanvas</span>                       0x00000001022cbfa8 0x1022c0000 + <span class="number">49064
+5</span>   <span class="type">TouchCanvas</span>                       0x00000001022c90b0 0x1022c0000 + <span class="number">37040</span>
+</code></pre><p><strong>Java</strong></p><pre><code><span class="type">Exception</span> <span class="keyword">in</span> thread <span class="string">"main"</span> java.<span class="property">lang</span>.<span class="type">NullPointerException</span>
+    at <span class="type">Printer</span>.<span class="call">printString</span>(<span class="type">Printer</span>.<span class="property">java</span>:<span class="number">13</span>)
+    at <span class="type">Printer</span>.<span class="call">print</span>(<span class="type">Printer</span>.<span class="property">java</span>:<span class="number">9</span>)
+    at <span class="type">Printer</span>.<span class="call">main</span>(<span class="type">Printer</span>.<span class="property">java</span>:<span class="number">19</span>)
+</code></pre><br/><br/><h2>Symbolication</h2><p>There is a way to make the Swift Stack Trace more useful. That process is called <a href="https://developer.apple.com/documentation/xcode/adding-identifiable-symbol-names-to-a-crash-report">"Symbolication"</a>. It maps the address to a more readable format. <code>Ox0000012345</code> becomes something like <code>getElementWithIndex</code></p><p>For example, here is a symbolicated stack trace from an Objective-C crash report:</p><pre><code><span class="type">NSRangeException</span>: *** -[<span class="type">__NSArrayI</span> objectAtIndex:]: index <span class="number">3</span> beyond bounds [<span class="number">0</span> .. <span class="number">2</span>]
+<span class="number">0</span> <span class="type">CoreFoundation</span>      __exceptionPreprocess + <span class="number">124
+1</span> libobjc.<span class="type">A</span>.<span class="property">dylib</span>     objc_exception_throw + <span class="number">52
+2</span> <span class="type">CoreFoundation</span>      -[<span class="type">__NSArrayI</span> objectAtIndex:] + <span class="number">180
+3</span> <span class="type">MyApplication</span>       getElementFromArray (<span class="type">MyFile</span>.<span class="property">m</span>:<span class="number">22</span>)
+<span class="number">4</span> <span class="type">MyApplication</span>       printAllElements (<span class="type">MyFile</span>.<span class="property">m</span>:<span class="number">27</span>)
+</code></pre><p>It is better, but, I still find them cumbersome. The fact that we need to translate the stack trace into something useful while we're reading through logs is, well… annoying. That takes time and willpower, and when you're dealing with thousands of logs… it's pretty easy to kill a lot of time and get confused.</p><br/><br/><h2>Swift's <a href="https://docs.swift.org/swift-book/ReferenceManual/Expressions.html">Literal Expressions</a> to the rescue</h2><p>Thankfully, Swift provides a few nifty expressions to make it easier for us to track down what's happening. If you want to know the exact file, line number, and function the offending code originated, we can use these three literals:</p><pre><code><span class="keyword">func</span> logSomething() {
+    <span class="call">print</span>(<span class="string">"</span>\(<span class="keyword">#file</span>)<span class="string">,</span> \(<span class="keyword">#line</span>)<span class="string">,</span> \(<span class="keyword">#function</span>)<span class="string">"</span>)
+}
+</code></pre><p>That would output something like:</p><pre><code><span class="type">User</span>/<span class="type">User</span>-name/pathToProject/<span class="type">PathToFile</span>.<span class="property">swift</span>, <span class="number">22</span>, <span class="call">logSomething</span>()
+</code></pre><p>Great!</p><p>With that kind of information, we can make our logs work for us, instead of the other way around.</p><br/><br/><h2>In Practice</h2><p>These can come in handy, however, they can confuse just as easily as a stack trace if you're not careful. For one reason or another, we can use the literals as default arguments in a function and they will identify the location from which the function is called, which is what we want. That is not true if we do the same in an initializer used as a default argument, it identifies the file, line, and function name of the initializer invocation—which is the line where the default argument is supplied. That bit me once or twice already.</p><p>For example:</p><pre><code><span class="comment">// File A.swift
+// lines 1 - 5</span>
+<span class="keyword">func</span> logError(file: <span class="type">String</span> = <span class="keyword">#file</span>, line: <span class="type">Int</span> = <span class="keyword">#line</span>, function: <span class="type">String</span> = <span class="keyword">#function</span>, error: <span class="type">Error</span>) {
+    <span class="call">print</span>(<span class="string">"file:</span> \(file )<span class="string">, line:</span> \(line)<span class="string">, funtion:</span>\(function)<span class="string">"</span>)
+}
+
+<span class="comment">//File B.swift
+// line 33</span>
+<span class="call">logError</span>(error: <span class="type">MyError</span>()) 
+<span class="comment">// this will pass in default arguments from this exact location
+// as if we wrote `logError(file: "B.swift", line: 3, function: logError(error:_))
+
+// file ErrorDetails.swift 
+// Lines 1-15</span>
+<span class="keyword">struct</span> ErrorDetails: <span class="type">Codable</span> {
+    <span class="keyword">let</span> file: <span class="type">String</span>
+    <span class="keyword">let</span> line: <span class="type">Int</span>
+    <span class="keyword">let</span> function: <span class="type">String</span>
+
+    <span class="keyword">init</span>(
+        file: <span class="type">String</span> = <span class="keyword">#file</span>,
+        line: <span class="type">Int</span> = <span class="keyword">#line</span>,
+        function: <span class="type">String</span> = <span class="keyword">#function</span>
+    ) {
+        <span class="call">print</span>(<span class="string">"file:</span> \(file )<span class="string">, line:</span> \(line)<span class="string">, funtion:</span>\(function)<span class="string">"</span>)
+    }
+}
+
+<span class="comment">// File C.swift
+// lines 30-33</span>
+<span class="keyword">func</span> logErrorDetails(<span class="keyword">_</span> details: <span class="type">ErrorDetails</span> = .<span class="keyword">init</span>(), error: <span class="type">Error</span>) {
+    <span class="call">print</span>(details)
+}
+
+<span class="comment">// File D.swift
+// line 100</span>
+<span class="call">logErrorDetails</span>(error: error) 
+<span class="comment">// This would print `file: path/C.swift, line: 32, function: logErrorDetails(_, error)`
+// Instead of `file: path/D.swift, line:100, function: someContainingFunctionName`</span>
+</code></pre><p>Notice that? The initializer called in C.swift doesn't care about the place the function was called from. Instead, it reads the location of where exactly <code>.init()</code> was invoked.</p><p>We can skirt around that by passing the initializer as an argument explicitly like:</p><pre><code><span class="call">logErrorDetails</span>(.<span class="keyword">init</span>(), error: error)
+</code></pre><p>That's all well and good, but with the way that's written, we only know where we chose to log from, not from where the error was thrown. Let's tackle that next.</p><br/><br/><h2>Error With Details</h2><p>To make errors more useful, I recommend creating an error type that contains details like:</p><pre><code><span class="keyword">enum</span> DetailedError: <span class="type">Error</span> {
+    <span class="keyword">case</span> dependencyError(rootCause: <span class="type">Error</span>?, details: <span class="type">ErrorDetails</span>)
+    <span class="keyword">case</span> internalError(rootCause: <span class="type">Error</span>?, details: <span class="type">ErrorDetails</span>)
+}
+</code></pre><p>Then we can throw the error and capture the exact location of the issue.</p><pre><code><span class="keyword">do</span> {
+    <span class="keyword">try</span> <span class="type">SomeDependency</span>.<span class="call">logIn</span>()
+} <span class="keyword">catch</span> {
+    <span class="keyword">throw</span> <span class="type">DetailedError</span>.<span class="call">dependency</span>(rootCause: error, details: .<span class="keyword">init</span>())
+}
+</code></pre><p>Just like that, we can know exactly where an error was thrown! We know what function it came from, and even an underlying cause if we're wrapping an external error.</p><p>Of course, this is all dependent on a logger that knows how to extract that information from the error and send it out to your log repository.</p></div><span>Tags: </span><ul class="tag-list"><li><a href="/tags/macos">MacOS</a></li><li><a href="/tags/ios">iOS</a></li><li><a href="/tags/swift">Swift</a></li><li><a href="/tags/technology">Technology</a></li><li><a href="/tags/tutorial">Tutorial</a></li></ul></article></div><footer><p>Generated using <a href="https://github.com/johnsundell/publish">Publish</a></p><p class="jbmono">Code typeface == <a href="https://www.jetbrains.com/lp/mono/">JetBrains Mono</a></p><p><a href="/feed.rss">RSS feed</a></p><div class="social"><a target="_blank" class="find-me" href="https://github.com/JZDesign/"><img src="/images/git.svg"/></a><a target="_blank" class="find-me" href="https://www.linkedin.com/in/jacob-rakidzich-b8722436/"><img src="/images/linkedin.svg"/></a></div></footer></body></html>

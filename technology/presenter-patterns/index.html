@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="og:site_name" content="Jacob Zivan Design"/><link rel="canonical" href="https://JacobZivanDesign.com/technology/presenter-patterns"/><meta name="twitter:url" content="https://JacobZivanDesign.com/technology/presenter-patterns"/><meta name="og:url" content="https://JacobZivanDesign.com/technology/presenter-patterns"/><title>The Presenter Pattern | Jacob Zivan Design</title><meta name="twitter:title" content="The Presenter Pattern | Jacob Zivan Design"/><meta name="og:title" content="The Presenter Pattern | Jacob Zivan Design"/><meta name="description" content="Clean up your views with the Presenter pattern in Swift UI. Some people call it "BetterProgramming" when the view contains a lot of `@State` variables and functions. It's really not. Let's take a look on how to write a presenter with Swift 5.5"/><meta name="twitter:description" content="Clean up your views with the Presenter pattern in Swift UI. Some people call it "BetterProgramming" when the view contains a lot of `@State` variables and functions. It's really not. Let's take a look on how to write a presenter with Swift 5.5"/><meta name="og:description" content="Clean up your views with the Presenter pattern in Swift UI. Some people call it "BetterProgramming" when the view contains a lot of `@State` variables and functions. It's really not. Let's take a look on how to write a presenter with Swift 5.5"/><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Jacob Zivan Design"/><meta name="twitter:image" content="https://JacobZivanDesign.com/images/social.jpg"/><meta name="og:image" content="https://JacobZivanDesign.com/images/social.jpg"/></head><body class="item-page"><!--ITEM HTML--><header><div class="wrapper"><a class="site-icon" href="/"><img src="/images/memoji.png" alt="Memoji of Jacob giving a thumbs up"/></a><nav><ul><li><a href="/musings">Musings</a></li><li><a class="selected" href="/technology">Technology</a></li></ul></nav></div></header><div class="wrapper"><article><div class="content"><h1>The Presenter Pattern</h1><p>Often, when I read articles on how to do something in SwiftUI, I see a lot of bad patterns touted as "Better Programming" which they're not. <em>My friends and I call them <a href="https://refactoring.guru/refactoring/smells">Code smells</a> because... well, they stink.</em> One of the most prevalent code smells I encounter is a massive view file <em>(what refactoring.guru calls "bloaters")</em>. You know the ones I'm talking about. The views that have a lot of application logic in them, so much so, that it becomes hard to read or figure out where the view begins and the application logic ends.</p><p>It may look something like this:</p><pre><code><span class="keyword">struct</span> ContentView: <span class="type">View</span> {
+    <span class="keyword">@State var</span> shouldPresentHomeScreen = <span class="keyword">false
+    @State var</span> isLoading = <span class="keyword">false
+    @State var</span> username = <span class="string">""</span>
+    <span class="keyword">@State var</span> password = <span class="string">""</span>
+
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="type">VStack</span> {
+            <span class="keyword">if</span> isLoading {
+                <span class="type">ProgressView</span>()
+            } <span class="keyword">else</span> {
+                <span class="type">TextField</span>(<span class="string">"username"</span>, text: <span class="property">$username</span>)
+                <span class="type">TextField</span>(<span class="string">"password"</span>, text: <span class="property">$password</span>)
+                <span class="type">Spacer</span>()
+                <span class="type">Button</span>(<span class="string">"Login"</span>) {
+                    isLoading = <span class="keyword">true</span>
+                    <span class="type">Task</span> {
+                        <span class="keyword">defer</span> { <span class="type">DispatchQueue</span>.<span class="property">main</span>.<span class="call">async</span> { <span class="keyword">self</span>.<span class="property">isLoading</span> = <span class="keyword">false</span> } }
+                        <span class="keyword">let</span> result = <span class="keyword">try</span>? <span class="keyword">await</span> <span class="type">MyAuthenticationHandler</span>.<span class="call">login</span>(username, password)
+                        <span class="keyword">if</span> result?.<span class="property">isLoggedIn</span> == <span class="keyword">true</span> {
+                            <span class="type">DispatchQueue</span>.<span class="property">main</span>.<span class="call">async</span> {
+                                <span class="keyword">self</span>.<span class="property">shouldPresentHomeScreen</span> = <span class="keyword">true</span>
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .<span class="call">padding</span>()
+        .<span class="call">sheet</span>(isPresented: <span class="property">$presenter</span>.<span class="property">shouldPresentHomeScreen</span>) {
+            <span class="type">Text</span>(<span class="string">"You're in!"</span>)
+        }
+    }
+}
+</code></pre><p>This is not an extreme example, but even this is a lot to look at. There are several concepts represented here. I've found that the cost of context switching between these concepts can make reading the View code challenging. We can abstract much of this into a Presenter to reduce the conceptual load and make this a lot easier to reason about.</p><br/><h2>What is a Presenter?</h2><p>A Presenter is something that does the heavy lifting for a View, like network requests and data storage/manipulation. Afterwards, it <em>presents</em> ready to process data to the view. In SwiftUI specifically, the view will <a href="https://developer.apple.com/documentation/swiftui/state-and-data-flow">observe</a> the view state from the presenter. This pattern better adheres to the <a href="https://en.wikipedia.org/wiki/Single-responsibility_principle">Single Responsibility Principle</a> and it's cleaner to test.</p><br/><h2>Creating a Presenter</h2><p>Create a new class called <code>SignInPresenter</code> that conforms to <code>ObservableObject</code>. This presenter is going to own the <code>isLoading</code> variable and it's also going to own an <code>isFinished</code> variable which the view will use.</p><pre><code><span class="keyword">class</span> SignInPresenter: <span class="type">ObservableObject</span> {
+    <span class="keyword">@Published var</span> isLoading = <span class="keyword">false
+    @Published var</span> isFinished = <span class="keyword">false
+
+    func</span> login(<span class="keyword">_</span> username: <span class="type">String</span>, <span class="keyword">_</span> password: <span class="type">String</span>) {}
+}
+</code></pre><p>Great! Now we have the rough outline of the presenter, but, it needs to actually do the work. Let's cut the logic out of the button action from the <code>ContentView</code> and paste it here <em>changing the line inside of the second dispatch queue</em>.</p><pre><code><span class="keyword">func</span> login(<span class="keyword">_</span> username: <span class="type">String</span>, <span class="keyword">_</span> password: <span class="type">String</span>) {
+    isLoading = <span class="keyword">true</span>
+    <span class="type">Task</span> {
+        <span class="keyword">defer</span> { <span class="type">DispatchQueue</span>.<span class="property">main</span>.<span class="call">async</span> { <span class="keyword">self</span>.<span class="property">isLoading</span> = <span class="keyword">false</span> } }
+        <span class="keyword">let</span> result = <span class="keyword">try</span>? <span class="keyword">await</span> <span class="type">MyAuthenticationHandler</span>.<span class="call">login</span>(username, password)
+        <span class="keyword">if</span> result?.<span class="property">isLoggedIn</span> == <span class="keyword">true</span> {
+            <span class="type">DispatchQueue</span>.<span class="property">main</span>.<span class="call">async</span> {
+                <span class="keyword">self</span>.<span class="property">isFinished</span> = <span class="keyword">true</span>
+            }
+        }
+    }
+}
+</code></pre><p>Next, we can remove all of the noise from the view and observe this object like:</p><pre><code><span class="keyword">struct</span> ContentView: <span class="type">View</span> {
+    <span class="keyword">@ObservedObject var</span> presenter = <span class="type">SignInPresenter</span>()
+    <span class="keyword">@State var</span> username = <span class="string">""</span>
+    <span class="keyword">@State var</span> password = <span class="string">""</span>
+
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="type">VStack</span> {
+            <span class="keyword">if</span> presenter.<span class="property">isLoading</span> {
+                <span class="type">ProgressView</span>()
+            } <span class="keyword">else</span> {
+                <span class="type">TextField</span>(<span class="string">"username"</span>, text: <span class="property">$username</span>)
+                <span class="type">TextField</span>(<span class="string">"password"</span>, text: <span class="property">$password</span>)
+                <span class="type">Spacer</span>()
+                <span class="type">Button</span>(<span class="string">"Login"</span>) {
+                    presenter.<span class="call">login</span>(username, password)
+                }
+            }
+        }
+        .<span class="call">padding</span>()
+        .<span class="call">sheet</span>(isPresented: <span class="property">$presenter</span>.<span class="property">isFinished</span>) {
+            <span class="type">Text</span>(<span class="string">"You're in!"</span>)
+        }
+    }
+}
+</code></pre><br/><h2>🔥☝️</h2><p>That is much easer to read through! Presenters are commonly used to handle user interactions that modify the view state, like performing complex tasks that manipulate the view data. This example was very simplistic. Where in your code bases could you use a presenter to simplify your view logic?</p></div><span>Tags: </span><ul class="tag-list"><li><a href="/tags/ios">iOS</a></li><li><a href="/tags/macos">MacOS</a></li><li><a href="/tags/technology">Technology</a></li><li><a href="/tags/tutorial">Tutorial</a></li><li><a href="/tags/swiftui">SwiftUI</a></li><li><a href="/tags/designpatterns">Design-Patterns</a></li></ul></article></div><footer><p>Generated using <a href="https://github.com/johnsundell/publish">Publish</a></p><p class="jbmono">Code typeface == <a href="https://www.jetbrains.com/lp/mono/">JetBrains Mono</a></p><p><a href="/feed.rss">RSS feed</a></p><div class="social"><a target="_blank" class="find-me" href="https://github.com/JZDesign/"><img src="/images/git.svg"/></a><a target="_blank" class="find-me" href="https://www.linkedin.com/in/jacob-rakidzich-b8722436/"><img src="/images/linkedin.svg"/></a></div></footer></body></html>
