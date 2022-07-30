@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="og:site_name" content="Jacob Zivan Design"/><link rel="canonical" href="https://JacobZivanDesign.com/technology/deep-linking-in-swift-ui"/><meta name="twitter:url" content="https://JacobZivanDesign.com/technology/deep-linking-in-swift-ui"/><meta name="og:url" content="https://JacobZivanDesign.com/technology/deep-linking-in-swift-ui"/><title>Deep Links | Jacob Zivan Design</title><meta name="twitter:title" content="Deep Links | Jacob Zivan Design"/><meta name="og:title" content="Deep Links | Jacob Zivan Design"/><meta name="description" content="Set up deep linking in your SwiftUI app with ease! In this article we'll cover the apple-app-site-association file, associated domains, receiving the deep link, and parsing information off of it."/><meta name="twitter:description" content="Set up deep linking in your SwiftUI app with ease! In this article we'll cover the apple-app-site-association file, associated domains, receiving the deep link, and parsing information off of it."/><meta name="og:description" content="Set up deep linking in your SwiftUI app with ease! In this article we'll cover the apple-app-site-association file, associated domains, receiving the deep link, and parsing information off of it."/><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Jacob Zivan Design"/><meta name="twitter:image" content="https://JacobZivanDesign.com/images/social.jpg"/><meta name="og:image" content="https://JacobZivanDesign.com/images/social.jpg"/></head><body class="item-page"><!--ITEM HTML--><header><div class="wrapper"><a class="site-icon" href="/"><img src="/images/memoji.png" alt="Memoji of Jacob giving a thumbs up"/></a><nav><ul><li><a href="/musings">Musings</a></li><li><a class="selected" href="/technology">Technology</a></li></ul></nav></div></header><div class="wrapper"><article><div class="content"><h1>Deep Links</h1><p>This is a fun one. Getting a link to open your app is so satisfying!</p><p>However, it's not all sunshine ☀️ and rainbows 🌈</p><p>Because of caching on Apple's CDN, getting it configured initially can be burdensome. In this article, I hope to save you some of the headaches I went through.</p><br/><h2>A Birds Eye View</h2><p>If you're like me, you've had a few questions about deep linking: Why do some links in a website forward you to their app, but others don't? How does Apple know it should open an app?</p><p><strong>Some Context</strong></p><p>There are a lot of working parts here. First, your app must have been provisioned to support Associated Domains. Second, there needs to be an <code>apple-app-site-association</code> file hosted in the <code>.well-known/</code> directory on your site that tells apple what apps respond to what paths of your site. Finally, your app needs to know how to handle the incoming links.</p><p><strong>How it works</strong></p><p>When a user downloads—or updates—your application and opens it, the operating system will see the Associated Domains capability of your app and it will tell Apple to search for the <code>apple-app-site-association</code> for your domain. After fetching it, the os will register the URLs that should open your app and store it in their CDN. Then, if you tap a link—or scan a QR code—that matches a path in the site association file, the app will open instead of the browser. If you intentionally open a browser and navigate to the URL manually, a button should appear at the top of your browser asking if you want to open the page in the app instead.</p><br/><h2>Provisioning the Associated Domains Capability</h2><p>Your application is "provisioned" by Apple using a Signing Certificate and a Provisioning Profile. The Provisioning Profile contains a list of capabilities your application is allowed to use. What we need to do is update that profile and make Xcode aware of it.</p><h3>Update the App's Capabilities with Apple</h3><p>To do so we first need to update your app's identifier to contain the capability. Sign into <a href="https://developer.apple.com">Apple's Developer Console</a> then find your <a href="https://developer.apple.com/account/resources/identifiers/">App Identifier</a>. Once there, check the box for Associated Domains and click save.</p><img src="../../images/app-identifier.png" alt="App Identifier - Capability"/><h3>Download the Profile for Development</h3><p>When that is done, you'll need to refresh your provisioning profile. From Xcode's Settings -&gt; Accounts pane, make sure you're signed into your Apple account, and click "Download manual profiles"</p><img src="../../images/download-profiles.png" alt="Download the provisioning profile"/><h3>Setup the <a href="https://developer.apple.com/documentation/xcode/supporting-associated-domains">Associated Domains</a> Capability</h3><p>Finally, we need to update your application's capabilities. Navigate to your app's target -&gt; Signing &amp; Capabilities. There, click on <code>+ Capability</code> and select "Associated Domains." Then, in the Capability menu, click the <code>+</code> at the bottom left and enter <code>applinks:{{yourdomain}}</code>. The <code>applinks:</code> prefix is important. That is the bit of information that tells Apple you mean to do deep linking. For more information, you can read <a href="https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_associated-domains">the docs.</a></p><img src="../../images/add-applink-capability.png" alt="App Links capability"/><p>Great! Now that you've done that, we can move on to creating the site association file.</p><br/><h2>The <code>apple-app-site-association</code> file</h2><p>The associated domain you just set up will tell apple to look for the <code>apple-app-site-association</code> file at the domain you entered. For example, if you entered <code>applinks:mysite.com</code> Apple will look here: <code>https://mysite.com/.well-known/apple-app-site-association</code>.</p><p>First, create your <code>.well-known</code> directory at the root of your site's public folder. Then add a file named <code>apple-app-site-association</code> - even though we're going to put JSON in this file, do not give it a file type.</p><p>Now, paste the following JSON into the file.</p><pre><code class="language-no-highlight">{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "{{Your Apple Team ID}}.com.mybundle.identifier"
+        ],
+        "components": [
+          {
+            "/": "/some-path-with-data/*",
+            "comment": "Matches any URL whose path starts with /some-path-with-data/"
+          }
+        ]
+      }
+    ]
+  }
+}
+</code></pre><p>Notice the first JSON object is named <code>applinks</code>? That's the prefix to the Associated Domain capability you added in the last step. You'll need to update a few things here. First, go to <a href="https://developer.apple.com/account/#!/membership/">Apple's Membership</a> area and find your team ID. Your <code>appID</code> is your Team ID + your app's bundle identifier. Replace the appID above with yours. Then, inside of the components object, we have our first link declaration. After <code>"/":</code> we define a path that will redirect to your app. Right now it's set to <code>/some-path-with-data/*</code>. That means if we clicked a link with a URL of: <code>https://mysite.com/some-path-with-data/link-data-12345</code> your application would open.</p><p>The <code>*</code> is important here. It allows us to start the link with any URL matching <code>https://mysite.com/some-path-with-data/</code> we can add any data we want after that. You can change that path if you'd like to, or you could add more by creating a new component like so:</p><pre><code class="language-no-highlight">"components": [
+  {
+    "/": "/some-path-with-data/*",
+    "comment": "Matches any URL whose path starts with /some-path-with-data/"
+  },
+  {
+    "/": "/my-deep-link-with-no-data/",
+    "comment": "Matches any URL whose path is exactly /my-deep-link-with-no-data/"
+  }
+]
+</code></pre><p>Great! Now upload that file to your site. Then, we can test that the file exists by making a <code>curl</code> request to Apple's CDN. Open your terminal and paste in this command:</p><pre><code class="language-no-highlight">curl -v https://app-site-association.cdn-apple.com/a/v1/yourdomain.com
+</code></pre><p>If you see your JSON in the response, it worked! Your file is formatted properly.</p><p><em>Now, these are cached with Apple's CDN for an hour. If you make any changes to your file and publish them, you won't be able to test the deep link until the cache is refreshed.</em></p><blockquote><p>These are cached with Apple's CDN for an hour.</p></blockquote><br/><h2>Intercepting the Link in SwiftUI</h2><p>Phew! All the hard work is over. Now for the fun stuff! Go ahead and open your SwiftUI application. To make sure we catch all deep links, open your <code>App.swift</code> file. We're going to add 2 modifiers to your view that will catch the deep links, <code>onOpenURL</code> and <code>onContinueUserActivity</code> - we need to do both.</p><pre><code><span class="keyword">@main
+struct</span> MyApp: <span class="type">App</span> {
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">Scene</span> {
+        <span class="type">WindowGroup</span> {
+            <span class="type">ContentView</span>()
+                <span class="comment">// This handles Link taps</span>
+                .<span class="call">onOpenURL</span> { url <span class="keyword">in</span>
+                    <span class="call">print</span>(url.<span class="property">absoluteString</span>)
+                }
+                <span class="comment">// This handles QR Code scanning or redirecting from Safari</span>
+                .<span class="call">onContinueUserActivity</span>(<span class="type">NSUserActivityTypeBrowsingWeb</span>) { userActivity <span class="keyword">in
+                    guard let</span> url = userActivity.<span class="property">webpageURL</span> <span class="keyword">else</span> { <span class="keyword">return</span> }
+                    <span class="call">print</span>(url.<span class="property">absoluteString</span>)
+                }
+        }
+    }
+}
+</code></pre><p>Now, when you run your app, go to a URL you specified in your site association file. If you're running a simulator, you can use safari and press the "Open" button that appears at the top of the browser, or you could save a calendar event with the link as a note and tap that. Either way, your app should open and the URL should print to your debugger.</p><p>🔥☝️</p><br/><h1>Deep linking</h1><p>Great! But how do we do <strong><em>Deep</em></strong> Linking? That's a loaded question, and each application will have different needs and implementations. To give you an example of how you <em>could</em> handle a deep link, we'll add a few things.</p><p>I like to enumerate the deep links I put into my applications. Go ahead and add a new file named <code>DeepLinkDestiniation.swift</code> and add the following code:</p><pre><code><span class="keyword">enum</span> DeepLinkDestination: <span class="type">String</span> {
+    <span class="comment">// You can name this whatever you want, but the value on the right 
+    // needs to match the path you added to the site association file
+    // not including a "*" if you had one</span>
+    <span class="keyword">case</span> deepLinkTest = <span class="string">"deep-link-test/"</span>
+
+    <span class="keyword">private var</span> urlRoot: <span class="type">String</span> {
+        <span class="string">"https://yourDomain.com/"</span>
+    }
+
+    <span class="keyword">var</span> urlString: <span class="type">String</span> {
+        urlRoot + rawValue
+    }
+}
+</code></pre><p>Now in your <code>App.swift</code> file, we're going to add a few things:</p><ul><li>A <code>@State</code> variable to hold the URL</li><li>A new view variable that will show different content if a deep link came in</li><li>And the code to set the URL</li></ul><br/><pre><code><span class="keyword">struct</span> MyApp: <span class="type">App</span> {
+    <span class="comment">// This value will allow us to act on the deep links</span>
+    <span class="keyword">@State var</span> url: <span class="type">URL</span>? = <span class="keyword">nil
+
+    @ViewBuilder 
+    var</span> content: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="keyword">if let</span> url = url, url.<span class="property">absoluteString</span>.<span class="call">starts</span>(with: <span class="type">DeepLinkDestination</span>.<span class="property">deepLinkTest</span>.<span class="property">urlString</span>) {
+            <span class="type">VStack</span> {
+                <span class="type">Text</span>(<span class="string">"It's Alive!"</span>)
+                <span class="type">Text</span>(url.<span class="property">absoluteString</span>)
+                <span class="comment">// if there is any additional info on the end, display it</span>
+                <span class="type">Text</span>(<span class="string">"Deep Link Info:</span> \(url.<span class="property">absoluteString</span>.<span class="call">replacingOccurrences</span>(of: <span class="type">DeepLinkDestination</span>.<span class="property">deepLinkTest</span>.<span class="property">urlString</span>, with: <span class="string">""</span>))<span class="string">"</span>)
+            }
+        } <span class="keyword">else</span> {
+            <span class="type">ContentView</span>()
+        }
+    }
+
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">Scene</span> {
+        <span class="type">WindowGroup</span> {
+            content <span class="comment">// Use the new view</span>
+                .<span class="call">onOpenURL</span> { url <span class="keyword">in</span>
+                    <span class="comment">// Set the url to update the content</span>
+                    <span class="keyword">self</span>.<span class="property">url</span> = url
+                }
+                .<span class="call">onContinueUserActivity</span>(<span class="type">NSUserActivityTypeBrowsingWeb</span>) { userActivity <span class="keyword">in
+                    guard let</span> url = userActivity.<span class="property">webpageURL</span> <span class="keyword">else</span> { <span class="keyword">return</span> }
+                    <span class="comment">// Set the url to update the content</span>
+                    <span class="keyword">self</span>.<span class="property">url</span> = url
+                }
+        }
+    }
+}
+</code></pre><p>That's it! Now you know how to set a SwiftUI app up to handle deep links, create and test the site association file, and provision your app to accept the links. I hope this helped!</p></div><span>Tags: </span><ul class="tag-list"><li><a href="/tags/macos">macOS</a></li><li><a href="/tags/ios">iOS</a></li><li><a href="/tags/swift">Swift</a></li><li><a href="/tags/technology">Technology</a></li><li><a href="/tags/tutorial">Tutorial</a></li></ul></article></div><footer><p>Generated using <a href="https://github.com/johnsundell/publish">Publish</a></p><p class="jbmono">Code typeface == <a href="https://www.jetbrains.com/lp/mono/">JetBrains Mono</a></p><p><a href="/feed.rss">RSS feed</a></p><div class="social"><a target="_blank" class="find-me" href="https://github.com/JZDesign/"><img src="/images/git.svg"/></a><a target="_blank" class="find-me" href="https://www.linkedin.com/in/jacob-rakidzich-b8722436/"><img src="/images/linkedin.svg"/></a></div></footer></body></html>
