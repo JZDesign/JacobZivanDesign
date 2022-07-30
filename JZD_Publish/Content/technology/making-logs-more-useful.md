@@ -80,7 +80,7 @@ With that kind of information, we can make our logs work for us, instead of the 
 
 These can come in handy, however, they can confuse just as easily as a stack trace if you're not careful. For one reason or another, we can use the literals as default arguments in a function and they will identify the location from which the function is called, which is what we want. That is not true if we do the same in an initializer used as a default argument, it identifies the file, line, and function name of the initializer invocation—which is the line where the default argument is supplied. That bit me once or twice already.
 
-For example:
+### Literals as Default Arguments in a Function
 
 ```Swift
 // File A.swift
@@ -93,8 +93,12 @@ func logError(file: String = #file, line: Int = #line, function: String = #funct
 // line 33
 logError(error: MyError()) 
 // this will pass in default arguments from this exact location
-// as if we wrote `logError(file: "B.swift", line: 3, function: logError(error:_))
+// as if we wrote `logError(file: "B.swift", line: 33, function: logError(error:_))
+```
 
+### Literals as default values in a Struct
+
+```swift
 // file ErrorDetails.swift 
 // Lines 1-15
 struct ErrorDetails: Codable {
@@ -107,7 +111,9 @@ struct ErrorDetails: Codable {
         line: Int = #line,
         function: String = #function
     ) {
-        print("file: \(file ), line: \(line), funtion:\(function)")
+        self.file = file
+        self.line = line
+        self.funtion = function
     }
 }
 
@@ -120,8 +126,12 @@ func logErrorDetails(_ details: ErrorDetails = .init(), error: Error) {
 // File D.swift
 // line 100
 logErrorDetails(error: error) 
-// This would print `file: path/C.swift, line: 32, function: logErrorDetails(_, error)`
-// Instead of `file: path/D.swift, line:100, function: someContainingFunctionName`
+//
+// We would expect the log here to print 
+//     `file: path/D.swift, line:100, function: someContainingFunctionName`
+//
+// However, it prints the location of _exactly_ where `.init` is called
+//     `file: path/C.swift, line: 32, function: logErrorDetails(_, error)`
 ```
 
 Notice that? The initializer called in C.swift doesn't care about the place the function was called from. Instead, it reads the location of where exactly `.init()` was invoked. 
