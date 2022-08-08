@@ -49,8 +49,9 @@ struct ContentView: View {
 <br/>
 
 This is important. The `NavigationLink` has 2 arguments:
+
 1. The value sent during the navigation
-1. The "link" that is displayed before the navigation. This could be a simple button, or a custom view.
+2. The "link" that is displayed before the navigation event. This could be a simple button, or a custom view.
 
 In that example above, the user would see a link in the `ContentView` that says `"Test Navigating"` though, when it's tapped it does nothing. 
 
