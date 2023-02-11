@@ -3,12 +3,14 @@
         "title": "Notes/Journal",
         "createdAt": "2023-02-09",
         "content": "Foresight isn't only about looking forward. To make meaningful progress toward our goals, we have to look back and highlight the things we've done well—as well as be honest with ourselves when we've royally screwed things up. It's both a practice of personal accountability and calibration that helps us change our behaviors. A lot of people use a journal to facilitate this practice.\n\nWith that in mind, I'm thinking about adding a feature where we can add notes to a Glimpse. They would appear in a list, separated by day, so it would appear a lot like a journal. Of course, you could use the notes for whatever you wanted to, from something large and sentimental like marking a significant moment with one of your children to something small like \"I had a hard day at work today.\"\n\nIf you would use this, let me know!",
+        "status": "ideation",
         "id": "1476E6D4-8D12-4113-8FA2-98F88DB0DEF9"
     },
     {
         "title": "Mark significant dates",
         "createdAt": "2023-02-09",
         "content": "The reason I built this app was to help me keep focus on *very* long term goals… like, decades long goals. I personally struggle with staying on track when so many things come at me day-to-day and demand immediate attention. Before I know it, I've stopped making progress altogether.\n\nAfter having kids, I've realized another thing about myself: I've become more sentimental. Looking back at pictures of my children or thinking about the day I was married became important to me. But I realized it's not just because I'm sappy now, it's because I want to be able to tell stories to my children about those major days in my life. I want to give my children more than a safe place to live and food to eat. I want to give them a history and to teach them to remember all that God has given to them.\n\nSo, I'm thinking about creating a significant date feature in the app. The dates could be related to specific Glimpses. If a date is realted to a Glimpse then it would be indicated in the dot view of those Glimpses. If there are multiple significant dates in a dot, the color could be more vibrant—like a heat map. If you tap on the highlighted dot, you'd see a description of the significant date or dates. This would also tie in with the notes/journal feature I'm thinking about. I don't have it all figured out yet, but if you would use this, let me know!",
+        "status": "ideation",
         "id": "DAB58000-2EFA-4590-B0B8-557D8F30FA29"
     }
 ]
