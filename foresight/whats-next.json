@@ -4,34 +4,39 @@
         "createdAt": "2023-02-09",
         "content": "Foresight's mission isn't only about getting people to look forward and focus on what's important, it's also about helping people be honest with themselves.\n\nTo make meaningful progress toward our goals, we have to look back and highlight the things we've done well—**and** the things we've royally screwed up. And because we humans are so forgetful, it helps to write these things down and review them periodically.\n\nIt's a practice of personal accountability and calibration that helps us change our behaviors.\n\nA lot of people use a journal to facilitate practices like this. With that in mind, I'm thinking about adding a feature where we can add notes to a Glimpse. They would appear in a list, separated by day… so it would feel like a journal. Of course, you could use the notes for whatever you wanted to, from something large and sentimental like marking a significant moment with one of your children to something small like \"I had a hard day at work today.\"\n\nIf you would use this, let me know!",
         "status": "inProgress",
-        "id": "1476E6D4-8D12-4113-8FA2-98F88DB0DEF9"
+        "id": "1476E6D4-8D12-4113-8FA2-98F88DB0DEF9",
+        "images": []
     },
     {
         "title": "Mark significant dates",
         "createdAt": "2023-02-09",
         "content": "I built this app to help me stay focused on *very* long-term goals… like decades-long goals. \n\nI struggle with staying on track when so many things come at me day-to-day and demand my immediate attention. All to often, before I know it, I stop making progress altogether. And after having kids, I've realized another thing about myself: I've become more sentimental.\n\nLooking back at pictures of my children or thinking about the day I was married became important to me. But it's not just because I'm sappy now, it's because I want to be able to tell stories to my children about those significant days in my life. I want to give my children more than a safe place to live and food to eat. \n\n**I want to give them a history and teach them to remember all that God has given to them.**\n\nSo, I'm thinking about creating a significant date feature in the app. The dates could be related to specific Glimpses. If a date is related to a Glimpse then the dot chart view would indicate the date with a special color. If there are multiple significant dates in a dot, the color could be more vibrant—like a heat map. If you tap on the highlighted dot, you'd see a description of the significant date or dates. \n\nThis could also tie in with the notes/journal feature I'm thinking about. \nI don't have it all figured out yet, but if you would use this, let me know!",
         "status": "ideation",
-        "id": "DAB58000-2EFA-4590-B0B8-557D8F30FA29"
+        "id": "DAB58000-2EFA-4590-B0B8-557D8F30FA29",
+        "images": ["foresight-sig-date1.png", "foresight-sig-date2.png"]
     },
     {
         "title": "Goals and Accountability Reminders",
         "createdAt": "2023-02-011",
         "content": "One of the biggest enemies fighting for our attention today is all these blasted notifications on our phones. And honestly—aside from eliminating all notifications or throwing your phone in the ocean and going off grid—there's no great solutions to insulate us from the torrent or notifications coming through our phones.\n\nThat is what makes this feature a tough one for me to want to implement. Because my goal is to *not* distract you from your life, and notifications are… well… distracting.\n\nBut I think these would be beneficial, so hear me out.\n\nI set up a Glimpse on my phone that counts the weeks since I was born until the day I turn 65. A lot of people would assume that would be a retirment target, but for me, it's a mortality reminder.\n\nYou see, my father's side of the family goes to meet Jesus a couple of decades sooner than most. My uncle and both of my grandparents died in their 60's. They all had heart related issues.\n\nSo when I see that I'm more than half way there… that kicks me into gear.\n\nI would get all revved up, but I had no idea what to do with the energy. I found myself asking \"Where am I going in life? What do I want to accomplish by 65?\"\n\nI've been thinking about it for a while, and this is what I came up with:\n\n→ I want to raise my children in such a way that they know Jesus is their Lord and savior.\n→ I want them to be confident, hard working, patient, kind, giving, joyful and self sufficient.\n→ I want to make sure that my family won't need to worry about money after I'm gone and their lives are so full of friends that they'll have support with or without me.\n→ I want to pursue the will of God on earth and leave this place more loving than it is today.\n\nMost of my friends from high school won't hold me accountable to any of that. Heck, most people at most of the churches I've been to wouldn't hold me accountable to any of that.\n\nI think Foresight *could* fill in some of those gaps for me.\n\nSo, this is the feature idea. After a Glimpse is created the application will ask you some pointed questions like: \"What do you want to accomplish by the end of this period?\" and \"How will you know you're making progress toward those goals?\" Then the application will allow you to set up reminders that will check in on those goals. You will be able to use the notes feature to record your wins and setbacks.",
         "status": "ideation",
-        "id": "65346816-B50F-420F-99BC-6BED09AC29E2"
+        "id": "65346816-B50F-420F-99BC-6BED09AC29E2",
+        "images": []
     },
     {
         "title": "Widgets and Complications",
         "createdAt": "2023-02-011",
         "content": "If you're anything like me, you're pretty busy. You also have more apps on your phone than you use. In fact, you have 10 times more apps on your phone than you use. So trying to find Foresight to open it and get a Glimpse of inspiration… is too much work.\n\nSo one day, fed up with having to do that, you tried to add a widget of a Glimpse to your home screen. And you couldn't.\n\nAnd if you're like me, you got a bit ticked off at the developer for not solving that yet.\n\nI know… I'm sorry. \n\nLike I said, I'm busy.\n\nBut it's on the list. So let me know if you are like me and would use widgets or lock screen complications.",
         "status": "ideation",
-        "id": "5556E88C-13C6-477B-8503-355364D993E9"
+        "id": "5556E88C-13C6-477B-8503-355364D993E9",
+        "images": []
     },
     {
         "title": "Use more than one device",
         "createdAt": "2023-02-011",
         "content": "So far, I've found this app to be quite useful. I look at my Glimpses at least once a day and it really fires me up.\n\nHowever, I'm not always on my phone. Sometimes I'm on my iPad or my Mac. Since Foresight stores all of the Glimpse data on the device, I have to duplicate the data on any of the other devices I want to use.\n\nThat's annoying…\n\nSo I'm currently writing a server to hold all of the glimpse data. This will allow you to use multiple devices or delete and reinstall the app without losing any of your data. And I'm a bit of a privacy buff, so you don't need to worry, we do not—nor will we ever—collect the titles, significant dates, or notes for analytical purposes or selling any of your information. Your data is yours. The text isn't currently encrypted when it's stored in the database but it will be before this feature is released.",
         "status": "inProgress",
-        "id": "A518C6F7-B9FB-4D1E-A5A7-D8E02FC90D66"
+        "id": "A518C6F7-B9FB-4D1E-A5A7-D8E02FC90D66",
+        "images": []
     }
 ]
