@@ -29,7 +29,7 @@
         "content": "If you're anything like me, you're pretty busy. You also have more apps on your phone than you use. In fact, you have 10 times more apps on your phone than you use. So trying to find Foresight to open it and get a Glimpse of inspiration… is too much work.\n\nSo one day, fed up with having to do that, you tried to add a widget of a Glimpse to your home screen. And you couldn't.\n\nAnd if you're like me, you got a bit ticked off at the developer for not solving that yet.\n\nI know… I'm sorry. \n\nLike I said, I'm busy.\n\nBut it's on the list. So let me know if you are like me and would use widgets or lock screen complications.",
         "status": "ideation",
         "id": "5556E88C-13C6-477B-8503-355364D993E9",
-        "images": []
+        "images": ["complications.png", "widgets.png"]
     },
     {
         "title": "Use more than one device",
