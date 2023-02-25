@@ -6,11 +6,11 @@ tags: iOS, MacOS, SwiftUI, Technology, Tutorial, Dependency-Injection
 
 # Dependency Injection
 
-For a long time I had no idea what dependency injection was or why it mattered. When I realized I already knew one flavor of it, [Constructor Injection](https://en.wikipedia.org/wiki/Dependency_injection#Constructor_injection), it suddenly became obvious to me. In this article, I hope to provide a clear explanation of Dependency Injection and how you can use it in Swift.
+For a long time, I had no idea what dependency injection was or why it mattered. When I realized I already knew one flavor of it, [Constructor Injection](https://en.wikipedia.org/wiki/Dependency_injection#Constructor_injection), it suddenly became obvious to me. In this article, I hope to provide a clear explanation of Dependency Injection and how you can use it in Swift.
 
 ## So what is Dependency Injection?
 
-Related to the [Dependency Inversion Principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) _(one of the [SOLID](https://en.wikipedia.org/wiki/SOLID) principles)_, dependency injection is the concept of providing things to an object that it relies on, instead of letting the object create the things it needs, itself. Often this is done in a constructor. 
+Dependency injection is the concept of providing things to an object that it relies on, instead of letting the object create the things it needs, itself. Often this is done in a constructor. 
 
 ### No Injection
 

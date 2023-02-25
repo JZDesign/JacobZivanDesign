@@ -6,7 +6,7 @@ import CNAMEPublishPlugin
 
 struct JZDPublish: Website {
     enum SectionID: String, WebsiteSectionID {
-        case musings
+//        case musings
         case technology
         case foresight
 //        case about
