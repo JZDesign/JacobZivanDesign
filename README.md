@@ -1,2 +1,2 @@
-# [JacobZivanDesign](www.JacobZivanDesign.com)
+# [JacobZivanDesign](https://www.JacobZivanDesign.com)
 Personal Site
