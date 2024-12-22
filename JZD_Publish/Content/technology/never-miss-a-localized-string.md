@@ -1,9 +1,18 @@
 ---
 date: 2024-12-16 22:10
-description: Managing localized strings can be difficult. But, there are some tools to make sure we don't royally mess things up. In this article, we'll cover how to automate checks for localized string regressions.
-tags: Technology, Tips, Workflow, Swift, Localization
+description: Managing localized strings can be difficult. But, there are some tools on how to manage localized strings in iOS to make sure we don't royally mess things up. In this article, we'll cover how to utilize compile time checks and prevent errors with localized strings.
+tags: Technology, Tips, Workflow, Swift, Localization, Swift, String Catalogue
 ---
-
+    "how to manage localized strings in iOS"
+    "preventing errors with localized strings Swift"
+    "Swift localization best practices"
+    "using LocalizedStringKey in iOS"
+    "Swift Package Manager for localization"
+    "string localization in iOS without magic strings"
+    "compile-time checks for localized strings iOS"
+    "best practices for string catalogues in Swift"
+    "avoiding localization errors in iOS apps"
+    "Swift localization tutorial"
 # Never Miss a Localized String Value Again
 
 Have you ever had this happen to you? You're testing out a feature in your app, some other team members were recently moving things around and cleaning things up, and you notice that the text on your screen is… odd. It's not english anymore. It's a string key, something that says: `"FEED_PAGE_TITLE_SIGNED_IN"` instead of `"Your Feed"`.
