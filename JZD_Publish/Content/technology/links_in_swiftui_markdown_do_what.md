@@ -47,13 +47,14 @@ Well… Yes. We can.
 
 ## Hijacking the link
 
-So, how do we get a hold of the link tap and respond to it? In the world of UIKit, we usually had to subclass and write some hideous code, or swizzle… but in SwiftUI, we can simply inject a different URL handler. Like this:
+So, how do we get a hold of the link tap and respond to it? It's quite simple, in SwiftUI we can simply inject a different URL handler. Like this:
 
 ```swift
 Text("[log and call](tel:5558675309)")
     .environment(\.openURL, .init(handler: { url in
         logger.logDial(url.absoluteString)
         MyCustomURLHandler(for: url).invoke()
+        return .handled
     })
 ```
 
