@@ -16,7 +16,7 @@ At first, I thought the person who emailed me was talking about something like a
 
 The whole premise of the first blog was to prevent human error. To make it hard to pass some simple value where it shouldn't get used. My solution was to create a model and use the model instead of some simple type. And the reason I found it useful was that we could use it in our networking layer as if it were a simple type in our Codable models.
 
-And the Codable implementation _is_ a nice plus. And while Phantom Types are other types—much like what I wrote about before—they better solve the problem presented in the last article. They provide an automated and more readable solution that the compiler will enforce: Ownership.
+The Codable implementation _is_ a nice plus… and while Phantom Types are other types—much like what I wrote about before—they better solve the problem presented in the last article. They provide an automated and more readable solution that the compiler will enforce: Ownership.
 
 > Shadow Types provide an automated and more readable solution that the compiler will enforce: Ownership.
 
