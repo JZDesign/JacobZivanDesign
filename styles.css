@@ -23,6 +23,20 @@ body {
   text-align: center;
 }
 
+.center {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 40px;
+  text-align: center;
+}
+.center p {
+    margin-bottom: 0.3rem !important;
+    font-size: 0.7em;
+    line-height: 1rem
+}
+
+
 code {
   font-family: JetBrains Mono;
 }
