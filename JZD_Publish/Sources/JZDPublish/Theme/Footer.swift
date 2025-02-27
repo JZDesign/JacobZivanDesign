@@ -45,7 +45,7 @@ extension Node where Context == HTML.BodyContext {
                 .a(.img(.src("/images/git.svg")), .target(.blank), .class("find-me"), .href("https://github.com/JZDesign/")),
                 .a(.img(.src("/images/bsky.svg")), .target(.blank), .class("find-me"), .href("https://bsky.app/profile/jacobzivandesign.bsky.social")),
                 .a(.img(.src("/images/x-logo.svg")), .target(.blank), .class("find-me"), .href("https://x.com/JZivanDesign")),
-                .a(.img(.src("/images/mastodon.svg")), .target(.blank), .class("find-me"), .href("https://mastodon.social/@jacobzivandesign")),
+                .a(.img(.src("/images/mastodon.svg")), .attribute(named: "rel", value: "me"), .target(.blank), .class("find-me"), .href("https://mastodon.social/@jacobzivandesign")),
                 .a(.img(.src("/images/linkedin.svg")), .target(.blank), .class("find-me"), .href("https://www.linkedin.com/in/jacob-rakidzich-b8722436/")),
                 .class("social")
             ),

@@ -13,7 +13,10 @@ struct JZDPublish: Website {
     }
     
     struct ItemMetadata: WebsiteItemMetadata {
-        // Add any site-specific metadata that you want to use here.
+        static let mastodon: Node<HTML.HeadContext> = .meta(
+            .attribute(named: "name", value: "fediverse:creator"),
+            .attribute(named: "content", value: "@jacobzivandesign@mastodon.social")
+        )
     }
     
     var url = URL(string: "https://JacobZivanDesign.com")!
