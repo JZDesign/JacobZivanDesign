@@ -16,6 +16,9 @@ struct JZDPublish: Website {
         static let mastodon: Node<HTML.HeadContext> = .meta(
             .attribute(named: "name", value: "fediverse:creator"),
             .attribute(named: "content", value: "@jacobzivandesign@mastodon.social")
+        )   
+        static let xHandle: Node<HTML.HeadContext> = .meta(
+            .attribute(named: "twitter:site", value: "@JZivanDesign")
         )
     }
     
