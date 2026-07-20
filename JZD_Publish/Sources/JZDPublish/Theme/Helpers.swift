@@ -10,7 +10,6 @@ extension HTML {
                 for: location,
                 on: context.site,
                 metaData: [
-                    JZDPublish.ItemMetadata.mastodon,
                     JZDPublish.ItemMetadata.xHandle
                 ]
             ),

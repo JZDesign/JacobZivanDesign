@@ -18,7 +18,7 @@ let package = Package(
 
     ],
     targets: [
-        .target(
+        .executableTarget(
             name: "JZDPublish",
             dependencies: [
                 .product(name: "Publish", package: "publish"),

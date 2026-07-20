@@ -20,6 +20,25 @@ extension Node where Context == HTML.BodyContext {
             }
         )
     }
+
+    static func compactItemList<T: Website>(for items: [Item<T>]) -> Node {
+        .ul(
+            .class("writing-list"),
+            .forEach(items) { item in
+                .li(
+                    .a(
+                        .href(item.path),
+                        .span(.text(item.title)),
+                        .span(
+                            .class("writing-arrow"),
+                            .attribute(named: "aria-hidden", value: "true"),
+                            .text("↗")
+                        )
+                    )
+                )
+            }
+        )
+    }
     
     static func tagList<T: Website>(for item: Item<T>, on site: T) -> Node {
         return .ul(.class("tag-list"), .forEach(item.tags) { tag in
@@ -114,4 +133,3 @@ extension Theme.JZD_Factory {
         )
     }
 }
-
