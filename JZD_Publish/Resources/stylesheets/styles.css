@@ -133,7 +133,8 @@ header nav a.selected {
 
 .home-hero-copy {
   align-self: center;
-  padding: 92px 7vw 92px max(32px, calc((100vw - 1320px) / 2));
+  min-width: 0;
+  padding: 92px clamp(32px, 5vw, 96px);
 }
 
 .home-hero h1 {
@@ -213,7 +214,12 @@ header nav a.selected {
 .app-feature {
   margin: 0 auto;
   max-width: 1440px;
-  padding: 72px max(32px, calc((100vw - 1320px) / 2));
+  padding: 72px clamp(32px, 5vw, 96px);
+  width: 100%;
+}
+
+.app-feature > * {
+  min-width: 0;
 }
 
 .app-feature-whoya {
