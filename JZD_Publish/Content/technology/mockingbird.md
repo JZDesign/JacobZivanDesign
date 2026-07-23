@@ -1,7 +1,7 @@
 ---
 date: 2021-03-04 10:13
 description: Now that you understand Mocking and Stubbing, I'll show you how to avoid writing hand-rolled mocks using Mockingbird; an amazing framework that makes unit testing a breeze.
-tags: MacOS, iOS, Swift, Mocking, Stubbing, Testing, Technology, Tutorial
+tags: macOS, iOS, Swift, Mocking, Stubbing, Testing, Technology, Tutorial
 ---
 
 
@@ -169,4 +169,3 @@ XCTAssertNotNil(controller.data)
 <br/>
 
 Instead of needing to write a mock for each use case we want to test, we can instead generate them on the fly, and stub their responses only when necessary. This reduces so much overhead when it comes to writing tests that it's tough to describe. I can't tell you how many lines of aggravating configuration code this tool has saved me this year alone.
-

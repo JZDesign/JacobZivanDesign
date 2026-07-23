@@ -1,7 +1,7 @@
 ---
 date: 2021-03-03 10:13
 description: What are Mocking and Stubbing and how do those concepts help write write cleaner, more effective unit tests in Swift. We'll explore Protocol Oriented Programming and hand-rolled mocks.
-tags: MacOS, iOS, Swift, Mocking, Stubbing, Testing, Technology, Tutorial
+tags: macOS, iOS, Swift, Mocking, Stubbing, Testing, Technology, Tutorial
 ---
 
 # What's Mocking and Stubbing?

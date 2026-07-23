@@ -1,7 +1,7 @@
 ---
 date: 2021-10-28 6:13
 description: SwiftUI comes with its own Dependency Injection framework. Learn what dependency injection is, and how to utilize the Setter Injection provided by swift.
-tags: iOS, MacOS, SwiftUI, Technology, Tutorial, Dependency-Injection
+tags: iOS, macOS, SwiftUI, Technology, Tutorial, Dependency-Injection
 ---
 
 # Dependency Injection

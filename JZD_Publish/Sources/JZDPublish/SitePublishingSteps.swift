@@ -3,7 +3,34 @@ import Foundation
 import Plot
 import Publish
 
+private struct TagArchivePathCollisionError: LocalizedError {
+    let descriptions: [String]
+
+    var errorDescription: String? {
+        "Multiple tags generate the same archive path: " + descriptions.joined(separator: "; ")
+    }
+}
+
 extension PublishingStep where Site == JZDPublish {
+    static func validateUniqueTagArchivePaths() -> Self {
+        step(named: "Validate unique tag archive paths") { context in
+            let tagsByPath = Dictionary(grouping: context.allTags) {
+                context.site.path(for: $0).string
+            }
+            let collisions = tagsByPath
+                .filter { $0.value.count > 1 }
+                .map { path, tags in
+                    let names = tags.map(\.string).sorted().joined(separator: ", ")
+                    return "\(path) (\(names))"
+                }
+                .sorted()
+
+            guard collisions.isEmpty else {
+                throw TagArchivePathCollisionError(descriptions: collisions)
+            }
+        }
+    }
+
     static func generateCanonicalSiteMap() -> Self {
         step(named: "Generate canonical site map") { context in
             let site = context.site

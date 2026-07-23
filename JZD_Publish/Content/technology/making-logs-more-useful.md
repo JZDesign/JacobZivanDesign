@@ -1,7 +1,7 @@
 ---
 date: 2022-07-28 13:13
 description: Swift Stack Traces are not very useful in most logs because they're obfuscated. In this article, we'll learn how to determine the call site in a usable way using Swift's #file, #line, & #function
-tags: MacOS, iOS, Swift, Technology, Tutorial
+tags: macOS, iOS, Swift, Technology, Tutorial
 ---
 
 # When Stack Traces Aren't Useful…

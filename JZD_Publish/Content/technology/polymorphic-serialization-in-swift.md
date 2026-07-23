@@ -1,7 +1,7 @@
 ---
 date: 2021-11-20 13:13
 description: Learn how to use Codable enum's in Swift to handle Polymorphic Serialization.
-tags: MacOS, iOS, Swift, Technology, Tutorial
+tags: macOS, iOS, Swift, Technology, Tutorial
 ---
 # Polymorphic Serialization in Swift
 

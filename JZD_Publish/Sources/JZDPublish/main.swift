@@ -34,6 +34,7 @@ try JZDPublish().publish(using: [
     .copyFile(at: "Resources/robots.txt"),
     .addMarkdownFiles(),
     .sortItems(by: \.date, order: .descending),
+    .validateUniqueTagArchivePaths(),
     .generateHTML(withTheme: .JZD),
     .generateRSSFeed(including: Set(JZDPublish.SectionID.allCases)),
     .generateCanonicalSiteMap(),

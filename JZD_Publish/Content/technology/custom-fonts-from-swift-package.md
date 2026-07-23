@@ -1,7 +1,7 @@
 ---
 date: 2021-09-30 6:13
 description: A Tutorial for adding Custom Fonts to a Swift Package that can be consumed by another application. Allowing you to easily share fonts between your iOS, tvOS, MacOS, and WatchOS apps!
-tags: iOS, MacOS, SwiftUI, Technology, Tutorial, SPM
+tags: iOS, macOS, SwiftUI, Technology, Tutorial, SPM
 ---
 
 # Packaging your Custom Fonts in Swift Packages

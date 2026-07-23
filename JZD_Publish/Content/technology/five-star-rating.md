@@ -1,7 +1,7 @@
 ---
 date: 2020-09-19 08:13
 description: SwiftUI 5 Star Rating View Tutorial - Use SwiftUI to make a Star Review component from scratch!
-tags: iOS, MacOS, SwiftUI, Technology, Tutorial, UI/UX
+tags: iOS, macOS, SwiftUI, Technology, Tutorial, UI/UX
 ---
 
 # A Precise 5 Star Rating with SwiftUI

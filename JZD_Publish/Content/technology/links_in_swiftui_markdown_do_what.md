@@ -1,7 +1,7 @@
 ---
 date: 2024-12-23 17:13
 description: Did you know that SwiftUI has Markdown support and you can put links in your text… and they work? Well that's old news now, in this article I'll show you how to hijack the SwiftUI Markdown link and treat it like a button to run any code you want!
-tags: MacOS, iOS, Swift, Technology, Tutorial, SwiftUI
+tags: macOS, iOS, Swift, Technology, Tutorial, SwiftUI
 ---
 
 # Markdown links can do what?

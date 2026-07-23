@@ -67,6 +67,16 @@ end
 errors << ".nojekyll is missing from Output" unless output_root.join(".nojekyll").file?
 errors << "draft musings were generated" if output_root.join("__musings").exist?
 
+macos_archive_path = output_root.join("tags", "macos", "index.html")
+if macos_archive_path.file?
+  macos_archive = File.read(macos_archive_path)
+  macos_items = macos_archive.scan(%r{href="/technology/[^"#?]+/"}).uniq
+  errors << "macOS archive contains #{macos_items.length} articles; expected 12" unless macos_items.length == 12
+  errors << "macOS archive contains the nonstandard 'MacOS' label" if macos_archive.include?(">MacOS<")
+else
+  errors << "macOS tag archive is missing"
+end
+
 if errors.empty?
   puts "SEO validation passed for #{index_files.length} generated pages."
 else
