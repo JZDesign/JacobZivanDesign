@@ -41,6 +41,12 @@ index_files.each do |file|
 
     errors << "#{file}: internal page link is missing a trailing slash: #{href}"
   end
+
+  html.scan(/<meta\b.*?\/>/).each do |tag|
+    attributes = tag.delete_prefix("<meta").delete_suffix("/>")
+    remainder = attributes.gsub(/\s+[A-Za-z_:][-A-Za-z0-9_:.]*="[^"]*"/, "")
+    errors << "#{file}: malformed meta tag: #{tag}" unless remainder.strip.empty?
+  end
 end
 
 sitemap_path = output_root.join("sitemap.xml")
@@ -120,6 +126,21 @@ if tag_list_path.file?
   errors << "tag list description is generic" unless tag_list.include?("Browse Jacob Zivan's writing by topic")
 else
   errors << "tag list page is missing"
+end
+
+presenter_path = output_root.join("technology", "presenter-patterns", "index.html")
+presenter_description = "Clean up your views with the Presenter pattern in Swift UI. Some people call it \"BetterProgramming\" when the view contains a lot of `@State` variables and functions. It's really not. Let's take a look on how to write a presenter with Swift 5.5"
+
+if presenter_path.file?
+  presenter_html = File.read(presenter_path)
+  ["description", "twitter:description", "og:description"].each do |name|
+    tag = presenter_html.scan(/<meta\b.*?\/>/).find { |meta| meta.include?("name=\"#{name}\"") }
+    value = tag&.match(/\bcontent="([^"]*)"/)&.captures&.first
+    decoded_value = value && CGI.unescapeHTML(value)
+    errors << "presenter #{name} metadata is truncated" unless decoded_value == presenter_description
+  end
+else
+  errors << "presenter article is missing"
 end
 
 if errors.empty?

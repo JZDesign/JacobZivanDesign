@@ -28,6 +28,15 @@ extension Path {
     }
 }
 
+extension String {
+    var escapedForHTMLAttribute: String {
+        replacingOccurrences(of: "&", with: "&amp;")
+            .replacingOccurrences(of: "\"", with: "&quot;")
+            .replacingOccurrences(of: "<", with: "&lt;")
+            .replacingOccurrences(of: ">", with: "&gt;")
+    }
+}
+
 extension Website {
     func canonicalURL(for path: Path) -> URL {
         guard !path.string.isEmpty else {
@@ -89,10 +98,10 @@ extension Node where Context == HTML.DocumentContext {
 
         return .head(
             .encoding(.utf8),
-            .siteName(site.name),
+            .safeSiteName(site.name),
             .url(site.canonicalURL(for: location)),
-            .title(title),
-            .description(description),
+            .safeTitle(title),
+            .safeDescription(description),
             metaData.node,
             .twitterCardType(location.imagePath == nil ? .summary : .summaryLargeImage),
             .forEach(stylesheetPaths, { .stylesheet($0) }),
@@ -100,12 +109,44 @@ extension Node where Context == HTML.DocumentContext {
             .unwrap(site.favicon, { .favicon($0) }),
             .unwrap(rssFeedPath, { path in
                 let title = rssFeedTitle ?? "Subscribe to \(site.name)"
-                return .rssFeedLink(path.absoluteString, title: title)
+                return .rssFeedLink(
+                    path.absoluteString,
+                    title: title.escapedForHTMLAttribute
+                )
             }),
             .unwrap(location.imagePath ?? site.imagePath, { path in
                 let url = site.url(for: path)
                 return .socialImageLink(url)
             })
         )
+    }
+}
+
+extension Node where Context == HTML.HeadContext {
+    static func safeSiteName(_ name: String) -> Node {
+        .meta(
+            .name("og:site_name"),
+            .content(name.escapedForHTMLAttribute)
+        )
+    }
+
+    static func safeTitle(_ title: String) -> Node {
+        let escapedTitle = title.escapedForHTMLAttribute
+
+        return .group([
+            .element(named: "title", text: title),
+            .meta(.name("twitter:title"), .content(escapedTitle)),
+            .meta(.name("og:title"), .content(escapedTitle))
+        ])
+    }
+
+    static func safeDescription(_ description: String) -> Node {
+        let escapedDescription = description.escapedForHTMLAttribute
+
+        return .group([
+            .meta(.name("description"), .content(escapedDescription)),
+            .meta(.name("twitter:description"), .content(escapedDescription)),
+            .meta(.name("og:description"), .content(escapedDescription))
+        ])
     }
 }
