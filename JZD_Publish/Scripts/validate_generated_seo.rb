@@ -143,6 +143,45 @@ else
   errors << "presenter article is missing"
 end
 
+home_path = output_root.join("index.html")
+if home_path.file?
+  home = File.read(home_path)
+  images = home.scan(/<img\b.*?\/>/)
+  sources = home.scan(/<source\b.*?\/>/)
+
+  errors << "homepage contains #{images.length} images; expected 5" unless images.length == 5
+  images.each do |image|
+    errors << "homepage image is missing intrinsic dimensions: #{image}" unless image.match?(/\bwidth="\d+"/) && image.match?(/\bheight="\d+"/)
+    errors << "homepage image is missing async decoding: #{image}" unless image.include?("decoding=\"async\"")
+  end
+
+  errors << "homepage should lazy-load exactly 4 below-fold images" unless images.count { |image| image.include?("loading=\"lazy\"") } == 4
+  errors << "homepage hero should be the only eager image" unless images.count { |image| image.include?("loading=\"eager\"") } == 1
+  errors << "homepage hero should be the only high-priority image" unless images.count { |image| image.include?("fetchpriority=\"high\"") } == 1
+  errors << "homepage should contain 3 responsive WebP sources" unless sources.length == 3 && sources.all? { |source| source.include?("type=\"image/webp\"") && source.include?("srcset=") && source.include?("sizes=") }
+  errors << "homepage still references the mislabeled WhoYa PNG" if home.include?("whoya-icon.png")
+else
+  errors << "homepage is missing"
+end
+
+app_image_root = site_root.join("Resources", "images", "apps")
+expected_webp_files = %w[
+  whoya-icon-320.webp
+  whoya-icon-640.webp
+  whoya-icon-1024.webp
+  noah-weather-icon-240.webp
+  noah-weather-icon-480.webp
+  noah-weather-icon-720.webp
+]
+expected_webp_files.each do |name|
+  errors << "responsive image is missing: #{name}" unless app_image_root.join(name).file?
+end
+
+whoya_fallback = app_image_root.join("whoya-icon.jpg")
+unless whoya_fallback.file? && File.binread(whoya_fallback, 2) == "\xFF\xD8".b
+  errors << "WhoYa fallback is not a correctly named JPEG"
+end
+
 if errors.empty?
   puts "SEO validation passed for #{index_files.length} generated pages."
 else

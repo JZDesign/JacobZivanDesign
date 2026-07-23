@@ -49,7 +49,12 @@ body {
 
 img {
   display: block;
+  height: auto;
   max-width: 100%;
+}
+
+.responsive-picture {
+  display: block;
 }
 
 a {
