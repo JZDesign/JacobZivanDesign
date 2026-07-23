@@ -18,6 +18,30 @@ extension HTML {
     }
 }
 
+extension Path {
+    var pageURLString: String {
+        let path = absoluteString
+        return path.hasSuffix("/") ? path : path + "/"
+    }
+}
+
+extension Website {
+    func canonicalURL(for path: Path) -> URL {
+        guard !path.string.isEmpty else {
+            return url
+        }
+
+        return url.appendingPathComponent(
+            path.string,
+            isDirectory: true
+        )
+    }
+
+    func canonicalURL(for location: Location) -> URL {
+        canonicalURL(for: location.path)
+    }
+}
+
 extension Date {
     func formatted() -> String {
         let formatter = DateFormatter()
@@ -63,7 +87,7 @@ extension Node where Context == HTML.DocumentContext {
         return .head(
             .encoding(.utf8),
             .siteName(site.name),
-            .url(site.url(for: location)),
+            .url(site.canonicalURL(for: location)),
             .title(title),
             .description(description),
             metaData.node,

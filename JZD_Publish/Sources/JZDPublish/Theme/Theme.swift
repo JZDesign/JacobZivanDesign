@@ -124,7 +124,7 @@ extension Theme where Site == JZDPublish {
                             .compactItemList(for: latestItems),
                             .a(
                                 .class("text-link"),
-                                .href("/technology"),
+                                .href("/technology/"),
                                 .text("Read all writing →")
                             )
                         )

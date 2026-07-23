@@ -19,17 +19,23 @@ struct JZDPublish: Website {
         )
     }
     
-    var url = URL(string: "https://JacobZivanDesign.com")!
+    var url = URL(string: "https://jacobzivandesign.com/")!
     var name = "Jacob Zivan Design"
     var description = "Independent apps for families and everyday life, plus notes on Swift, Kotlin, and software design."
     var language: Language { .english }
     var imagePath: Path? { "images/social.jpg" }
 }
 
-try JZDPublish()
-    .publish(withTheme: .JZD,
-             additionalSteps: [
-                .deploy(using:.gitHub("JZDesign/JacobZivanDesign", useSSH: false))
-             ],
-             plugins: [.splash(withClassPrefix: ""), .addCNAME()]
-    )
+try JZDPublish().publish(using: [
+    .installPlugin(.splash(withClassPrefix: "")),
+    .installPlugin(.addCNAME()),
+    .optional(.copyResources()),
+    .copyFile(at: "Resources/.nojekyll"),
+    .copyFile(at: "Resources/robots.txt"),
+    .addMarkdownFiles(),
+    .sortItems(by: \.date, order: .descending),
+    .generateHTML(withTheme: .JZD),
+    .generateRSSFeed(including: Set(JZDPublish.SectionID.allCases)),
+    .generateCanonicalSiteMap(),
+    .deploy(using: .gitHub("JZDesign/JacobZivanDesign", useSSH: false))
+])
