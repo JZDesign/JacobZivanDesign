@@ -57,8 +57,6 @@ extension Theme.JZD_Factory {
                       context: PublishingContext<JZDPublish>) throws -> HTML {
         .page(for: context, location: item, body:
             .body(
-                .script(.src("https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js")),
-                .script("mermaid.initialize({ startOnLoad: true });"),
                 .comment("ITEM HTML"),
                 .class("item-page"),
                 .header(for: context, selectedSection: item.sectionID),

@@ -67,6 +67,11 @@ end
 errors << ".nojekyll is missing from Output" unless output_root.join(".nojekyll").file?
 errors << "draft musings were generated" if output_root.join("__musings").exist?
 
+mermaid_pages = index_files.select { |file| File.read(file).match?(/mermaid/i) }
+unless mermaid_pages.empty?
+  errors << "Mermaid is loaded without being used: #{mermaid_pages.join(", ")}"
+end
+
 macos_archive_path = output_root.join("tags", "macos", "index.html")
 if macos_archive_path.file?
   macos_archive = File.read(macos_archive_path)
