@@ -2,7 +2,7 @@
 date: 2021-08-11 08:13
 description: Clean up your views with the Presenter pattern in Swift UI. Some people call it "BetterProgramming" when the view contains a lot of `@State` variables and functions. It's really not. Let's take a look on how to write a presenter with Swift 5.5
 
-tags: iOS, MacOS, Technology, Tutorial, SwiftUI, Design-Patterns
+tags: iOS, macOS, Technology, Tutorial, SwiftUI, Design-Patterns
 ---
 
 # The Presenter Pattern

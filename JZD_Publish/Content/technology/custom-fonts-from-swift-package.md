@@ -1,12 +1,12 @@
 ---
 date: 2021-09-30 6:13
 description: A Tutorial for adding Custom Fonts to a Swift Package that can be consumed by another application. Allowing you to easily share fonts between your iOS, tvOS, MacOS, and WatchOS apps!
-tags: iOS, MacOS, SwiftUI, Technology, Tutorial, SPM
+tags: iOS, macOS, SwiftUI, Technology, Tutorial, SPM
 ---
 
 # Packaging your Custom Fonts in Swift Packages
 
-In a [previous article](../custom-dynamic-fonts-in-swift-ui) we covered how to add custom fonts that respond to the user's preferred font sizes in Swift UI. In this article, we'll take that code and package it up inside of a Swift Package so we can share it with our Widgets, or other OS applications. If you haven't done so already, go ahead and read [that article](../custom-dynamic-fonts-in-swift-ui). We're going to use that code in this tutorial.
+In a [previous article](../custom-dynamic-fonts-in-swift-ui/) we covered how to add custom fonts that respond to the user's preferred font sizes in Swift UI. In this article, we'll take that code and package it up inside of a Swift Package so we can share it with our Widgets, or other OS applications. If you haven't done so already, go ahead and read [that article](../custom-dynamic-fonts-in-swift-ui/). We're going to use that code in this tutorial.
 
 <br/>
 
@@ -32,7 +32,7 @@ Let me take you through that line by line.
 
 ## Preparing the Package
 
-Now that you've got a package, we need to move all of the code we wrote in the [previous article](../custom-dynamic-fonts-in-swift-ui) into this package. I put all the font files in a directory named "Fonts" inside of "Sources/JBMono".
+Now that you've got a package, we need to move all of the code we wrote in the [previous article](../custom-dynamic-fonts-in-swift-ui/) into this package. I put all the font files in a directory named "Fonts" inside of "Sources/JBMono".
 
 Copying the code and font files isn't all we need to do. Since this becomes a library an application will consume, the code inside of it is unusable unless we explicitly make the structures, extensions, and functions `public`. Go ahead and do that now. 
 
@@ -102,7 +102,7 @@ Sources/
 
 ## Registering the Fonts
 
-In the [previous article](../custom-dynamic-fonts-in-swift-ui), we registered the fonts by including them in the applications' property list. With a Swift Package it works a little differently. Open up the `JBMono.swift` file that was generated for you and we'll add the code we need there.
+In the [previous article](../custom-dynamic-fonts-in-swift-ui/), we registered the fonts by including them in the applications' property list. With a Swift Package it works a little differently. Open up the `JBMono.swift` file that was generated for you and we'll add the code we need there.
 
 <br/>
 
@@ -198,4 +198,4 @@ struct CustomFontSwiftUIExampleApp: App {
 
 # 🔥☝️
 
-That's it! Using the custom fonts is no different than what we did in the [previous article](../custom-dynamic-fonts-in-swift-ui)! You'll just need to remember to import the package first! I've uploaded the example code to [Github](https://github.com/JZDesign/CustomFontSwiftUIExample) for reference. 
+That's it! Using the custom fonts is no different than what we did in the [previous article](../custom-dynamic-fonts-in-swift-ui/)! You'll just need to remember to import the package first! I've uploaded the example code to [Github](https://github.com/JZDesign/CustomFontSwiftUIExample) for reference.

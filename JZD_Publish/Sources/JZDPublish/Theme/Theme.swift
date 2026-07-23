@@ -2,6 +2,58 @@ import Foundation
 import Publish
 import Plot
 
+extension Node where Context == HTML.BodyContext {
+    static func whoYaIcon(sizes: String, eager: Bool) -> Node {
+        .picture(
+            .class("responsive-picture"),
+            .source(
+                .attribute(named: "type", value: "image/webp"),
+                .srcset(
+                    "/images/apps/whoya-icon-320.webp 320w, " +
+                    "/images/apps/whoya-icon-640.webp 640w, " +
+                    "/images/apps/whoya-icon-1024.webp 1024w"
+                ),
+                .attribute(named: "sizes", value: sizes)
+            ),
+            .img(
+                .src("/images/apps/whoya-icon.jpg"),
+                .width(1024),
+                .height(1024),
+                .alt("WhoYa app icon"),
+                .attribute(named: "loading", value: eager ? "eager" : "lazy"),
+                .attribute(named: "decoding", value: "async"),
+                .attribute(named: "fetchpriority", value: eager ? "high" : nil)
+            )
+        )
+    }
+
+    static func noahWeatherIcon() -> Node {
+        .picture(
+            .class("responsive-picture"),
+            .source(
+                .attribute(named: "type", value: "image/webp"),
+                .srcset(
+                    "/images/apps/noah-weather-icon-240.webp 240w, " +
+                    "/images/apps/noah-weather-icon-480.webp 480w, " +
+                    "/images/apps/noah-weather-icon-720.webp 720w"
+                ),
+                .attribute(
+                    named: "sizes",
+                    value: "(max-width: 228px) calc(100vw - 48px), (max-width: 980px) 180px, 240px"
+                )
+            ),
+            .img(
+                .src("/images/apps/noah-weather-icon.png"),
+                .width(1024),
+                .height(1024),
+                .alt("Noah Weather app icon"),
+                .attribute(named: "loading", value: "lazy"),
+                .attribute(named: "decoding", value: "async")
+            )
+        )
+    }
+}
+
 extension Theme where Site == JZDPublish {
     static var JZD: Self {
         Theme(
@@ -40,9 +92,9 @@ extension Theme where Site == JZDPublish {
                             ),
                             .div(
                                 .class("home-hero-art"),
-                                .img(
-                                    .src("/images/apps/whoya-icon.png"),
-                                    .alt("WhoYa app icon")
+                                .whoYaIcon(
+                                    sizes: "(max-width: 385px) 70vw, (max-width: 720px) 270px, (max-width: 1235px) 34vw, 420px",
+                                    eager: true
                                 )
                             )
                         ),
@@ -54,9 +106,9 @@ extension Theme where Site == JZDPublish {
                                 .class("app-feature app-feature-whoya"),
                                 .div(
                                     .class("app-art"),
-                                    .img(
-                                        .src("/images/apps/whoya-icon.png"),
-                                        .alt("WhoYa app icon")
+                                    .whoYaIcon(
+                                        sizes: "(max-width: 318px) calc(100vw - 48px), (max-width: 720px) 270px, (max-width: 1146px) calc(41vw - 30px), 440px",
+                                        eager: false
                                     )
                                 ),
                                 .div(
@@ -89,10 +141,7 @@ extension Theme where Site == JZDPublish {
                                 .class("app-feature app-feature-noah"),
                                 .div(
                                     .class("app-art app-art-small"),
-                                    .img(
-                                        .src("/images/apps/noah-weather-icon.png"),
-                                        .alt("Noah Weather app icon")
-                                    )
+                                    .noahWeatherIcon()
                                 ),
                                 .div(
                                     .class("app-copy"),
@@ -104,11 +153,19 @@ extension Theme where Site == JZDPublish {
                                     .class("noah-screens"),
                                     .img(
                                         .src("/images/apps/noah-forecast.jpg"),
-                                        .alt("Noah Weather forecast screen")
+                                        .width(368),
+                                        .height(800),
+                                        .alt("Noah Weather forecast screen"),
+                                        .attribute(named: "loading", value: "lazy"),
+                                        .attribute(named: "decoding", value: "async")
                                     ),
                                     .img(
                                         .src("/images/apps/noah-radar.jpg"),
-                                        .alt("Noah Weather radar screen")
+                                        .width(368),
+                                        .height(800),
+                                        .alt("Noah Weather radar screen"),
+                                        .attribute(named: "loading", value: "lazy"),
+                                        .attribute(named: "decoding", value: "async")
                                     )
                                 )
                             )
@@ -124,7 +181,7 @@ extension Theme where Site == JZDPublish {
                             .compactItemList(for: latestItems),
                             .a(
                                 .class("text-link"),
-                                .href("/technology"),
+                                .href("/technology/"),
                                 .text("Read all writing →")
                             )
                         )

@@ -1,7 +1,7 @@
 ---
 date: 2021-03-03 10:13
 description: What are Mocking and Stubbing and how do those concepts help write write cleaner, more effective unit tests in Swift. We'll explore Protocol Oriented Programming and hand-rolled mocks.
-tags: MacOS, iOS, Swift, Mocking, Stubbing, Testing, Technology, Tutorial
+tags: macOS, iOS, Swift, Mocking, Stubbing, Testing, Technology, Tutorial
 ---
 
 # What's Mocking and Stubbing?
@@ -178,7 +178,7 @@ Now, you may have noticed that there was a bit of configuration code required to
 
 They do. Even hand rolled mocks like these do. But I prefer to have my mocks generated for me in such a way that eliminates the need to create one off mocks like this. Luckily, there is a package that will do just that. In my next article, you'll learn how to generate fully functional mocks using mockingbird 😊
 
-### [`-> Auto-Magically generate mocks using Mockingbird ->`](../mockingbird)
+### [`-> Auto-Magically generate mocks using Mockingbird ->`](../mockingbird/)
 
 <br/>
 <br/>

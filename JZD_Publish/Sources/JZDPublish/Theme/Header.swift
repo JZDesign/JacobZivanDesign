@@ -21,10 +21,10 @@ extension Node where Context == HTML.BodyContext {
                         .li(.a(.href("/#apps"), .text("Apps"))),
                         .li(.a(
                             .class(selectedSection == nil ? "" : "selected"),
-                            .href("/technology"),
+                            .href("/technology/"),
                             .text("Writing")
                         )),
-                        .li(.a(.href("/about"), .text("About")))
+                        .li(.a(.href("/about/"), .text("About")))
                     )
                 )
             )

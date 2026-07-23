@@ -10,7 +10,7 @@ extension Node where Context == HTML.BodyContext {
             .forEach(items) { item in
                 .li(.article(
                     .h1(.a(
-                        .href(item.path),
+                        .href(item.path.pageURLString),
                         .text(item.title)
                     )),
                     .tagList(for: item, on: site),
@@ -27,7 +27,7 @@ extension Node where Context == HTML.BodyContext {
             .forEach(items) { item in
                 .li(
                     .a(
-                        .href(item.path),
+                        .href(item.path.pageURLString),
                         .span(.text(item.title)),
                         .span(
                             .class("writing-arrow"),
@@ -43,7 +43,7 @@ extension Node where Context == HTML.BodyContext {
     static func tagList<T: Website>(for item: Item<T>, on site: T) -> Node {
         return .ul(.class("tag-list"), .forEach(item.tags) { tag in
             .li(.a(
-                .href(site.path(for: tag)),
+                .href(site.path(for: tag).pageURLString),
                 .text(tag.string)
             ))
         })
@@ -57,8 +57,6 @@ extension Theme.JZD_Factory {
                       context: PublishingContext<JZDPublish>) throws -> HTML {
         .page(for: context, location: item, body:
             .body(
-                .script(.src("https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js")),
-                .script("mermaid.initialize({ startOnLoad: true });"),
                 .comment("ITEM HTML"),
                 .class("item-page"),
                 .header(for: context, selectedSection: item.sectionID),
@@ -91,7 +89,7 @@ extension Theme.JZD_Factory {
                             .li(
                                 .class("tag"),
                                 .a(
-                                    .href(context.site.path(for: tag)),
+                                    .href(context.site.path(for: tag).pageURLString),
                                     .text(tag.string)
                                 )
                             )
@@ -105,7 +103,20 @@ extension Theme.JZD_Factory {
     
     func makeTagDetailsHTML(for page: TagDetailsPage,
                             context: PublishingContext<JZDPublish>) throws -> HTML? {
-        .page(for: context, location: page, body:
+        let items = context.items(
+            taggedWith: page.tag,
+            sortedBy: \.date,
+            order: .descending
+        )
+        let additionalMetaData: [Node<HTML.HeadContext>] = items.count <= 1
+            ? [.meta(.name("robots"), .content("noindex, follow"))]
+            : []
+
+        return .page(
+            for: context,
+            location: page,
+            additionalMetaData: additionalMetaData,
+            body:
             .body(      
                 .header(for: context, selectedSection: nil),
                 .wrapper(
@@ -117,14 +128,10 @@ extension Theme.JZD_Factory {
                     .a(
                         .class("browse-all"),
                         .text("Browse all tags"),
-                        .href(context.site.tagListPath)
+                        .href(context.site.tagListPath.pageURLString)
                     ),
                     .itemList(
-                        for: context.items(
-                            taggedWith: page.tag,
-                            sortedBy: \.date,
-                            order: .descending
-                        ),
+                        for: items,
                         on: context.site
                     )
                 ),

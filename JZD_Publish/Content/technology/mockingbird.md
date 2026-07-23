@@ -1,7 +1,7 @@
 ---
 date: 2021-03-04 10:13
 description: Now that you understand Mocking and Stubbing, I'll show you how to avoid writing hand-rolled mocks using Mockingbird; an amazing framework that makes unit testing a breeze.
-tags: MacOS, iOS, Swift, Mocking, Stubbing, Testing, Technology, Tutorial
+tags: macOS, iOS, Swift, Mocking, Stubbing, Testing, Technology, Tutorial
 ---
 
 
@@ -10,7 +10,7 @@ tags: MacOS, iOS, Swift, Mocking, Stubbing, Testing, Technology, Tutorial
 
 I personally use the [Mockingbird](https://github.com/birdrides/mockingbird) framework to generate my mocks for me. I don't like having to mock an entire interface for every code path I want to test. [Mockingbird](https://github.com/birdrides/mockingbird) affords me the convenience and versatility I've been looking for in the Swift world. It does have its limitations, but it's far better than doing all of that work by hand.
 
-_If you're not sure what mocking or stubbing is, check out [this article.](../mocking_and_stubbing)_
+_If you're not sure what mocking or stubbing is, check out [this article.](../mocking_and_stubbing/)_
 
 <br/>
 <br/>
@@ -96,7 +96,7 @@ given(store.getDataForUser(user: any())) ~> any() // Inline stubbing!!
 
 <br/>
 
-Let's recreate [the example](../mocking_and_stubbing) from my last article, but for the tests we'll do things a little differently. Below is a controller that has a logger and a data store. There is a function that reads from the store and logs the event.
+Let's recreate [the example](../mocking_and_stubbing/) from my last article, but for the tests we'll do things a little differently. Below is a controller that has a logger and a data store. There is a function that reads from the store and logs the event.
 
 ```swift
 protocol Loggable {
@@ -169,5 +169,3 @@ XCTAssertNotNil(controller.data)
 <br/>
 
 Instead of needing to write a mock for each use case we want to test, we can instead generate them on the fly, and stub their responses only when necessary. This reduces so much overhead when it comes to writing tests that it's tough to describe. I can't tell you how many lines of aggravating configuration code this tool has saved me this year alone.
-
-
