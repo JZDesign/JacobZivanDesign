@@ -14,7 +14,10 @@ unless output_root.directory?
 end
 
 index_files = Dir.glob(output_root.join("**", "index.html")).sort
-generated_urls = index_files.map do |file|
+indexable_files = index_files.reject do |file|
+  File.read(file).match?(/<meta\b[^>]*\bname="robots"[^>]*\bcontent="[^"]*noindex/i)
+end
+generated_urls = indexable_files.map do |file|
   relative_directory = Pathname.new(file).dirname.relative_path_from(output_root).to_s
   relative_directory == "." ? base_url : "#{base_url}#{relative_directory}/"
 end
@@ -80,6 +83,43 @@ if macos_archive_path.file?
   errors << "macOS archive contains the nonstandard 'MacOS' label" if macos_archive.include?(">MacOS<")
 else
   errors << "macOS tag archive is missing"
+end
+
+tag_archive_files = Dir.glob(output_root.join("tags", "*", "index.html")).sort
+tag_titles = []
+tag_descriptions = []
+thin_archive_count = 0
+
+tag_archive_files.each do |file|
+  html = File.read(file)
+  item_count = html.scan("<li><article>").length
+  noindex = html.match?(/<meta\b[^>]*\bname="robots"[^>]*\bcontent="noindex, follow"/i)
+  title = html[/<title>(.*?)<\/title>/, 1]
+  description_tag = html.scan(/<meta\b[^>]*>/).find { |tag| tag.match?(/\bname="description"/) }
+  description = description_tag&.match(/\bcontent="([^"]*)"/)&.captures&.first
+
+  tag_titles << title
+  tag_descriptions << description
+
+  if item_count <= 1
+    thin_archive_count += 1
+    errors << "#{file}: thin tag archive is indexable" unless noindex
+  elsif noindex
+    errors << "#{file}: substantive tag archive is noindexed"
+  end
+end
+
+errors << "no thin tag archives were found to validate" if thin_archive_count.zero?
+errors << "tag archive titles are not unique" unless tag_titles.compact.uniq.length == tag_archive_files.length
+errors << "tag archive descriptions are not unique" unless tag_descriptions.compact.uniq.length == tag_archive_files.length
+
+tag_list_path = output_root.join("tags", "index.html")
+if tag_list_path.file?
+  tag_list = File.read(tag_list_path)
+  errors << "tag list title is generic" unless tag_list.include?("<title>Writing Topics | Jacob Zivan Design</title>")
+  errors << "tag list description is generic" unless tag_list.include?("Browse Jacob Zivan's writing by topic")
+else
+  errors << "tag list page is missing"
 end
 
 if errors.empty?

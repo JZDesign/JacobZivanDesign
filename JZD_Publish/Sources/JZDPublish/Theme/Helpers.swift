@@ -3,15 +3,18 @@ import Publish
 import Plot
 
 extension HTML {
-    static func page<T: Website>(for context: PublishingContext<T>, location: Location, body: Node<HTML.DocumentContext>) -> HTML {
+    static func page<T: Website>(
+        for context: PublishingContext<T>,
+        location: Location,
+        additionalMetaData: [Node<HTML.HeadContext>] = [],
+        body: Node<HTML.DocumentContext>
+    ) -> HTML {
         HTML(
             .lang(context.site.language),
             .headWithAddedMetaData(
                 for: location,
                 on: context.site,
-                metaData: [
-                    JZDPublish.ItemMetadata.xHandle
-                ]
+                metaData: [JZDPublish.ItemMetadata.xHandle] + additionalMetaData
             ),
             body
         )

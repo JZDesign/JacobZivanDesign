@@ -24,6 +24,20 @@ struct JZDPublish: Website {
     var description = "Independent apps for families and everyday life, plus notes on Swift, Kotlin, and software design."
     var language: Language { .english }
     var imagePath: Path? { "images/social.jpg" }
+    var tagHTMLConfig: TagHTMLConfiguration? {
+        .init(
+            listContent: Content(
+                title: "Writing Topics",
+                description: "Browse Jacob Zivan's writing by topic, from Swift and SwiftUI to testing, accessibility, and software design."
+            ),
+            detailsContentResolver: { tag in
+                Content(
+                    title: "\(tag.string) Articles",
+                    description: "Browse Jacob Zivan's articles tagged \(tag.string), with practical lessons from app development and software design."
+                )
+            }
+        )
+    }
 }
 
 try JZDPublish().publish(using: [

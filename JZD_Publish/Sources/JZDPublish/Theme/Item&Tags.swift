@@ -103,7 +103,20 @@ extension Theme.JZD_Factory {
     
     func makeTagDetailsHTML(for page: TagDetailsPage,
                             context: PublishingContext<JZDPublish>) throws -> HTML? {
-        .page(for: context, location: page, body:
+        let items = context.items(
+            taggedWith: page.tag,
+            sortedBy: \.date,
+            order: .descending
+        )
+        let additionalMetaData: [Node<HTML.HeadContext>] = items.count <= 1
+            ? [.meta(.name("robots"), .content("noindex, follow"))]
+            : []
+
+        return .page(
+            for: context,
+            location: page,
+            additionalMetaData: additionalMetaData,
+            body:
             .body(      
                 .header(for: context, selectedSection: nil),
                 .wrapper(
@@ -118,11 +131,7 @@ extension Theme.JZD_Factory {
                         .href(context.site.tagListPath.pageURLString)
                     ),
                     .itemList(
-                        for: context.items(
-                            taggedWith: page.tag,
-                            sortedBy: \.date,
-                            order: .descending
-                        ),
+                        for: items,
                         on: context.site
                     )
                 ),

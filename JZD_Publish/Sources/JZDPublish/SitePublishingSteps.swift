@@ -83,9 +83,14 @@ extension PublishingStep where Site == JZDPublish {
                 )
 
                 for tag in context.allTags {
+                    let taggedItems = context.items(taggedWith: tag)
+                    guard taggedItems.count > 1 else {
+                        continue
+                    }
+
                     include(
                         site.canonicalURL(for: site.path(for: tag)),
-                        lastModified: context.items(taggedWith: tag).map(\.date).max()
+                        lastModified: taggedItems.map(\.date).max()
                     )
                 }
             }
