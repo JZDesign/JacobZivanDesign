@@ -52,5 +52,5 @@ try JZDPublish().publish(using: [
     .generateHTML(withTheme: .JZD),
     .generateRSSFeed(including: Set(JZDPublish.SectionID.allCases)),
     .generateCanonicalSiteMap(),
-    .deploy(using: .gitHub("JZDesign/JacobZivanDesign", useSSH: false))
+    .deploy(using: .cleanGitHub("JZDesign/JacobZivanDesign", useSSH: false))
 ])

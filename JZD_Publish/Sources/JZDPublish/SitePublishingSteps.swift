@@ -114,3 +114,37 @@ extension PublishingStep where Site == JZDPublish {
         }
     }
 }
+
+extension DeploymentMethod where Site == JZDPublish {
+    static func cleanGitHub(
+        _ repository: String,
+        branch: String = "master",
+        useSSH: Bool = true
+    ) -> Self {
+        let standardDeployment = Self.gitHub(
+            repository,
+            branch: branch,
+            useSSH: useSSH
+        )
+
+        return DeploymentMethod(name: standardDeployment.name) { context in
+            if let outputFolder = try? context.folder(at: "Output"),
+               let deploymentFolder = try? context.folder(at: ".publish/GitDeploy") {
+                for file in outputFolder.files.includingHidden where file.name.hasPrefix(".") {
+                    if let existingFile = try? deploymentFolder.file(named: file.name) {
+                        try existingFile.delete()
+                    }
+                }
+
+                for folder in outputFolder.subfolders.includingHidden
+                    where folder.name.hasPrefix(".") && folder.name != ".git" {
+                    if let existingFolder = try? deploymentFolder.subfolder(named: folder.name) {
+                        try existingFolder.delete()
+                    }
+                }
+            }
+
+            try standardDeployment.body(context)
+        }
+    }
+}
