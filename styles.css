@@ -307,15 +307,6 @@ header nav a.selected {
   max-width: 240px;
 }
 
-.coming-soon {
-  color: var(--blue-deep);
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.9rem !important;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
 .noah-screens {
   align-items: flex-end;
   display: flex;
