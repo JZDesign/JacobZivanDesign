@@ -27,7 +27,10 @@ extension Node where Context == HTML.BodyContext {
         )
     }
 
-    static func noahWeatherIcon() -> Node {
+    static func noahWeatherIcon(
+        sizes: String = "(max-width: 228px) calc(100vw - 48px), (max-width: 980px) 180px, 240px",
+        eager: Bool = false
+    ) -> Node {
         .picture(
             .class("responsive-picture"),
             .source(
@@ -37,18 +40,16 @@ extension Node where Context == HTML.BodyContext {
                     "/images/apps/noah-weather-icon-480.webp 480w, " +
                     "/images/apps/noah-weather-icon-720.webp 720w"
                 ),
-                .attribute(
-                    named: "sizes",
-                    value: "(max-width: 228px) calc(100vw - 48px), (max-width: 980px) 180px, 240px"
-                )
+                .attribute(named: "sizes", value: sizes)
             ),
             .img(
                 .src("/images/apps/noah-weather-icon.png"),
                 .width(1024),
                 .height(1024),
                 .alt("Noah Weather app icon"),
-                .attribute(named: "loading", value: "lazy"),
-                .attribute(named: "decoding", value: "async")
+                .attribute(named: "loading", value: eager ? "eager" : "lazy"),
+                .attribute(named: "decoding", value: "async"),
+                .attribute(named: "fetchpriority", value: eager ? "high" : nil)
             )
         )
     }
@@ -92,7 +93,7 @@ extension Theme where Site == JZDPublish {
                             ),
                             .div(
                                 .class("home-hero-art"),
-                                .whoYaIcon(
+                                .noahWeatherIcon(
                                     sizes: "(max-width: 385px) 70vw, (max-width: 720px) 270px, (max-width: 1235px) 34vw, 420px",
                                     eager: true
                                 )
@@ -102,6 +103,57 @@ extension Theme where Site == JZDPublish {
                             .id("apps"),
                             .class("apps"),
                             .div(.class("section-heading"), .h2("The apps")),
+                            .article(
+                                .class("app-feature app-feature-noah"),
+                                .div(
+                                    .class("app-art app-art-small"),
+                                    .noahWeatherIcon()
+                                ),
+                                .div(
+                                    .class("app-copy"),
+                                    .h3("Noah Weather"),
+                                    .p("Weather without the noise. A peaceful, private forecast that keeps your attention on what matters."),
+                                    .div(
+                                        .class("app-actions"),
+                                        .a(
+                                            .class("button button-store"),
+                                            .href("https://apps.apple.com/us/app/noah-weather/id6792880452"),
+                                            .target(.blank),
+                                            .span(
+                                                .class("apple-mark"),
+                                                .attribute(named: "aria-hidden", value: "true"),
+                                                .text("")
+                                            ),
+                                            .span(.text("Download on the App Store"))
+                                        ),
+                                        .a(
+                                            .class("text-link"),
+                                            .href("https://noahweather.app"),
+                                            .target(.blank),
+                                            .text("Visit Noah Weather ↗")
+                                        )
+                                    )
+                                ),
+                                .div(
+                                    .class("noah-screens"),
+                                    .img(
+                                        .src("/images/apps/noah-forecast.jpg"),
+                                        .width(368),
+                                        .height(800),
+                                        .alt("Noah Weather forecast screen"),
+                                        .attribute(named: "loading", value: "lazy"),
+                                        .attribute(named: "decoding", value: "async")
+                                    ),
+                                    .img(
+                                        .src("/images/apps/noah-radar.jpg"),
+                                        .width(368),
+                                        .height(800),
+                                        .alt("Noah Weather radar screen"),
+                                        .attribute(named: "loading", value: "lazy"),
+                                        .attribute(named: "decoding", value: "async")
+                                    )
+                                )
+                            ),
                             .article(
                                 .class("app-feature app-feature-whoya"),
                                 .div(
@@ -134,38 +186,6 @@ extension Theme where Site == JZDPublish {
                                             .target(.blank),
                                             .text("Visit WhoYa ↗")
                                         )
-                                    )
-                                )
-                            ),
-                            .article(
-                                .class("app-feature app-feature-noah"),
-                                .div(
-                                    .class("app-art app-art-small"),
-                                    .noahWeatherIcon()
-                                ),
-                                .div(
-                                    .class("app-copy"),
-                                    .h3("Noah Weather"),
-                                    .p("Weather without the noise. A peaceful, private forecast that keeps your attention on what matters."),
-                                    .p(.class("coming-soon"), .text("Coming soon"))
-                                ),
-                                .div(
-                                    .class("noah-screens"),
-                                    .img(
-                                        .src("/images/apps/noah-forecast.jpg"),
-                                        .width(368),
-                                        .height(800),
-                                        .alt("Noah Weather forecast screen"),
-                                        .attribute(named: "loading", value: "lazy"),
-                                        .attribute(named: "decoding", value: "async")
-                                    ),
-                                    .img(
-                                        .src("/images/apps/noah-radar.jpg"),
-                                        .width(368),
-                                        .height(800),
-                                        .alt("Noah Weather radar screen"),
-                                        .attribute(named: "loading", value: "lazy"),
-                                        .attribute(named: "decoding", value: "async")
                                     )
                                 )
                             )
