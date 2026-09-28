@@ -54,3 +54,11 @@ I also generally like to build for me first. And when an app idea is solid enoug
 ## Wrapping it up
 
 So, if you're anything like me and you don't have much time to spend on things… Here's my advice to you. Take stock of what you spend your time on and evaluate if that matches your values. Does the way you spend your time indicate that you value your faith, yourself, and your family? Cut out anything that contends with your values. Do the hard work now because it's so much easier to walk and run when you don't have weights around your ankles. Then build from a place of excitement and passion! It's a fun way to be.
+
+### Apps
+
+In the introduction, I mentioned things I've shipped this year outside of work. They are:
+
+- [Whoya](https://apps.apple.com/us/app/whoya/id6757703773) - a phone number memorization game I made for my kids
+- [Noah Weather](https://apps.apple.com/us/app/noah-weather/id6792880452) - my most recent app. An encouraging weather app for Christians
+- [BnbPhotoFactory's](https://bnbphotofactory.com/) ai image editing pipeline - (the SaaS I mentioned)
