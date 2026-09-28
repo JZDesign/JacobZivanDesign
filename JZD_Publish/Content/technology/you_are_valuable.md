@@ -61,4 +61,4 @@ In the introduction, I mentioned things I've shipped this year outside of work. 
 
 - [Whoya](https://apps.apple.com/us/app/whoya/id6757703773) - a phone number memorization game I made for my kids
 - [Noah Weather](https://apps.apple.com/us/app/noah-weather/id6792880452) - my most recent app. An encouraging weather app for Christians
-- [BnbPhotoFactory's](https://bnbphotofactory.com/) ai image editing pipeline - (the SaaS I mentioned)
+- [BnbPhotoFactory's](https://thebnbfactory.com) ai image editing pipeline - (the SaaS I mentioned)
